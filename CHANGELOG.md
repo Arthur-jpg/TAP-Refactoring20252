@@ -116,12 +116,27 @@ Este arquivo documenta todas as mudanças realizadas no código original do prof
 
 ---
 
+## [1.0.1] - 2025-10-03
+
+### 🛠️ **Correções de Compatibilidade**
+
+#### **Correção de Métodos Refatorados**
+- ✅ **AlunoService.java**: Substituído `curso.getAlunos().add(aluno)` → `curso.adicionarAluno(aluno)`
+- ✅ **EscolaDAO.java**: Substituído `curso.getAlunos().add(aluno)` → `curso.adicionarAluno(aluno)`
+
+**Motivo**: Com a implementação de cópias defensivas, o método `getAlunos()` agora retorna uma cópia da lista. Adicionar elementos diretamente na lista retornada não afeta a lista original da classe. A correção garante que os alunos sejam adicionados corretamente ao curso.
+
+---
+
 ## 🎯 **Próximos Passos**
 
 ### **Pendente**
-- [ ] Revisar outras classes entity se necessário
-- [ ] Atualizar classes de service que usam os métodos renomeados
-- [ ] Verificar impacto nas classes DAO e Resource
+- [ ] Revisar outras classes entity (Data, EstadoCivil, Turma, Disciplina)
+- [x] ✅ Atualizar classes de service que usam os métodos renomeados
+- [x] ✅ Verificar impacto nas classes DAO e Resource  
+- [ ] Refatorar classes Service seguindo Clean Code
+- [ ] Migrar para Spring Boot completo
+- [ ] Implementar persistência MySQL
 - [ ] Testes unitários para validar as mudanças
 
 ---

@@ -64,7 +64,7 @@ public class EscolaDAO {
         Data data = new Data(10, 10, 1990);
         Aluno aluno = new Aluno(11, "Joao da Silva", data, true,
                 EstadoCivil.solteiro, curso, telefones);
-        curso.getAlunos().add(aluno);
+        curso.adicionarAluno(aluno);
 
         try {
             this.addAluno(aluno);

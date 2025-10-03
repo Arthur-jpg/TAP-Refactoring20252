@@ -76,7 +76,7 @@ public class AlunoService {
         try {
             dao.addAluno(aluno);
             Curso curso = dao.getCurso(alunoDTO.getCurso());
-            curso.getAlunos().add(aluno);
+            curso.adicionarAluno(aluno);
         } catch (DaoException e) {
             throw new DaoException("erro do dao no service throw");
         }
