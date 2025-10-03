@@ -1,6 +1,6 @@
 package br.edu.ibmec.dto;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="inscricao")
 public class InscricaoDTO {

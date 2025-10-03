@@ -1,13 +1,13 @@
-package service;
+package br.edu.ibmec.service;
 
 import java.util.Collection;
 
-import dao.EscolaDAO;
-import dto.InscricaoDTO;
-import entity.Inscricao;
-import exception.DaoException;
-import exception.ServiceException;
-import exception.ServiceException.ServiceExceptionEnum;
+import br.edu.ibmec.dao.EscolaDAO;
+import br.edu.ibmec.dto.InscricaoDTO;
+import br.edu.ibmec.entity.Inscricao;
+import br.edu.ibmec.exception.DaoException;
+import br.edu.ibmec.exception.ServiceException;
+import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
 
 public class InscricaoService {
     private EscolaDAO dao;

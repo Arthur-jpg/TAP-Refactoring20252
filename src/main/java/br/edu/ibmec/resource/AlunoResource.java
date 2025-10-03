@@ -6,22 +6,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.Response;
 
-import service.AlunoService;
-import dto.AlunoDTO;
-import entity.Aluno;
-import exception.DaoException;
-import exception.ServiceException;
-import exception.ServiceException.ServiceExceptionEnum;
+import br.edu.ibmec.service.AlunoService;
+import br.edu.ibmec.dto.AlunoDTO;
+import br.edu.ibmec.entity.Aluno;
+import br.edu.ibmec.exception.DaoException;
+import br.edu.ibmec.exception.ServiceException;
+import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
 
 @Path("aluno")
 @Consumes("application/xml")
