@@ -1,24 +1,25 @@
 package br.edu.ibmec.entity;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+/**
+ * Representa um aluno da universidade com suas informações pessoais,
+ * curso associado e inscrições em disciplinas.
+ */
 public class Aluno {
     private int matricula;
     private String nome;
     private Data dataNascimento;
     private int idade;
-    private boolean matriculaAtiva;
+    private boolean isMatriculaAtiva;
     private EstadoCivil estadoCivil;
     private Vector<String> telefones;
-
-
     private Curso curso;
-
-    private List<Inscricao> inscricoes = new ArrayList<Inscricao>();
+    private List<Inscricao> inscricoes = new ArrayList<>();
 
     public Aluno() {
-
     }
 
     public Aluno(int matricula, String nome, Data dataNascimento,
@@ -27,28 +28,34 @@ public class Aluno {
         this.matricula = matricula;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-        this.matriculaAtiva = matriculaAtiva;
+        this.isMatriculaAtiva = matriculaAtiva;
         this.estadoCivil = estadoCivil;
         this.curso = curso;
-
         this.idade = 0;
         this.telefones = telefones;
     }
 
-    public void addInscricao(Inscricao inscricao) {
-        inscricoes.add(inscricao);
+    public void adicionarInscricao(Inscricao inscricao) {
+        if (inscricao == null) {
+            throw new IllegalArgumentException("Inscrição não pode ser nula");
+        }
+        if (!inscricoes.contains(inscricao)) {
+            inscricoes.add(inscricao);
+        }
     }
 
-    public void removeInscricao(Inscricao inscricao) {
-        inscricoes.remove(inscricao);
+    public void removerInscricao(Inscricao inscricao) {
+        if (inscricao != null) {
+            inscricoes.remove(inscricao);
+        }
     }
 
     public List<Inscricao> getInscricoes() {
-        return inscricoes;
+        return new ArrayList<>(inscricoes);
     }
 
     public void setInscricoes(List<Inscricao> inscricoes) {
-        this.inscricoes = inscricoes;
+        this.inscricoes = inscricoes != null ? new ArrayList<>(inscricoes) : new ArrayList<>();
     }
 
     public int getMatricula() {
@@ -56,6 +63,9 @@ public class Aluno {
     }
 
     public void setMatricula(int matricula) {
+        if (matricula <= 0) {
+            throw new IllegalArgumentException("Matrícula deve ser um número positivo");
+        }
         this.matricula = matricula;
     }
 
@@ -64,7 +74,10 @@ public class Aluno {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome não pode ser nulo ou vazio");
+        }
+        this.nome = nome.trim();
     }
 
     public Data getDataNascimento() {
@@ -80,15 +93,18 @@ public class Aluno {
     }
 
     public void setIdade(int idade) {
+        if (idade < 0) {
+            throw new IllegalArgumentException("Idade não pode ser negativa");
+        }
         this.idade = idade;
     }
 
     public boolean isMatriculaAtiva() {
-        return matriculaAtiva;
+        return isMatriculaAtiva;
     }
 
     public void setMatriculaAtiva(boolean matriculaAtiva) {
-        this.matriculaAtiva = matriculaAtiva;
+        this.isMatriculaAtiva = matriculaAtiva;
     }
 
     public EstadoCivil getEstadoCivil() {
@@ -108,11 +124,19 @@ public class Aluno {
     }
 
     public Vector<String> getTelefones() {
-        return telefones;
+        return telefones != null ? new Vector<>(telefones) : new Vector<>();
     }
 
     public void setTelefones(Vector<String> telefones) {
-        this.telefones = telefones;
+        this.telefones = telefones != null ? new Vector<>(telefones) : new Vector<>();
     }
 
+    public boolean temInscricaoAtiva() {
+        return inscricoes.stream()
+                .anyMatch(inscricao -> inscricao != null);
+    }
+
+    public int getQuantidadeInscricoes() {
+        return inscricoes.size();
+    }
 }
