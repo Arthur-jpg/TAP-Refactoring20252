@@ -1,8 +1,17 @@
 package br.edu.ibmec.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Data {
+    @Column(name = "dia_nascimento")
     private int dia;
+    
+    @Column(name = "mes_nascimento") 
     private int mes;
+    
+    @Column(name = "ano_nascimento")
     private int ano;
 
     public Data() {

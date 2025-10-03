@@ -1,84 +1,83 @@
 package br.edu.ibmec.service;
 
 import java.util.Collection;
+import java.util.Optional;
 
-import br.edu.ibmec.dao.EscolaDAO;
+import br.edu.ibmec.dao.CursoDAO;
 import br.edu.ibmec.dto.CursoDTO;
 import br.edu.ibmec.entity.Curso;
 import br.edu.ibmec.exception.DaoException;
 import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CursoService {
-    private EscolaDAO dao;
-
-    public CursoService() {
-        this.dao = EscolaDAO.getInstance();
-    }
+    
+    @Autowired
+    private CursoDAO cursoDAO;
 
     public CursoDTO buscarCurso(int codigo) throws DaoException {
-        try{
-            CursoDTO cursoDTO = new CursoDTO(dao.getCurso(codigo).getCodigo(), dao
-                    .getCurso(codigo).getNome());
+        try {
+            Optional<Curso> cursoOpt = cursoDAO.findByCodigo(codigo);
+            if (cursoOpt.isEmpty()) {
+                throw new DaoException("Curso com código " + codigo + " não encontrado");
+            }
+            
+            Curso curso = cursoOpt.get();
+            CursoDTO cursoDTO = new CursoDTO(curso.getCodigo(), curso.getNome());
             return cursoDTO;
-        }
-        catch(DaoException e)
-        {
-            throw new DaoException("");
+        } catch (DaoException e) {
+            throw new DaoException("Erro ao buscar curso: " + e.getMessage());
         }
     }
 
-    public Collection<Curso> listarCursos() {
-        return dao.getCursos();
+    public Collection<Curso> listarCursos() throws DaoException {
+        return cursoDAO.findAll();
     }
 
-    public void cadastrarCurso(CursoDTO cursoDTO) throws ServiceException,
-            DaoException {
-        if ((cursoDTO.getCodigo() < 1) || (cursoDTO.getCodigo() > 99)) {
-            throw new ServiceException(
-                    ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
+    public void cadastrarCurso(CursoDTO cursoDTO) throws ServiceException, DaoException {
+        // Validações
+        if ((cursoDTO.getCodigo() < 1) || (cursoDTO.getCodigo() > 99999)) {
+            throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
         }
-        if ((cursoDTO.getNome().length() < 1)
-                || (cursoDTO.getNome().length() > 20)) {
+        if ((cursoDTO.getNome().length() < 1) || (cursoDTO.getNome().length() > 100)) {
             throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
         }
 
         Curso curso = new Curso(cursoDTO.getCodigo(), cursoDTO.getNome());
 
         try {
-            dao.addCurso(curso);
+            cursoDAO.save(curso);
         } catch (DaoException e) {
-            throw new DaoException("erro do dao no service throw");
+            throw new DaoException("Erro ao cadastrar curso: " + e.getMessage());
         }
     }
 
-    public void alterarCurso(CursoDTO cursoDTO) throws ServiceException,
-            DaoException {
-        if ((cursoDTO.getCodigo() < 1) || (cursoDTO.getCodigo() > 99)) {
-            throw new ServiceException(
-                    ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
+    public void alterarCurso(CursoDTO cursoDTO) throws ServiceException, DaoException {
+        // Validações
+        if ((cursoDTO.getCodigo() < 1) || (cursoDTO.getCodigo() > 99999)) {
+            throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
         }
-        if ((cursoDTO.getNome().length() < 1)
-                || (cursoDTO.getNome().length() > 20)) {
+        if ((cursoDTO.getNome().length() < 1) || (cursoDTO.getNome().length() > 100)) {
             throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
         }
 
         Curso curso = new Curso(cursoDTO.getCodigo(), cursoDTO.getNome());
 
         try {
-            dao.updateCurso(curso);
+            cursoDAO.update(curso);
         } catch (DaoException e) {
-            throw new DaoException("erro do dao no service throw");
+            throw new DaoException("Erro ao alterar curso: " + e.getMessage());
         }
     }
 
     public void removerCurso(int codigo) throws DaoException {
         try {
-            dao.removeCurso(codigo);
-        }
-        catch(DaoException e)
-        {
-            throw new DaoException("");
+            cursoDAO.deleteByCodigo(codigo);
+        } catch (DaoException e) {
+            throw new DaoException("Erro ao remover curso: " + e.getMessage());
         }
     }
 }

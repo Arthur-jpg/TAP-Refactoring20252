@@ -1,5 +1,6 @@
 package br.edu.ibmec.entity;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -8,15 +9,39 @@ import java.util.Vector;
  * Representa um aluno da universidade com suas informações pessoais,
  * curso associado e inscrições em disciplinas.
  */
+@Entity
+@Table(name = "alunos")
 public class Aluno {
+    @Id
+    @Column(name = "matricula")
     private int matricula;
+    
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
+    
+    @Embedded
     private Data dataNascimento;
+    
+    @Column(name = "idade")
     private int idade;
+    
+    @Column(name = "matricula_ativa")
     private boolean isMatriculaAtiva;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado_civil")
     private EstadoCivil estadoCivil;
+    
+    @ElementCollection
+    @CollectionTable(name = "aluno_telefones", joinColumns = @JoinColumn(name = "matricula"))
+    @Column(name = "telefone")
     private Vector<String> telefones;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "curso_codigo")
     private Curso curso;
+    
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Inscricao> inscricoes = new ArrayList<>();
 
     public Aluno() {

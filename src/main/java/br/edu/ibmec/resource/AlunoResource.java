@@ -113,12 +113,17 @@ public class AlunoResource {
 
     @GET
     @Produces("text/plain")
-    public String listarAlunos() {
-        List<String> nomes = new ArrayList<String>();
-        for(Iterator<Aluno> it = alunoService.listarAlunos().iterator(); it.hasNext();)
-        {
-            Aluno aluno = (Aluno)it.next();
-            nomes.add(aluno.getNome());
-        } return nomes.toString();
+    public Response listarAlunos() {
+        try {
+            List<String> nomes = new ArrayList<String>();
+            for(Iterator<Aluno> it = alunoService.listarAlunos().iterator(); it.hasNext();)
+            {
+                Aluno aluno = (Aluno)it.next();
+                nomes.add(aluno.getNome());
+            }
+            return Response.ok(nomes.toString()).build();
+        } catch (DaoException e) {
+            return Response.status(500).entity("Erro ao listar alunos: " + e.getMessage()).build();
+        }
     }
 }

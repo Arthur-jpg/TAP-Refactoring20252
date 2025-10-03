@@ -113,13 +113,17 @@ public class CursoResource {
 
     @GET
     @Produces("text/plain")
-    public String listarCursos() {
-        List<String> nomes = new ArrayList<String>();
-        for (Iterator<Curso> it = cursoService.listarCursos().iterator(); it
-                .hasNext();) {
-            Curso curso = (Curso) it.next();
-            nomes.add(curso.getNome());
+    public Response listarCursos() {
+        try {
+            List<String> nomes = new ArrayList<String>();
+            for (Iterator<Curso> it = cursoService.listarCursos().iterator(); it
+                    .hasNext();) {
+                Curso curso = (Curso) it.next();
+                nomes.add(curso.getNome());
+            }
+            return Response.ok(nomes.toString()).build();
+        } catch (DaoException e) {
+            return Response.status(500).entity("Erro ao listar cursos: " + e.getMessage()).build();
         }
-        return nomes.toString();
     }
 }

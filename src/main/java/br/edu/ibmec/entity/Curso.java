@@ -1,5 +1,6 @@
 package br.edu.ibmec.entity;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +8,20 @@ import java.util.List;
  * Representa um curso universitário com suas disciplinas e alunos matriculados.
  * Gerencia a relação entre alunos e disciplinas dentro do contexto do curso.
  */
+@Entity
+@Table(name = "cursos")
 public class Curso {
+    @Id
+    @Column(name = "codigo")
     private int codigo;
+    
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
+    
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Aluno> alunos = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Disciplina> disciplinas = new ArrayList<>();
 
     public Curso() {

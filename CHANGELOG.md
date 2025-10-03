@@ -116,6 +116,61 @@ Este arquivo documenta todas as mudanças realizadas no código original do prof
 
 ---
 
+## [2.0.0] - 2025-10-03
+
+### 🚀 **IMPLEMENTAÇÃO DE PERSISTÊNCIA COM MYSQL**
+
+#### **🗄️ Migração para Arquitetura em Camadas com Banco de Dados**
+
+##### ✨ **Adicionado**
+- **Anotações JPA** nas entidades:
+  - `Aluno`: `@Entity`, `@Table`, `@Id`, `@Column`, `@ManyToOne`, `@OneToMany`, `@Embedded`, `@ElementCollection`
+  - `Curso`: `@Entity`, `@Table`, `@Id`, `@Column`, `@OneToMany`
+  - `Data`: `@Embeddable`, `@Column`
+- **Interfaces DAO**:
+  - `AlunoDAO`: Interface para operações de persistência de alunos
+  - `CursoDAO`: Interface para operações de persistência de cursos
+- **Implementações DAO com JPA**:
+  - `AlunoDAOImpl`: Implementação JPA com `EntityManager`
+  - `CursoDAOImpl`: Implementação JPA com `EntityManager`
+- **Configuração MySQL**:
+  - Conexão com banco `universidade_db`
+  - Pool de conexões Hikari
+  - Hibernate DDL auto-update
+  - Logging SQL habilitado
+- **Configuração JPA**:
+  - `JpaConfig`: Configuração de repositórios e transações
+  - `@EnableTransactionManagement`
+
+##### 🔧 **Modificado**
+- **AlunoService**:
+  - Migrado de `EscolaDAO` para `AlunoDAO` + `CursoDAO`
+  - Adicionado `@Service` e `@Autowired`
+  - Validações melhoradas (matrícula até 99999, nome até 100 chars)
+  - Tratamento de erro aprimorado
+- **CursoService**:
+  - Migrado de `EscolaDAO` para `CursoDAO`
+  - Adicionado `@Service` e `@Autowired`
+  - Validações melhoradas (código até 99999, nome até 100 chars)
+  - Tratamento de erro aprimorado
+
+##### 🛡️ **Segurança e Validações**
+- Transações ACID garantidas pelo JPA
+- Validações de integridade referencial
+- Prevenção de remoção de cursos com alunos
+- Verificação de existência antes de operações
+- Pool de conexões configurado para performance
+
+##### 📋 **Estrutura do Banco**
+- Tabela `alunos`: Dados principais + campos de data embedded
+- Tabela `cursos`: Código e nome do curso
+- Tabela `aluno_telefones`: Telefones como collection
+- Relacionamentos:
+  - `Aluno` ManyToOne `Curso`
+  - `Curso` OneToMany `Aluno`
+
+---
+
 ## [1.0.1] - 2025-10-03
 
 ### 🛠️ **Correções de Compatibilidade**
