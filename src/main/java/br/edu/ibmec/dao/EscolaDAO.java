@@ -15,14 +15,14 @@ import java.util.Vector;
 
 import org.apache.commons.collections4.map.MultiKeyMap;
 
-import entity.Aluno;
-import entity.Curso;
-import entity.Data;
-import entity.Disciplina;
-import entity.EstadoCivil;
-import entity.Inscricao;
-import entity.Turma;
-import exception.DaoException;
+import br.edu.ibmec.entity.Aluno;
+import br.edu.ibmec.entity.Curso;
+import br.edu.ibmec.entity.Data;
+import br.edu.ibmec.entity.Disciplina;
+import br.edu.ibmec.entity.EstadoCivil;
+import br.edu.ibmec.entity.Inscricao;
+import br.edu.ibmec.entity.Turma;
+import br.edu.ibmec.exception.DaoException;
 
 public class EscolaDAO {
 
