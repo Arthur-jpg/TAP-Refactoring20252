@@ -21,6 +21,7 @@ import br.edu.ibmec.entity.Data;
 import br.edu.ibmec.entity.Disciplina;
 import br.edu.ibmec.entity.EstadoCivil;
 import br.edu.ibmec.entity.Inscricao;
+import br.edu.ibmec.entity.Situacao;
 import br.edu.ibmec.entity.Turma;
 import br.edu.ibmec.exception.DaoException;
 
@@ -94,7 +95,7 @@ public class EscolaDAO {
             e.printStackTrace();
         }
 
-        Inscricao inscricao = new Inscricao(6.0f, 8.0f, 10, "aprovado", aluno,
+        Inscricao inscricao = new Inscricao(6.0f, 8.0f, 10, Situacao.aprovado, aluno,
                 turma2);
         inscricoes.put(aluno.getMatricula(), turma2.getCodigo(), turma2
                 .getAno(), turma2.getSemestre(), inscricao);

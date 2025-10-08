@@ -1,28 +1,38 @@
 package br.edu.ibmec.dto;
 
-/**
- * Aplicação com serviços REST para gestão de cursos.
- *
- * @author  Thiago Silva de Souza
- * @version 1.0
- * @since   2012-02-29
- */
-
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-@XmlRootElement(name="aluno")
+/**
+ * DTO para transferência de dados de Aluno
+ * Contém validações Bean Validation
+ */
 public class AlunoDTO {
+    
+    @Min(value = 1, message = "Matrícula deve ser um número positivo")
     private int matricula;
+    
+    @NotBlank(message = "Nome é obrigatório")
+    @Size(max = 100, message = "Nome deve ter no máximo 100 caracteres")
     private String nome;
+    
+    @NotBlank(message = "Data de nascimento é obrigatória")
     private String dtNascimento;
+    
+    @Min(value = 0, message = "Idade deve ser positiva")
     private int idade;
+    
     private boolean matriculaAtiva;
+    
+    @NotNull(message = "Estado civil é obrigatório")
     private EstadoCivilDTO estadoCivilDTO;
+    
     private Vector<String> telefones;
 
     private int curso;

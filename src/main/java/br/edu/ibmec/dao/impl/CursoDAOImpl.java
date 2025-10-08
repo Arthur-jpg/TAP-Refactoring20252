@@ -7,7 +7,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -17,7 +16,6 @@ import java.util.Optional;
  * Utiliza EntityManager para operações de persistência.
  */
 @Repository
-@Transactional
 public class CursoDAOImpl implements CursoDAO {
 
     @PersistenceContext
@@ -30,7 +28,9 @@ public class CursoDAOImpl implements CursoDAO {
                 throw new DaoException("Curso com código " + curso.getCodigo() + " já existe");
             }
             entityManager.persist(curso);
-            entityManager.flush();
+            // Removido entityManager.flush() para evitar conflitos de transação
+        } catch (DaoException e) {
+            throw e; // Re-throw DaoException sem encapsular
         } catch (Exception e) {
             throw new DaoException("Erro ao salvar curso: " + e.getMessage());
         }
@@ -51,7 +51,6 @@ public class CursoDAOImpl implements CursoDAO {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<Curso> findByCodigo(int codigo) throws DaoException {
         try {
             Curso curso = entityManager.find(Curso.class, codigo);
@@ -62,7 +61,6 @@ public class CursoDAOImpl implements CursoDAO {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Collection<Curso> findAll() throws DaoException {
         try {
             TypedQuery<Curso> query = entityManager.createQuery(
@@ -94,7 +92,6 @@ public class CursoDAOImpl implements CursoDAO {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public boolean existsByCodigo(int codigo) throws DaoException {
         try {
             TypedQuery<Long> query = entityManager.createQuery(

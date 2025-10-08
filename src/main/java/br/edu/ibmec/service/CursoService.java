@@ -11,8 +11,10 @@ import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class CursoService {
     
     @Autowired
@@ -37,21 +39,24 @@ public class CursoService {
         return cursoDAO.findAll();
     }
 
+    @Transactional
     public void cadastrarCurso(CursoDTO cursoDTO) throws ServiceException, DaoException {
         // Validações
         if ((cursoDTO.getCodigo() < 1) || (cursoDTO.getCodigo() > 99999)) {
             throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
         }
-        if ((cursoDTO.getNome().length() < 1) || (cursoDTO.getNome().length() > 100)) {
+        if (cursoDTO.getNome() == null || cursoDTO.getNome().trim().isEmpty() || 
+            cursoDTO.getNome().length() > 100) {
             throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
         }
 
-        Curso curso = new Curso(cursoDTO.getCodigo(), cursoDTO.getNome());
+        Curso curso = new Curso(cursoDTO.getCodigo(), cursoDTO.getNome().trim());
 
         try {
             cursoDAO.save(curso);
         } catch (DaoException e) {
-            throw new DaoException("Erro ao cadastrar curso: " + e.getMessage());
+            // Re-throw DaoException sem wrapping adicional para evitar rollback
+            throw e;
         }
     }
 
