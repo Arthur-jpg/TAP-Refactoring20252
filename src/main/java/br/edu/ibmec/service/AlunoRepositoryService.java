@@ -1,0 +1,223 @@
+package br.edu.ibmec.service;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import br.edu.ibmec.dto.AlunoDTO;
+import br.edu.ibmec.dto.EstadoCivilDTO;
+import br.edu.ibmec.entity.Aluno;
+import br.edu.ibmec.entity.Curso;
+import br.edu.ibmec.entity.Data;
+import br.edu.ibmec.entity.EstadoCivil;
+import br.edu.ibmec.exception.DaoException;
+import br.edu.ibmec.exception.ServiceException;
+import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
+import br.edu.ibmec.repository.AlunoRepository;
+import br.edu.ibmec.repository.CursoRepository;
+
+/**
+ * Serviço para Aluno usando Spring Data JPA Repository
+ */
+@Service("alunoRepositoryService")
+@Transactional
+public class AlunoRepositoryService {
+    
+    @Autowired
+    private AlunoRepository alunoRepository;
+    
+    @Autowired
+    private CursoRepository cursoRepository;
+
+    public AlunoDTO buscarAluno(int matricula) throws DaoException {
+        Aluno aluno = alunoRepository.findByMatricula(matricula);
+        if (aluno == null) {
+            throw new DaoException("Aluno com matrícula " + matricula + " não encontrado");
+        }
+        
+        return convertToDTO(aluno);
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<Aluno> listarAlunos() throws DaoException {
+        return alunoRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<AlunoDTO> listarAlunosCompletos() throws DaoException {
+        List<Aluno> alunos = alunoRepository.findAll();
+        List<AlunoDTO> alunosDTO = new ArrayList<>();
+        
+        for (Aluno aluno : alunos) {
+            alunosDTO.add(convertToDTO(aluno));
+        }
+        
+        return alunosDTO;
+    }
+
+    @Transactional
+    public void cadastrarAluno(AlunoDTO alunoDTO) throws ServiceException, DaoException {
+        // Validações
+        if (alunoDTO.getMatricula() <= 0) {
+            throw new ServiceException(ServiceExceptionEnum.ALUNO_MATRICULA_INVALIDA);
+        }
+        if (alunoDTO.getNome() == null || alunoDTO.getNome().trim().isEmpty()) {
+            throw new ServiceException(ServiceExceptionEnum.ALUNO_NOME_INVALIDO);
+        }
+
+        // Verifica se já existe
+        if (alunoRepository.existsByMatricula(alunoDTO.getMatricula())) {
+            throw new ServiceException("Aluno com matrícula " + alunoDTO.getMatricula() + " já existe");
+        }
+
+        // Busca o curso se informado
+        Curso curso = null;
+        if (alunoDTO.getCurso() > 0) {
+            curso = cursoRepository.findByCodigo(alunoDTO.getCurso());
+            if (curso == null) {
+                throw new DaoException("Curso com código " + alunoDTO.getCurso() + " não encontrado");
+            }
+        }
+
+        Aluno aluno = convertToEntity(alunoDTO, curso);
+        alunoRepository.save(aluno);
+    }
+
+    @Transactional
+    public void alterarAluno(AlunoDTO alunoDTO) throws ServiceException, DaoException {
+        // Validações
+        if (alunoDTO.getMatricula() <= 0) {
+            throw new ServiceException(ServiceExceptionEnum.ALUNO_MATRICULA_INVALIDA);
+        }
+        if (alunoDTO.getNome() == null || alunoDTO.getNome().trim().isEmpty()) {
+            throw new ServiceException(ServiceExceptionEnum.ALUNO_NOME_INVALIDO);
+        }
+
+        // Verifica se existe
+        Optional<Aluno> alunoOpt = alunoRepository.findById(alunoDTO.getMatricula());
+        if (alunoOpt.isEmpty()) {
+            throw new DaoException("Aluno com matrícula " + alunoDTO.getMatricula() + " não encontrado");
+        }
+
+        // Busca o curso se informado
+        Curso curso = null;
+        if (alunoDTO.getCurso() > 0) {
+            curso = cursoRepository.findByCodigo(alunoDTO.getCurso());
+            if (curso == null) {
+                throw new DaoException("Curso com código " + alunoDTO.getCurso() + " não encontrado");
+            }
+        }
+
+        Aluno aluno = alunoOpt.get();
+        aluno.setNome(alunoDTO.getNome().trim());
+        aluno.setCurso(curso);
+        // Atualizar outros campos conforme necessário
+        
+        alunoRepository.save(aluno);
+    }
+
+    @Transactional
+    public void removerAluno(int matricula) throws DaoException {
+        if (!alunoRepository.existsById(matricula)) {
+            throw new DaoException("Aluno com matrícula " + matricula + " não encontrado");
+        }
+        
+        alunoRepository.deleteById(matricula);
+    }
+
+    private AlunoDTO convertToDTO(Aluno aluno) {
+        AlunoDTO dto = new AlunoDTO();
+        dto.setMatricula(aluno.getMatricula());
+        dto.setNome(aluno.getNome());
+        dto.setIdade(aluno.getIdade());
+        dto.setMatriculaAtiva(aluno.isMatriculaAtiva());
+        
+        if (aluno.getCurso() != null) {
+            dto.setCurso(aluno.getCurso().getCodigo());
+        }
+        
+        // Converter data de nascimento
+        if (aluno.getDataNascimento() != null) {
+            dto.setDtNascimento(aluno.getDataNascimento().toString());
+        }
+        
+        // Converter estado civil
+        if (aluno.getEstadoCivil() != null) {
+            dto.setEstadoCivil(convertEstadoCivilToDTO(aluno.getEstadoCivil()));
+        }
+        
+        // Converter telefones
+        if (aluno.getTelefones() != null) {
+            dto.setTelefones(aluno.getTelefones());
+        }
+        
+        return dto;
+    }
+
+    private Aluno convertToEntity(AlunoDTO dto, Curso curso) {
+        Aluno aluno = new Aluno();
+        aluno.setMatricula(dto.getMatricula());
+        aluno.setNome(dto.getNome().trim());
+        aluno.setIdade(dto.getIdade());
+        aluno.setMatriculaAtiva(dto.isMatriculaAtiva());
+        aluno.setCurso(curso);
+        
+        // Converter data de nascimento
+        if (dto.getDtNascimento() != null && !dto.getDtNascimento().trim().isEmpty()) {
+            try {
+                Data dataNascimento = Data.fromString(dto.getDtNascimento());
+                aluno.setDataNascimento(dataNascimento);
+            } catch (Exception e) {
+                // Se houver erro na conversão, manter null
+                System.err.println("Erro ao converter data de nascimento: " + e.getMessage());
+            }
+        }
+        
+        // Converter estado civil
+        if (dto.getEstadoCivil() != null) {
+            aluno.setEstadoCivil(convertEstadoCivilFromDTO(dto.getEstadoCivil()));
+        }
+        
+        // Converter telefones
+        if (dto.getTelefones() != null) {
+            aluno.setTelefones(dto.getTelefones());
+        }
+        
+        return aluno;
+    }
+
+    private EstadoCivilDTO convertEstadoCivilToDTO(EstadoCivil estadoCivil) {
+        switch (estadoCivil) {
+            case solteiro:
+                return EstadoCivilDTO.solteiro;
+            case casado:
+                return EstadoCivilDTO.casado;
+            case divorciado:
+                return EstadoCivilDTO.divorciado;
+            case viuvo:
+                return EstadoCivilDTO.viuvo;
+            default:
+                return null;
+        }
+    }
+
+    private EstadoCivil convertEstadoCivilFromDTO(EstadoCivilDTO estadoCivilDTO) {
+        switch (estadoCivilDTO) {
+            case solteiro:
+                return EstadoCivil.solteiro;
+            case casado:
+                return EstadoCivil.casado;
+            case divorciado:
+                return EstadoCivil.divorciado;
+            case viuvo:
+                return EstadoCivil.viuvo;
+            default:
+                return null;
+        }
+    }
+}

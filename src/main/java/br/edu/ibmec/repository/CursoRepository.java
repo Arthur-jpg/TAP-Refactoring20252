@@ -1,0 +1,28 @@
+package br.edu.ibmec.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import br.edu.ibmec.entity.Curso;
+
+/**
+ * Repository Spring Data JPA para a entidade Curso
+ * Substitui o DAO tradicional por uma abordagem mais moderna
+ */
+@Repository
+public interface CursoRepository extends JpaRepository<Curso, Integer> {
+    
+    /**
+     * Verifica se existe um curso com o código informado
+     * @param codigo código do curso
+     * @return true se existe, false caso contrário
+     */
+    boolean existsByCodigo(int codigo);
+    
+    /**
+     * Busca curso por código
+     * @param codigo código do curso
+     * @return o curso encontrado ou null
+     */
+    Curso findByCodigo(int codigo);
+}

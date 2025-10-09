@@ -1,22 +1,46 @@
 package br.edu.ibmec.entity;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * Representa um aluno da universidade com suas informações pessoais,
  * curso associado e inscrições em disciplinas.
  */
+@Entity
+@Table(name = "alunos")
 public class Aluno {
+    @Id
+    @Column(name = "matricula")
     private int matricula;
+    
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
+    
+    @Embedded
     private Data dataNascimento;
+    
+    @Column(name = "idade")
     private int idade;
+    
+    @Column(name = "matricula_ativa")
     private boolean isMatriculaAtiva;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado_civil")
     private EstadoCivil estadoCivil;
-    private Vector<String> telefones;
+    
+    @ElementCollection
+    @CollectionTable(name = "aluno_telefones", joinColumns = @JoinColumn(name = "matricula"))
+    @Column(name = "telefone")
+    private List<String> telefones = new ArrayList<>();
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "curso_codigo")
     private Curso curso;
+    
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Inscricao> inscricoes = new ArrayList<>();
 
     public Aluno() {
@@ -24,7 +48,7 @@ public class Aluno {
 
     public Aluno(int matricula, String nome, Data dataNascimento,
                  boolean matriculaAtiva, EstadoCivil estadoCivil, Curso curso,
-                 Vector<String> telefones) {
+                 List<String> telefones) {
         this.matricula = matricula;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -32,7 +56,7 @@ public class Aluno {
         this.estadoCivil = estadoCivil;
         this.curso = curso;
         this.idade = 0;
-        this.telefones = telefones;
+        this.telefones = telefones != null ? new ArrayList<>(telefones) : new ArrayList<>();
     }
 
     public void adicionarInscricao(Inscricao inscricao) {
@@ -123,12 +147,12 @@ public class Aluno {
         this.curso = curso;
     }
 
-    public Vector<String> getTelefones() {
-        return telefones != null ? new Vector<>(telefones) : new Vector<>();
+    public List<String> getTelefones() {
+        return telefones != null ? new ArrayList<>(telefones) : new ArrayList<>();
     }
 
-    public void setTelefones(Vector<String> telefones) {
-        this.telefones = telefones != null ? new Vector<>(telefones) : new Vector<>();
+    public void setTelefones(List<String> telefones) {
+        this.telefones = telefones != null ? new ArrayList<>(telefones) : new ArrayList<>();
     }
 
     public boolean temInscricaoAtiva() {
