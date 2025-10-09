@@ -1,6 +1,8 @@
 package br.edu.ibmec.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,18 @@ public class DisciplinaRepositoryService {
     @Transactional(readOnly = true)
     public Collection<Disciplina> listarDisciplinas() throws DaoException {
         return disciplinaRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<DisciplinaDTO> listarDisciplinasCompletas() throws DaoException {
+        List<Disciplina> disciplinas = disciplinaRepository.findAll();
+        List<DisciplinaDTO> disciplinasDTO = new ArrayList<>();
+        
+        for (Disciplina disciplina : disciplinas) {
+            disciplinasDTO.add(convertToDTO(disciplina));
+        }
+        
+        return disciplinasDTO;
     }
 
     @Transactional

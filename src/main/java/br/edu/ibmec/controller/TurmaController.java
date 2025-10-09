@@ -22,6 +22,7 @@ import br.edu.ibmec.exception.DaoException;
 import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
 import br.edu.ibmec.service.TurmaService;
+import br.edu.ibmec.service.TurmaRepositoryService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -39,6 +40,9 @@ public class TurmaController {
     @Autowired
     private TurmaService turmaService;
 
+    @Autowired
+    private TurmaRepositoryService turmaRepositoryService;
+
     /**
      * Busca turma por código, ano e semestre.
      * GET /api/turma/{codigo}/{ano}/{semestre}
@@ -50,7 +54,7 @@ public class TurmaController {
             @Parameter(description = "Ano da turma") @PathVariable int ano, 
             @Parameter(description = "Semestre (1 ou 2)") @PathVariable int semestre) {
         try {
-            TurmaDTO turmaDTO = turmaService.buscarTurma(codigo, ano, semestre);
+            TurmaDTO turmaDTO = turmaRepositoryService.buscarTurma(codigo, ano, semestre);
             return ResponseEntity.ok(turmaDTO);
         } catch (DaoException e) {
             return ResponseEntity.notFound().build();
@@ -64,7 +68,7 @@ public class TurmaController {
     @PostMapping
     public ResponseEntity<String> cadastrarTurma(@RequestBody TurmaDTO turmaDTO) {
         try {
-            turmaService.cadastrarTurma(turmaDTO);
+            turmaRepositoryService.cadastrarTurma(turmaDTO);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body("Turma cadastrada com sucesso");
         } catch (ServiceException e) {
@@ -91,7 +95,7 @@ public class TurmaController {
     @PutMapping
     public ResponseEntity<String> alterarTurma(@RequestBody TurmaDTO turmaDTO) {
         try {
-            turmaService.alterarCurso(turmaDTO);
+            turmaRepositoryService.alterarTurma(turmaDTO);
             return ResponseEntity.ok("Turma alterada com sucesso");
         } catch (ServiceException e) {
             if (e.getTipo() == ServiceExceptionEnum.CURSO_CODIGO_INVALIDO) {
@@ -119,7 +123,7 @@ public class TurmaController {
                                              @PathVariable int ano, 
                                              @PathVariable int semestre) {
         try {
-            turmaService.removerTurma(codigo, ano, semestre);
+            turmaRepositoryService.removerTurma(codigo, ano, semestre);
             return ResponseEntity.ok("Turma removida com sucesso");
         } catch (DaoException e) {
             return ResponseEntity.notFound().build();
@@ -131,9 +135,9 @@ public class TurmaController {
      * GET /api/turma
      */
     @GetMapping
-    public ResponseEntity<List<Turma>> listarTurmas() {
+    public ResponseEntity<List<TurmaDTO>> listarTurmas() {
         try {
-            List<Turma> turmas = new ArrayList<>(turmaService.listarTurmas());
+            List<TurmaDTO> turmas = turmaRepositoryService.listarTurmasCompletas();
             return ResponseEntity.ok(turmas);
         } catch (DaoException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -145,14 +149,10 @@ public class TurmaController {
      * GET /api/turma/disciplina/{codigoDisciplina}
      */
     @GetMapping("/disciplina/{codigoDisciplina}")
-    public ResponseEntity<List<Turma>> listarTurmasPorDisciplina(@PathVariable int codigoDisciplina) {
+    public ResponseEntity<List<TurmaDTO>> listarTurmasPorDisciplina(@PathVariable int codigoDisciplina) {
         try {
-            List<Turma> todasTurmas = new ArrayList<>(turmaService.listarTurmas());
-            List<Turma> turmasFiltradas = todasTurmas.stream()
-                    .filter(turma -> turma.getDisciplina() != null && 
-                            turma.getDisciplina().getCodigo() == codigoDisciplina)
-                    .toList();
-            return ResponseEntity.ok(turmasFiltradas);
+            List<TurmaDTO> turmas = turmaRepositoryService.listarTurmasPorDisciplina(codigoDisciplina);
+            return ResponseEntity.ok(turmas);
         } catch (DaoException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

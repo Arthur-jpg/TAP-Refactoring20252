@@ -22,6 +22,7 @@ import br.edu.ibmec.exception.DaoException;
 import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
 import br.edu.ibmec.service.InscricaoService;
+import br.edu.ibmec.service.InscricaoRepositoryService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -43,6 +44,9 @@ public class InscricaoController {
     @Autowired
     private InscricaoService inscricaoService;
 
+    @Autowired
+    private InscricaoRepositoryService inscricaoRepositoryService;
+
     /**
      * Busca inscrição por matrícula do aluno e dados da turma.
      * GET /api/inscricao/{matricula}/{codigo}/{ano}/{semestre}
@@ -55,7 +59,7 @@ public class InscricaoController {
             @Parameter(description = "Ano da turma") @PathVariable int ano, 
             @Parameter(description = "Semestre da turma") @PathVariable int semestre) {
         try {
-            InscricaoDTO inscricaoDTO = inscricaoService.buscarInscricao(matricula, codigo, ano, semestre);
+            InscricaoDTO inscricaoDTO = inscricaoRepositoryService.buscarInscricao(matricula, codigo, ano, semestre);
             return ResponseEntity.ok(inscricaoDTO);
         } catch (DaoException e) {
             return ResponseEntity.notFound().build();
@@ -69,7 +73,7 @@ public class InscricaoController {
     @PostMapping
     public ResponseEntity<String> cadastrarInscricao(@RequestBody InscricaoDTO inscricaoDTO) {
         try {
-            inscricaoService.cadastrarInscricao(inscricaoDTO);
+            inscricaoRepositoryService.cadastrarInscricao(inscricaoDTO);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body("Inscrição cadastrada com sucesso");
         } catch (ServiceException e) {
@@ -96,7 +100,7 @@ public class InscricaoController {
     @PutMapping
     public ResponseEntity<String> alterarInscricao(@RequestBody InscricaoDTO inscricaoDTO) {
         try {
-            inscricaoService.alterarInscricao(inscricaoDTO);
+            inscricaoRepositoryService.alterarInscricao(inscricaoDTO);
             return ResponseEntity.ok("Inscrição alterada com sucesso");
         } catch (ServiceException e) {
             if (e.getTipo() == ServiceExceptionEnum.CURSO_CODIGO_INVALIDO) {
@@ -125,7 +129,7 @@ public class InscricaoController {
                                                  @PathVariable int ano, 
                                                  @PathVariable int semestre) {
         try {
-            inscricaoService.removerInscricao(matricula, codigo, ano, semestre);
+            inscricaoRepositoryService.removerInscricao(matricula, codigo, ano, semestre);
             return ResponseEntity.ok("Inscrição removida com sucesso");
         } catch (DaoException e) {
             return ResponseEntity.notFound().build();
@@ -137,9 +141,9 @@ public class InscricaoController {
      * GET /api/inscricao
      */
     @GetMapping
-    public ResponseEntity<List<Inscricao>> listarInscricoes() {
+    public ResponseEntity<List<InscricaoDTO>> listarInscricoes() {
         try {
-            List<Inscricao> inscricoes = new ArrayList<>(inscricaoService.listarInscricoes());
+            List<InscricaoDTO> inscricoes = inscricaoRepositoryService.listarInscricoesCompletas();
             return ResponseEntity.ok(inscricoes);
         } catch (DaoException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -151,14 +155,10 @@ public class InscricaoController {
      * GET /api/inscricao/aluno/{matricula}
      */
     @GetMapping("/aluno/{matricula}")
-    public ResponseEntity<List<Inscricao>> listarInscricoesPorAluno(@PathVariable int matricula) {
+    public ResponseEntity<List<InscricaoDTO>> listarInscricoesPorAluno(@PathVariable int matricula) {
         try {
-            List<Inscricao> todasInscricoes = new ArrayList<>(inscricaoService.listarInscricoes());
-            List<Inscricao> inscricoesFiltradas = todasInscricoes.stream()
-                    .filter(inscricao -> inscricao.getAluno() != null && 
-                            inscricao.getAluno().getMatricula() == matricula)
-                    .toList();
-            return ResponseEntity.ok(inscricoesFiltradas);
+            List<InscricaoDTO> inscricoes = inscricaoRepositoryService.listarInscricoesPorAluno(matricula);
+            return ResponseEntity.ok(inscricoes);
         } catch (DaoException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -169,18 +169,12 @@ public class InscricaoController {
      * GET /api/inscricao/turma/{codigo}/{ano}/{semestre}
      */
     @GetMapping("/turma/{codigo}/{ano}/{semestre}")
-    public ResponseEntity<List<Inscricao>> listarInscricoesPorTurma(@PathVariable int codigo,
-                                                                  @PathVariable int ano, 
-                                                                  @PathVariable int semestre) {
+    public ResponseEntity<List<InscricaoDTO>> listarInscricoesPorTurma(@PathVariable int codigo,
+                                                                     @PathVariable int ano, 
+                                                                     @PathVariable int semestre) {
         try {
-            List<Inscricao> todasInscricoes = new ArrayList<>(inscricaoService.listarInscricoes());
-            List<Inscricao> inscricoesFiltradas = todasInscricoes.stream()
-                    .filter(inscricao -> inscricao.getTurma() != null && 
-                            inscricao.getTurma().getCodigo() == codigo &&
-                            inscricao.getTurma().getAno() == ano &&
-                            inscricao.getTurma().getSemestre() == semestre)
-                    .toList();
-            return ResponseEntity.ok(inscricoesFiltradas);
+            List<InscricaoDTO> inscricoes = inscricaoRepositoryService.listarInscricoesPorTurma(codigo);
+            return ResponseEntity.ok(inscricoes);
         } catch (DaoException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

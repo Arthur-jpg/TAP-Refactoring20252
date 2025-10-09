@@ -149,10 +149,10 @@ public class DisciplinaController {
      * GET /api/disciplina/completas
      */
     @GetMapping("/completas")
-    public ResponseEntity<List<Disciplina>> listarDisciplinasCompletas() {
+    public ResponseEntity<List<DisciplinaDTO>> listarDisciplinasCompletas() {
         try {
-            List<Disciplina> disciplinas = new ArrayList<>(disciplinaService.listarDisciplinas());
-            return ResponseEntity.ok(disciplinas);
+            List<DisciplinaDTO> disciplinasDTO = disciplinaService.listarDisciplinasCompletas();
+            return ResponseEntity.ok(disciplinasDTO);
         } catch (DaoException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
