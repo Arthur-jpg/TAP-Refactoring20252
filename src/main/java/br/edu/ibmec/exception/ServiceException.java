@@ -22,8 +22,8 @@ public class ServiceException extends Exception {
         this.tipo = tipo;
     }
 
-    public ServiceException(ArrayList listaErrosCurso) {
-        // TODO Auto-generated constructor stub
+    public ServiceException(ArrayList<String> listaErrosCurso) {
+        this.message = String.join(", ", listaErrosCurso);
     }
 
     public String getMessage() {
@@ -47,12 +47,18 @@ public class ServiceException extends Exception {
         CURSO_CODIGO_INVALIDO("Código de curso inválido"), CURSO_NOME_INVALIDO(
                 "Nome de curso inválido"), CURSO_CODIGO_DUPLICADO("Código de curso já existe"), ALUNO_MATRICULA_INVALIDA, ALUNO_NOME_INVALIDO;
 
+        private String descricao;
+        
         private ServiceExceptionEnum() {
-            // TODO Auto-generated constructor stub
+            this.descricao = "";
         }
 
-        private ServiceExceptionEnum(String valor) {
-            // TODO Auto-generated constructor stub
+        private ServiceExceptionEnum(String descricao) {
+            this.descricao = descricao;
+        }
+        
+        public String getDescricao() {
+            return descricao;
         }
 
     }

@@ -224,6 +224,7 @@ public class TurmaRepositoryService {
     private Turma convertToEntity(TurmaDTO dto, Disciplina disciplina) {
         Turma turma = new Turma();
         
+        // A entidade Turma usa @IdClass, então configuramos os campos diretamente
         turma.setCodigo(dto.getCodigo());
         turma.setAno(dto.getAno());
         turma.setSemestre(dto.getSemestre());
