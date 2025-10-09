@@ -1,6 +1,8 @@
 package br.edu.ibmec.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,18 @@ public class CursoRepositoryService {
     @Transactional(readOnly = true)
     public Collection<Curso> listarCursos() throws DaoException {
         return cursoRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<CursoDTO> listarCursosCompletos() throws DaoException {
+        List<Curso> cursos = cursoRepository.findAll();
+        List<CursoDTO> cursosDTO = new ArrayList<>();
+        
+        for (Curso curso : cursos) {
+            cursosDTO.add(new CursoDTO(curso.getCodigo(), curso.getNome()));
+        }
+        
+        return cursosDTO;
     }
 
     @Transactional

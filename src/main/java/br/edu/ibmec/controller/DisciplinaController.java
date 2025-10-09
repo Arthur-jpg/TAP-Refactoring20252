@@ -21,7 +21,7 @@ import br.edu.ibmec.entity.Disciplina;
 import br.edu.ibmec.exception.DaoException;
 import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
-import br.edu.ibmec.service.DisciplinaService;
+import br.edu.ibmec.service.DisciplinaRepositoryService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -41,7 +41,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class DisciplinaController {
 
     @Autowired
-    private DisciplinaService disciplinaService;
+    private DisciplinaRepositoryService disciplinaService;
 
     /**
      * Busca disciplina por código.

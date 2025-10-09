@@ -39,31 +39,31 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 
  :: Spring Boot ::                (v3.5.6)
 
-2025-10-08T19:58:11.724-03:00  INFO 10069 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Starting UniversidadeApplication using Java 24.0.2 with PID 10069 (/Users/arthurschiller/Documents/ibmec-rio/2025.2/tecnicas-avancadas/universidade/target/classes started by arthurschiller in /Users/arthurschiller/Documents/ibmec-rio/2025.2/tecnicas-avancadas/universidade)
-2025-10-08T19:58:11.724-03:00 DEBUG 10069 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Running with Spring Boot v3.5.6, Spring v6.2.11
-2025-10-08T19:58:11.724-03:00  INFO 10069 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : No active profile set, falling back to 1 default profile: "default"
-2025-10-08T19:58:11.742-03:00  INFO 10069 --- [universidade] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-10-08T19:58:11.743-03:00  INFO 10069 --- [universidade] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-10-08T19:58:11.916-03:00  INFO 10069 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-08T19:58:11.922-03:00  INFO 10069 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 JPA repository interfaces.
-2025-10-08T19:58:11.924-03:00  INFO 10069 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-08T19:58:11.933-03:00  INFO 10069 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 1 JPA repository interface.
-2025-10-08T19:58:12.167-03:00  INFO 10069 --- [universidade] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-10-08T19:58:12.172-03:00  INFO 10069 --- [universidade] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-08T19:58:12.172-03:00  INFO 10069 --- [universidade] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
-2025-10-08T19:58:12.184-03:00  INFO 10069 --- [universidade] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-10-08T19:58:12.185-03:00  INFO 10069 --- [universidade] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 442 ms
-2025-10-08T19:58:12.229-03:00 DEBUG 10069 --- [universidade] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
-2025-10-08T19:58:12.234-03:00  INFO 10069 --- [universidade] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-08T19:58:12.248-03:00  INFO 10069 --- [universidade] [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
-2025-10-08T19:58:12.256-03:00  INFO 10069 --- [universidade] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-10-08T19:58:12.339-03:00  INFO 10069 --- [universidade] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-08T19:58:12.346-03:00  INFO 10069 --- [universidade] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-10-08T19:58:12.397-03:00  INFO 10069 --- [universidade] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@b04be2
-2025-10-08T19:58:12.398-03:00  INFO 10069 --- [universidade] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-10-08T19:58:12.414-03:00  WARN 10069 --- [universidade] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-08T19:58:12.414-03:00  WARN 10069 --- [universidade] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-08T19:58:12.419-03:00  INFO 10069 --- [universidade] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-10-08T20:47:06.354-03:00  INFO 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Starting UniversidadeApplication using Java 24.0.2 with PID 16243 (/Users/arthurschiller/Documents/ibmec-rio/2025.2/tecnicas-avancadas/universidade/target/classes started by arthurschiller in /Users/arthurschiller/Documents/ibmec-rio/2025.2/tecnicas-avancadas/universidade)
+2025-10-08T20:47:06.355-03:00 DEBUG 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-10-08T20:47:06.355-03:00  INFO 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-10-08T20:47:06.372-03:00  INFO 16243 --- [universidade] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-10-08T20:47:06.372-03:00  INFO 16243 --- [universidade] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-10-08T20:47:06.543-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-08T20:47:06.549-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 JPA repository interfaces.
+2025-10-08T20:47:06.551-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-08T20:47:06.562-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 5 JPA repository interfaces.
+2025-10-08T20:47:06.802-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-08T20:47:06.808-03:00  INFO 16243 --- [universidade] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-08T20:47:06.808-03:00  INFO 16243 --- [universidade] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-08T20:47:06.820-03:00  INFO 16243 --- [universidade] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-08T20:47:06.820-03:00  INFO 16243 --- [universidade] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 447 ms
+2025-10-08T20:47:06.867-03:00 DEBUG 16243 --- [universidade] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2025-10-08T20:47:06.874-03:00  INFO 16243 --- [universidade] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-08T20:47:06.888-03:00  INFO 16243 --- [universidade] [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-10-08T20:47:06.896-03:00  INFO 16243 --- [universidade] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-08T20:47:06.981-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-08T20:47:06.989-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-08T20:47:07.045-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2ea126e6
+2025-10-08T20:47:07.045-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-08T20:47:07.060-03:00  WARN 16243 --- [universidade] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-08T20:47:07.060-03:00  WARN 16243 --- [universidade] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-08T20:47:07.065-03:00  INFO 16243 --- [universidade] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 8.0
@@ -71,18 +71,209 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-10-08T19:58:12.719-03:00  INFO 10069 --- [universidade] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-10-08T19:58:12.786-03:00  INFO 10069 --- [universidade] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-08T19:58:13.085-03:00  INFO 10069 --- [universidade] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-10-08T19:58:13.098-03:00  INFO 10069 --- [universidade] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-10-08T19:58:13.102-03:00  INFO 10069 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Started UniversidadeApplication in 1.508 seconds (process running for 1.636)
-2025-10-08T19:58:30.875-03:00  INFO 10069 --- [universidade] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-10-08T19:58:30.876-03:00  INFO 10069 --- [universidade] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-10-08T19:58:30.881-03:00  INFO 10069 --- [universidade] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
-2025-10-08T19:58:30.944-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.cadastrarCurso]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
-2025-10-08T19:58:30.945-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1893697042<open>)] for JPA transaction
-2025-10-08T19:58:30.948-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@60c82971]
-2025-10-08T19:58:31.000-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-1] org.hibernate.SQL                        : 
+2025-10-08T20:47:07.375-03:00  INFO 16243 --- [universidade] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-08T20:47:07.444-03:00  INFO 16243 --- [universidade] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-08T20:47:07.779-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-08T20:47:07.791-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-08T20:47:07.795-03:00  INFO 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Started UniversidadeApplication in 1.566 seconds (process running for 1.693)
+2025-10-08T20:47:18.880-03:00  INFO 16243 --- [universidade] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-08T20:47:18.880-03:00  INFO 16243 --- [universidade] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-08T20:47:18.880-03:00  INFO 16243 --- [universidade] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-10-08T20:47:18.927-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.AlunoRepositoryService.cadastrarAluno]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-10-08T20:47:18.928-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(370033741<open>)] for JPA transaction
+2025-10-08T20:47:18.929-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@52b744bd]
+2025-10-08T20:47:18.966-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        a1_0.matricula 
+    from
+        alunos a1_0 
+    where
+        a1_0.matricula=? 
+    limit
+        ?
+Hibernate: 
+    select
+        a1_0.matricula 
+    from
+        alunos a1_0 
+    where
+        a1_0.matricula=? 
+    limit
+        ?
+2025-10-08T20:47:18.973-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0 
+    where
+        c1_0.codigo=?
+Hibernate: 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0 
+    where
+        c1_0.codigo=?
+2025-10-08T20:47:18.981-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(370033741<open>)] for JPA transaction
+2025-10-08T20:47:18.981-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2025-10-08T20:47:18.986-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        a1_0.matricula,
+        a1_0.curso_codigo,
+        a1_0.ano_nascimento,
+        a1_0.dia_nascimento,
+        a1_0.mes_nascimento,
+        a1_0.estado_civil,
+        a1_0.idade,
+        a1_0.matricula_ativa,
+        a1_0.nome,
+        i1_0.aluno_matricula,
+        i1_0.id,
+        i1_0.avaliacao1,
+        i1_0.avaliacao2,
+        i1_0.media,
+        i1_0.num_faltas,
+        i1_0.situacao,
+        i1_0.turma_codigo,
+        i1_0.turma_ano,
+        i1_0.turma_semestre 
+    from
+        alunos a1_0 
+    left join
+        inscricoes i1_0 
+            on a1_0.matricula=i1_0.aluno_matricula 
+    where
+        a1_0.matricula=?
+Hibernate: 
+    select
+        a1_0.matricula,
+        a1_0.curso_codigo,
+        a1_0.ano_nascimento,
+        a1_0.dia_nascimento,
+        a1_0.mes_nascimento,
+        a1_0.estado_civil,
+        a1_0.idade,
+        a1_0.matricula_ativa,
+        a1_0.nome,
+        i1_0.aluno_matricula,
+        i1_0.id,
+        i1_0.avaliacao1,
+        i1_0.avaliacao2,
+        i1_0.media,
+        i1_0.num_faltas,
+        i1_0.situacao,
+        i1_0.turma_codigo,
+        i1_0.turma_ano,
+        i1_0.turma_semestre 
+    from
+        alunos a1_0 
+    left join
+        inscricoes i1_0 
+            on a1_0.matricula=i1_0.aluno_matricula 
+    where
+        a1_0.matricula=?
+2025-10-08T20:47:18.994-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2025-10-08T20:47:18.994-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(370033741<open>)]
+2025-10-08T20:47:19.002-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] org.hibernate.SQL                        : 
+    insert 
+    into
+        alunos
+        (curso_codigo, ano_nascimento, dia_nascimento, mes_nascimento, estado_civil, idade, matricula_ativa, nome, matricula) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        alunos
+        (curso_codigo, ano_nascimento, dia_nascimento, mes_nascimento, estado_civil, idade, matricula_ativa, nome, matricula) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-10-08T20:47:19.005-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(370033741<open>)] after transaction
+2025-10-08T20:47:22.477-03:00  INFO 16243 --- [universidade] [nio-8080-exec-6] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 162 ms
+2025-10-08T22:58:52.903-03:00  WARN 16243 --- [universidade] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m44s391ms).
+2025-10-08T23:15:18.696-03:00  WARN 16243 --- [universidade] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m55s767ms).
+2025-10-08T23:23:28.129-03:00  WARN 16243 --- [universidade] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m39s433ms).
+2025-10-08T23:40:50.028-03:00  WARN 16243 --- [universidade] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m21s899ms).
+2025-10-08T23:52:41.488-03:00  INFO 16243 --- [universidade] [   File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 24 class path changes (0 additions, 0 deletions, 24 modifications)
+2025-10-08T23:52:41.494-03:00  INFO 16243 --- [universidade] [       Thread-5] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-08T23:52:41.504-03:00  INFO 16243 --- [universidade] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-08T23:52:41.508-03:00  INFO 16243 --- [universidade] [       Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-08T23:52:41.510-03:00  INFO 16243 --- [universidade] [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-08T23:52:41.511-03:00  INFO 16243 --- [universidade] [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.6)
+
+2025-10-08T23:52:41.555-03:00  INFO 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Starting UniversidadeApplication using Java 24.0.2 with PID 16243 (/Users/arthurschiller/Documents/ibmec-rio/2025.2/tecnicas-avancadas/universidade/target/classes started by arthurschiller in /Users/arthurschiller/Documents/ibmec-rio/2025.2/tecnicas-avancadas/universidade)
+2025-10-08T23:52:41.556-03:00 DEBUG 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-10-08T23:52:41.556-03:00  INFO 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-10-08T23:52:41.626-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-08T23:52:41.627-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 0 ms. Found 0 JPA repository interfaces.
+2025-10-08T23:52:41.628-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-08T23:52:41.633-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 5 JPA repository interfaces.
+2025-10-08T23:52:41.703-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-08T23:52:41.704-03:00  INFO 16243 --- [universidade] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-08T23:52:41.704-03:00  INFO 16243 --- [universidade] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-08T23:52:41.708-03:00  INFO 16243 --- [universidade] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-08T23:52:41.708-03:00  INFO 16243 --- [universidade] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 151 ms
+2025-10-08T23:52:41.727-03:00 DEBUG 16243 --- [universidade] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2025-10-08T23:52:41.727-03:00  INFO 16243 --- [universidade] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-08T23:52:41.728-03:00  INFO 16243 --- [universidade] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-08T23:52:41.733-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-08T23:52:41.734-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2025-10-08T23:52:41.737-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@177b09e
+2025-10-08T23:52:41.737-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2025-10-08T23:52:41.737-03:00  WARN 16243 --- [universidade] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-08T23:52:41.737-03:00  WARN 16243 --- [universidade] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-08T23:52:41.737-03:00  INFO 16243 --- [universidade] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-08T23:52:41.801-03:00  INFO 16243 --- [universidade] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-08T23:52:41.913-03:00  INFO 16243 --- [universidade] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-08T23:52:42.060-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-08T23:52:42.064-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-08T23:52:42.067-03:00  INFO 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Started UniversidadeApplication in 0.526 seconds (process running for 7854.229)
+2025-10-08T23:52:42.067-03:00  INFO 16243 --- [universidade] [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-10-08T23:53:01.296-03:00  INFO 16243 --- [universidade] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-08T23:53:01.296-03:00  INFO 16243 --- [universidade] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-08T23:53:01.297-03:00  INFO 16243 --- [universidade] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-10-08T23:53:01.301-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.listarCursos]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2025-10-08T23:53:01.302-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(36608273<open>)] for JPA transaction
+2025-10-08T23:53:01.305-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@29f06c9a]
+2025-10-08T23:53:01.307-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(36608273<open>)] for JPA transaction
+2025-10-08T23:53:01.307-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2025-10-08T23:53:01.311-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0
+Hibernate: 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0
+2025-10-08T23:53:01.314-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2025-10-08T23:53:01.314-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(36608273<open>)]
+2025-10-08T23:53:01.315-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(36608273<open>)] after transaction
+2025-10-08T23:53:28.436-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.cadastrarCurso]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-10-08T23:53:28.436-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1466217269<open>)] for JPA transaction
+2025-10-08T23:53:28.437-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@23cfe3e7]
+2025-10-08T23:53:28.439-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] org.hibernate.SQL                        : 
     select
         c1_0.codigo 
     from
@@ -100,9 +291,9 @@ Hibernate:
         c1_0.codigo=? 
     limit
         ?
-2025-10-08T19:58:31.006-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1893697042<open>)] for JPA transaction
-2025-10-08T19:58:31.006-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
-2025-10-08T19:58:31.013-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-1] org.hibernate.SQL                        : 
+2025-10-08T23:53:28.441-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1466217269<open>)] for JPA transaction
+2025-10-08T23:53:28.441-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2025-10-08T23:53:28.445-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] org.hibernate.SQL                        : 
     select
         c1_0.codigo,
         c1_0.nome,
@@ -142,9 +333,9 @@ Hibernate:
             on c1_0.codigo=a1_0.curso_codigo 
     where
         c1_0.codigo=?
-2025-10-08T19:58:31.025-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
-2025-10-08T19:58:31.026-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1893697042<open>)]
-2025-10-08T19:58:31.033-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-1] org.hibernate.SQL                        : 
+2025-10-08T23:53:28.449-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2025-10-08T23:53:28.449-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1466217269<open>)]
+2025-10-08T23:53:28.450-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] org.hibernate.SQL                        : 
     insert 
     into
         cursos
@@ -158,31 +349,11 @@ Hibernate:
         (nome, codigo) 
     values
         (?, ?)
-2025-10-08T19:58:31.036-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1893697042<open>)] after transaction
-2025-10-08T19:58:43.073-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.listarCursos]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
-2025-10-08T19:58:43.073-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1772646792<open>)] for JPA transaction
-2025-10-08T19:58:43.074-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@18cd524e]
-2025-10-08T19:58:43.075-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1772646792<open>)] for JPA transaction
-2025-10-08T19:58:43.075-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
-2025-10-08T19:58:43.078-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        c1_0.codigo,
-        c1_0.nome 
-    from
-        cursos c1_0
-Hibernate: 
-    select
-        c1_0.codigo,
-        c1_0.nome 
-    from
-        cursos c1_0
-2025-10-08T19:58:43.079-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
-2025-10-08T19:58:43.079-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1772646792<open>)]
-2025-10-08T19:58:43.080-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1772646792<open>)] after transaction
-2025-10-08T19:58:55.807-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.buscarCurso]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
-2025-10-08T19:58:55.807-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(34955465<open>)] for JPA transaction
-2025-10-08T19:58:55.808-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@5820eca9]
-2025-10-08T19:58:55.809-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-4] org.hibernate.SQL                        : 
+2025-10-08T23:53:28.459-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1466217269<open>)] after transaction
+2025-10-08T23:53:43.133-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.buscarCurso]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-10-08T23:53:43.134-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(2109933011<open>)] for JPA transaction
+2025-10-08T23:53:43.134-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@376c5b9f]
+2025-10-08T23:53:43.136-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-3] org.hibernate.SQL                        : 
     select
         c1_0.codigo,
         c1_0.nome 
@@ -198,38 +369,146 @@ Hibernate:
         cursos c1_0 
     where
         c1_0.codigo=?
-2025-10-08T19:58:55.810-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
-2025-10-08T19:58:55.810-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(34955465<open>)]
-2025-10-08T19:58:55.810-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(34955465<open>)] after transaction
-2025-10-08T19:59:03.143-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.cadastrarCurso]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
-2025-10-08T19:59:03.143-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1281536543<open>)] for JPA transaction
-2025-10-08T19:59:03.143-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@42a555e3]
-2025-10-08T19:59:03.144-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-6] org.hibernate.SQL                        : 
-    select
-        c1_0.codigo 
-    from
-        cursos c1_0 
-    where
-        c1_0.codigo=? 
-    limit
-        ?
-Hibernate: 
-    select
-        c1_0.codigo 
-    from
-        cursos c1_0 
-    where
-        c1_0.codigo=? 
-    limit
-        ?
-2025-10-08T19:59:03.145-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1281536543<open>)] for JPA transaction
-2025-10-08T19:59:03.145-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
-2025-10-08T19:59:03.145-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-6] org.hibernate.SQL                        : 
+2025-10-08T23:53:43.139-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2025-10-08T23:53:43.139-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(2109933011<open>)]
+2025-10-08T23:53:43.140-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(2109933011<open>)] after transaction
+2025-10-08T23:53:54.232-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.listarCursos]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2025-10-08T23:53:54.232-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1832645673<open>)] for JPA transaction
+2025-10-08T23:53:54.233-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@63fc17fe]
+2025-10-08T23:53:54.233-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1832645673<open>)] for JPA transaction
+2025-10-08T23:53:54.233-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2025-10-08T23:53:54.236-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-4] org.hibernate.SQL                        : 
     select
         c1_0.codigo,
-        c1_0.nome,
-        a1_0.curso_codigo,
+        c1_0.nome 
+    from
+        cursos c1_0
+Hibernate: 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0
+2025-10-08T23:53:54.238-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2025-10-08T23:53:54.239-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1832645673<open>)]
+2025-10-08T23:53:54.240-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1832645673<open>)] after transaction
+2025-10-08T23:54:06.810-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.listarCursos]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2025-10-08T23:54:06.811-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1193334118<open>)] for JPA transaction
+2025-10-08T23:54:06.811-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@49e723f2]
+2025-10-08T23:54:06.811-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1193334118<open>)] for JPA transaction
+2025-10-08T23:54:06.811-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2025-10-08T23:54:06.813-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-5] org.hibernate.SQL                        : 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0
+Hibernate: 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0
+2025-10-08T23:54:06.816-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2025-10-08T23:54:06.816-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1193334118<open>)]
+2025-10-08T23:54:06.816-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1193334118<open>)] after transaction
+2025-10-08T23:54:12.953-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.buscarCurso]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-10-08T23:54:12.953-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(443452813<open>)] for JPA transaction
+2025-10-08T23:54:12.954-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@14a970b0]
+2025-10-08T23:54:12.957-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0 
+    where
+        c1_0.codigo=?
+Hibernate: 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0 
+    where
+        c1_0.codigo=?
+2025-10-08T23:54:12.959-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2025-10-08T23:54:12.959-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(443452813<open>)]
+2025-10-08T23:54:12.960-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(443452813<open>)] after transaction
+2025-10-08T23:54:21.910-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.buscarCurso]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-10-08T23:54:21.910-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1548158763<open>)] for JPA transaction
+2025-10-08T23:54:21.911-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@5280f2d3]
+2025-10-08T23:54:21.912-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0 
+    where
+        c1_0.codigo=?
+Hibernate: 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0 
+    where
+        c1_0.codigo=?
+2025-10-08T23:54:21.914-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2025-10-08T23:54:21.914-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1548158763<open>)]
+2025-10-08T23:54:21.914-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1548158763<open>)] after transaction
+2025-10-08T23:54:32.002-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.buscarCurso]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-10-08T23:54:32.002-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1920938770<open>)] for JPA transaction
+2025-10-08T23:54:32.003-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@7cb8c32d]
+2025-10-08T23:54:32.004-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-8] org.hibernate.SQL                        : 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0 
+    where
+        c1_0.codigo=?
+Hibernate: 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0 
+    where
+        c1_0.codigo=?
+2025-10-08T23:54:32.006-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2025-10-08T23:54:32.006-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1920938770<open>)]
+2025-10-08T23:54:32.007-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1920938770<open>)] after transaction
+2025-10-08T23:54:35.439-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.buscarCurso]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-10-08T23:54:35.439-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1367754114<open>)] for JPA transaction
+2025-10-08T23:54:35.440-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@5f41a1c2]
+2025-10-08T23:54:35.441-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-9] org.hibernate.SQL                        : 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0 
+    where
+        c1_0.codigo=?
+Hibernate: 
+    select
+        c1_0.codigo,
+        c1_0.nome 
+    from
+        cursos c1_0 
+    where
+        c1_0.codigo=?
+2025-10-08T23:54:35.442-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2025-10-08T23:54:35.442-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1367754114<open>)]
+2025-10-08T23:54:35.443-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1367754114<open>)] after transaction
+2025-10-08T23:54:49.778-03:00 DEBUG 16243 --- [universidade] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.AlunoRepositoryService.listarAlunos]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2025-10-08T23:54:49.778-03:00 DEBUG 16243 --- [universidade] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(763288875<open>)] for JPA transaction
+2025-10-08T23:54:49.779-03:00 DEBUG 16243 --- [universidade] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@23b936f4]
+2025-10-08T23:54:49.781-03:00 DEBUG 16243 --- [universidade] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(763288875<open>)] for JPA transaction
+2025-10-08T23:54:49.781-03:00 DEBUG 16243 --- [universidade] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2025-10-08T23:54:49.783-03:00 DEBUG 16243 --- [universidade] [io-8080-exec-10] org.hibernate.SQL                        : 
+    select
         a1_0.matricula,
+        a1_0.curso_codigo,
         a1_0.ano_nascimento,
         a1_0.dia_nascimento,
         a1_0.mes_nascimento,
@@ -238,18 +517,11 @@ Hibernate:
         a1_0.matricula_ativa,
         a1_0.nome 
     from
-        cursos c1_0 
-    left join
-        alunos a1_0 
-            on c1_0.codigo=a1_0.curso_codigo 
-    where
-        c1_0.codigo=?
+        alunos a1_0
 Hibernate: 
     select
-        c1_0.codigo,
-        c1_0.nome,
-        a1_0.curso_codigo,
         a1_0.matricula,
+        a1_0.curso_codigo,
         a1_0.ano_nascimento,
         a1_0.dia_nascimento,
         a1_0.mes_nascimento,
@@ -258,54 +530,427 @@ Hibernate:
         a1_0.matricula_ativa,
         a1_0.nome 
     from
-        cursos c1_0 
-    left join
-        alunos a1_0 
-            on c1_0.codigo=a1_0.curso_codigo 
-    where
-        c1_0.codigo=?
-2025-10-08T19:59:03.145-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
-2025-10-08T19:59:03.145-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1281536543<open>)]
-2025-10-08T19:59:03.146-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-6] org.hibernate.SQL                        : 
-    insert 
-    into
-        cursos
-        (nome, codigo) 
-    values
-        (?, ?)
-Hibernate: 
-    insert 
-    into
-        cursos
-        (nome, codigo) 
-    values
-        (?, ?)
-2025-10-08T19:59:03.147-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1281536543<open>)] after transaction
-2025-10-08T20:01:27.212-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.CursoRepositoryService.listarCursos]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
-2025-10-08T20:01:27.212-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1547332146<open>)] for JPA transaction
-2025-10-08T20:01:27.213-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@52fd8fc5]
-2025-10-08T20:01:27.213-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1547332146<open>)] for JPA transaction
-2025-10-08T20:01:27.213-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
-2025-10-08T20:01:27.213-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-8] org.hibernate.SQL                        : 
+        alunos a1_0
+2025-10-08T23:54:49.797-03:00 DEBUG 16243 --- [universidade] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating transaction failed - marking existing transaction as rollback-only
+2025-10-08T23:54:49.798-03:00 DEBUG 16243 --- [universidade] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Setting JPA transaction on EntityManager [SessionImpl(763288875<open>)] rollback-only
+2025-10-08T23:54:49.801-03:00 DEBUG 16243 --- [universidade] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2025-10-08T23:54:49.801-03:00 DEBUG 16243 --- [universidade] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(763288875<open>)]
+2025-10-08T23:54:49.803-03:00 DEBUG 16243 --- [universidade] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(763288875<open>)] after transaction
+2025-10-08T23:54:49.805-03:00 ERROR 16243 --- [universidade] [io-8080-exec-10] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.orm.jpa.JpaSystemException: Could not set value of type [org.hibernate.collection.spi.PersistentBag]: 'br.edu.ibmec.entity.Aluno.telefones' (setter)] with root cause
+
+java.lang.IllegalArgumentException: Can not set java.util.Vector field br.edu.ibmec.entity.Aluno.telefones to org.hibernate.collection.spi.PersistentBag
+	at java.base/jdk.internal.reflect.FieldAccessorImpl.throwSetIllegalArgumentException(FieldAccessorImpl.java:223) ~[na:na]
+	at java.base/jdk.internal.reflect.FieldAccessorImpl.throwSetIllegalArgumentException(FieldAccessorImpl.java:227) ~[na:na]
+	at java.base/jdk.internal.reflect.MethodHandleObjectFieldAccessorImpl.set(MethodHandleObjectFieldAccessorImpl.java:115) ~[na:na]
+	at java.base/java.lang.reflect.Field.set(Field.java:832) ~[na:na]
+	at org.hibernate.property.access.spi.SetterFieldImpl.set(SetterFieldImpl.java:57) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.setPropertyValues(AbstractEntityPersister.java:4648) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.graph.entity.internal.EntityInitializerImpl.initializeEntityInstance(EntityInitializerImpl.java:1353) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.graph.entity.internal.EntityInitializerImpl.initializeInstance(EntityInitializerImpl.java:1316) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.graph.entity.internal.EntityInitializerImpl.initializeInstance(EntityInitializerImpl.java:97) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.internal.StandardRowReader.coordinateInitializers(StandardRowReader.java:244) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.internal.StandardRowReader.readRow(StandardRowReader.java:141) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.read(ListResultsConsumer.java:249) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:201) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:35) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:224) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:102) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.executeQuery(JdbcSelectExecutor.java:91) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:165) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$1(ConcreteSqmSelectQueryPlan.java:149) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:439) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:359) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.query.Query.getResultList(Query.java:120) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:405) ~[spring-data-jpa-3.5.4.jar:3.5.4]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:734) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165) ~[spring-data-jpa-3.5.4.jar:3.5.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223) ~[spring-aop-6.2.11.jar:6.2.11]
+	at jdk.proxy5/jdk.proxy5.$Proxy179.findAll(Unknown Source) ~[na:na]
+	at br.edu.ibmec.service.AlunoRepositoryService.listarAlunos(AlunoRepositoryService.java:45) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728) ~[spring-aop-6.2.11.jar:6.2.11]
+	at br.edu.ibmec.service.AlunoRepositoryService$$SpringCGLIB$$0.listarAlunos(<generated>) ~[classes/:na]
+	at br.edu.ibmec.controller.AlunoController.listarAlunos(AlunoController.java:180) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.46.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.46.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at java.base/java.lang.Thread.run(Thread.java:1447) ~[na:na]
+
+2025-10-08T23:56:32.195-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [br.edu.ibmec.service.AlunoRepositoryService.listarAlunos]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2025-10-08T23:56:32.195-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1556699573<open>)] for JPA transaction
+2025-10-08T23:56:32.196-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@17a43152]
+2025-10-08T23:56:32.196-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1556699573<open>)] for JPA transaction
+2025-10-08T23:56:32.196-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2025-10-08T23:56:32.197-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] org.hibernate.SQL                        : 
     select
-        c1_0.codigo,
-        c1_0.nome 
+        a1_0.matricula,
+        a1_0.curso_codigo,
+        a1_0.ano_nascimento,
+        a1_0.dia_nascimento,
+        a1_0.mes_nascimento,
+        a1_0.estado_civil,
+        a1_0.idade,
+        a1_0.matricula_ativa,
+        a1_0.nome 
     from
-        cursos c1_0
+        alunos a1_0
 Hibernate: 
     select
-        c1_0.codigo,
-        c1_0.nome 
+        a1_0.matricula,
+        a1_0.curso_codigo,
+        a1_0.ano_nascimento,
+        a1_0.dia_nascimento,
+        a1_0.mes_nascimento,
+        a1_0.estado_civil,
+        a1_0.idade,
+        a1_0.matricula_ativa,
+        a1_0.nome 
     from
-        cursos c1_0
-2025-10-08T20:01:27.214-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
-2025-10-08T20:01:27.214-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1547332146<open>)]
-2025-10-08T20:01:27.215-03:00 DEBUG 10069 --- [universidade] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1547332146<open>)] after transaction
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     [INFO] ------------------------------------------------------------------------
+        alunos a1_0
+2025-10-08T23:56:32.199-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating transaction failed - marking existing transaction as rollback-only
+2025-10-08T23:56:32.199-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Setting JPA transaction on EntityManager [SessionImpl(1556699573<open>)] rollback-only
+2025-10-08T23:56:32.199-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2025-10-08T23:56:32.199-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(1556699573<open>)]
+2025-10-08T23:56:32.200-03:00 DEBUG 16243 --- [universidade] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1556699573<open>)] after transaction
+2025-10-08T23:56:32.201-03:00 ERROR 16243 --- [universidade] [nio-8080-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.orm.jpa.JpaSystemException: Could not set value of type [org.hibernate.collection.spi.PersistentBag]: 'br.edu.ibmec.entity.Aluno.telefones' (setter)] with root cause
+
+java.lang.IllegalArgumentException: Can not set java.util.Vector field br.edu.ibmec.entity.Aluno.telefones to org.hibernate.collection.spi.PersistentBag
+	at java.base/jdk.internal.reflect.FieldAccessorImpl.throwSetIllegalArgumentException(FieldAccessorImpl.java:223) ~[na:na]
+	at java.base/jdk.internal.reflect.FieldAccessorImpl.throwSetIllegalArgumentException(FieldAccessorImpl.java:227) ~[na:na]
+	at java.base/jdk.internal.reflect.MethodHandleObjectFieldAccessorImpl.set(MethodHandleObjectFieldAccessorImpl.java:115) ~[na:na]
+	at java.base/java.lang.reflect.Field.set(Field.java:832) ~[na:na]
+	at org.hibernate.property.access.spi.SetterFieldImpl.set(SetterFieldImpl.java:57) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.setPropertyValues(AbstractEntityPersister.java:4648) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.graph.entity.internal.EntityInitializerImpl.initializeEntityInstance(EntityInitializerImpl.java:1353) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.graph.entity.internal.EntityInitializerImpl.initializeInstance(EntityInitializerImpl.java:1316) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.graph.entity.internal.EntityInitializerImpl.initializeInstance(EntityInitializerImpl.java:97) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.internal.StandardRowReader.coordinateInitializers(StandardRowReader.java:244) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.internal.StandardRowReader.readRow(StandardRowReader.java:141) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.read(ListResultsConsumer.java:249) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:201) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:35) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:224) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:102) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.executeQuery(JdbcSelectExecutor.java:91) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:165) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$1(ConcreteSqmSelectQueryPlan.java:149) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:439) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:359) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:380) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:143) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.query.Query.getResultList(Query.java:120) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:405) ~[spring-data-jpa-3.5.4.jar:3.5.4]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:734) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165) ~[spring-data-jpa-3.5.4.jar:3.5.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223) ~[spring-aop-6.2.11.jar:6.2.11]
+	at jdk.proxy5/jdk.proxy5.$Proxy179.findAll(Unknown Source) ~[na:na]
+	at br.edu.ibmec.service.AlunoRepositoryService.listarAlunos(AlunoRepositoryService.java:45) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728) ~[spring-aop-6.2.11.jar:6.2.11]
+	at br.edu.ibmec.service.AlunoRepositoryService$$SpringCGLIB$$0.listarAlunos(<generated>) ~[classes/:na]
+	at br.edu.ibmec.controller.AlunoController.listarAlunos(AlunoController.java:180) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.46.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.46.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at java.base/java.lang.Thread.run(Thread.java:1447) ~[na:na]
+
+2025-10-08T23:58:16.933-03:00  INFO 16243 --- [universidade] [   File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 54 class path changes (0 additions, 47 deletions, 7 modifications)
+2025-10-08T23:58:16.936-03:00  INFO 16243 --- [universidade] [       Thread-7] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-08T23:58:16.942-03:00  INFO 16243 --- [universidade] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-08T23:58:16.946-03:00  INFO 16243 --- [universidade] [       Thread-7] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-08T23:58:16.947-03:00  INFO 16243 --- [universidade] [       Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2025-10-08T23:58:16.951-03:00  INFO 16243 --- [universidade] [       Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.6)
+
+2025-10-08T23:58:17.008-03:00  INFO 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Starting UniversidadeApplication using Java 24.0.2 with PID 16243 (/Users/arthurschiller/Documents/ibmec-rio/2025.2/tecnicas-avancadas/universidade/target/classes started by arthurschiller in /Users/arthurschiller/Documents/ibmec-rio/2025.2/tecnicas-avancadas/universidade)
+2025-10-08T23:58:17.008-03:00 DEBUG 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-10-08T23:58:17.008-03:00  INFO 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-10-08T23:58:17.036-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-08T23:58:17.037-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 0 ms. Found 0 JPA repository interfaces.
+2025-10-08T23:58:17.037-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-08T23:58:17.037-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 0 ms. Found 0 JPA repository interfaces.
+2025-10-08T23:58:17.069-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-08T23:58:17.069-03:00  INFO 16243 --- [universidade] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-08T23:58:17.069-03:00  INFO 16243 --- [universidade] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-08T23:58:17.072-03:00  INFO 16243 --- [universidade] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-08T23:58:17.072-03:00  INFO 16243 --- [universidade] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 64 ms
+2025-10-08T23:58:17.082-03:00 DEBUG 16243 --- [universidade] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2025-10-08T23:58:17.082-03:00  INFO 16243 --- [universidade] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-08T23:58:17.082-03:00  INFO 16243 --- [universidade] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-08T23:58:17.084-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-08T23:58:17.084-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2025-10-08T23:58:17.088-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4860e614
+2025-10-08T23:58:17.088-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2025-10-08T23:58:17.088-03:00  WARN 16243 --- [universidade] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-08T23:58:17.088-03:00  WARN 16243 --- [universidade] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-08T23:58:17.088-03:00  INFO 16243 --- [universidade] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-3)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-08T23:58:17.092-03:00  INFO 16243 --- [universidade] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-08T23:58:17.092-03:00  INFO 16243 --- [universidade] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-08T23:58:17.094-03:00  WARN 16243 --- [universidade] [  restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'alunoController': Lookup method resolution failed
+2025-10-08T23:58:17.094-03:00  INFO 16243 --- [universidade] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-08T23:58:17.094-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2025-10-08T23:58:17.094-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2025-10-08T23:58:17.094-03:00  INFO 16243 --- [universidade] [  restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-10-08T23:58:17.096-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-10-08T23:58:17.100-03:00 ERROR 16243 --- [universidade] [  restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'alunoController': Lookup method resolution failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:498) ~[spring-beans-6.2.11.jar:6.2.11]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:368) ~[spring-beans-6.2.11.jar:6.2.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1334) ~[spring-beans-6.2.11.jar:6.2.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1229) ~[spring-beans-6.2.11.jar:6.2.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569) ~[spring-beans-6.2.11.jar:6.2.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.11.jar:6.2.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.11.jar:6.2.11]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.11.jar:6.2.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.11.jar:6.2.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-6.2.11.jar:6.2.11]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1221) ~[spring-beans-6.2.11.jar:6.2.11]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1187) ~[spring-beans-6.2.11.jar:6.2.11]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123) ~[spring-beans-6.2.11.jar:6.2.11]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987) ~[spring-context-6.2.11.jar:6.2.11]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.11.jar:6.2.11]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.6.jar:3.5.6]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.6.jar:3.5.6]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.6.jar:3.5.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.6.jar:3.5.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.6.jar:3.5.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.6.jar:3.5.6]
+	at br.edu.ibmec.universidade.UniversidadeApplication.main(UniversidadeApplication.java:16) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.6.jar:3.5.6]
+Caused by: java.lang.IllegalStateException: Failed to introspect Class [br.edu.ibmec.controller.AlunoController] from ClassLoader [org.springframework.boot.devtools.restart.classloader.RestartClassLoader@2717bef6]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:483) ~[spring-core-6.2.11.jar:6.2.11]
+	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:320) ~[spring-core-6.2.11.jar:6.2.11]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:476) ~[spring-beans-6.2.11.jar:6.2.11]
+	... 24 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: br/edu/ibmec/exception/DaoException
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3035) ~[na:na]
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2331) ~[na:na]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:465) ~[spring-core-6.2.11.jar:6.2.11]
+	... 26 common frames omitted
+Caused by: java.lang.ClassNotFoundException: br.edu.ibmec.exception.DaoException
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:580) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:490) ~[na:na]
+	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:543) ~[na:na]
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121) ~[spring-boot-devtools-3.5.6.jar:3.5.6]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:490) ~[na:na]
+	... 30 common frames omitted
+
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.6)
+
+2025-10-08T23:59:04.425-03:00  INFO 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Starting UniversidadeApplication using Java 24.0.2 with PID 16243 (/Users/arthurschiller/Documents/ibmec-rio/2025.2/tecnicas-avancadas/universidade/target/classes started by arthurschiller in /Users/arthurschiller/Documents/ibmec-rio/2025.2/tecnicas-avancadas/universidade)
+2025-10-08T23:59:04.425-03:00 DEBUG 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-10-08T23:59:04.425-03:00  INFO 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-10-08T23:59:04.481-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-08T23:59:04.482-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 0 ms. Found 0 JPA repository interfaces.
+2025-10-08T23:59:04.482-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-08T23:59:04.485-03:00  INFO 16243 --- [universidade] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 5 JPA repository interfaces.
+2025-10-08T23:59:04.521-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-08T23:59:04.522-03:00  INFO 16243 --- [universidade] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-08T23:59:04.522-03:00  INFO 16243 --- [universidade] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-08T23:59:04.524-03:00  INFO 16243 --- [universidade] [  restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-10-08T23:59:04.524-03:00  INFO 16243 --- [universidade] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 98 ms
+2025-10-08T23:59:04.534-03:00 DEBUG 16243 --- [universidade] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2025-10-08T23:59:04.534-03:00  INFO 16243 --- [universidade] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-08T23:59:04.535-03:00  INFO 16243 --- [universidade] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-08T23:59:04.537-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-08T23:59:04.537-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2025-10-08T23:59:04.540-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2f778ec7
+2025-10-08T23:59:04.540-03:00  INFO 16243 --- [universidade] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2025-10-08T23:59:04.540-03:00  WARN 16243 --- [universidade] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-08T23:59:04.540-03:00  WARN 16243 --- [universidade] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-08T23:59:04.540-03:00  INFO 16243 --- [universidade] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-4)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-08T23:59:04.572-03:00  INFO 16243 --- [universidade] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-08T23:59:04.628-03:00  INFO 16243 --- [universidade] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-08T23:59:04.723-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-08T23:59:04.727-03:00  INFO 16243 --- [universidade] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-08T23:59:04.729-03:00  INFO 16243 --- [universidade] [  restartedMain] b.e.i.u.UniversidadeApplication          : Started UniversidadeApplication in 0.326 seconds (process running for 8236.891)
+2025-10-08T23:59:04.729-03:00  INFO 16243 --- [universidade] [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+[INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  06:01 min
-[INFO] Finished at: 2025-10-08T19:58:10-03:00
+[INFO] Total time:  03:12 h
+[INFO] Finished at: 2025-10-08T23:59:31-03:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.5.6:run (default-cli) on project universidade: Process terminated with exit code: 137 -> [Help 1]
 [ERROR] 

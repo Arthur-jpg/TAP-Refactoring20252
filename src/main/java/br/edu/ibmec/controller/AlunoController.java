@@ -23,7 +23,7 @@ import br.edu.ibmec.entity.Aluno;
 import br.edu.ibmec.exception.DaoException;
 import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
-import br.edu.ibmec.service.AlunoService;
+import br.edu.ibmec.service.AlunoRepositoryService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -43,7 +43,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class AlunoController {
 
     @Autowired
-    private AlunoService alunoService;
+    private AlunoRepositoryService alunoService;
 
     /**
      * Busca aluno por matrícula.
@@ -191,18 +191,18 @@ public class AlunoController {
      * Lista todos os alunos completos (versão melhorada).
      * GET /api/aluno/completos
      */
-    @Operation(summary = "Listar alunos completos", description = "Lista todos os alunos com dados completos (entidades)")
+    @Operation(summary = "Listar alunos completos", description = "Lista todos os alunos com dados completos (DTOs)")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Lista de alunos obtida com sucesso",
-                content = @Content(mediaType = "application/json", schema = @Schema(implementation = Aluno.class))),
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = AlunoDTO.class))),
         @ApiResponse(responseCode = "500", description = "Erro interno do servidor",
                 content = @Content)
     })
     @GetMapping("/completos")
-    public ResponseEntity<List<Aluno>> listarAlunosCompletos() {
+    public ResponseEntity<List<AlunoDTO>> listarAlunosCompletos() {
         try {
-            List<Aluno> alunos = new ArrayList<>(alunoService.listarAlunos());
-            return ResponseEntity.ok(alunos);
+            List<AlunoDTO> alunosDTO = alunoService.listarAlunosCompletos();
+            return ResponseEntity.ok(alunosDTO);
         } catch (DaoException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

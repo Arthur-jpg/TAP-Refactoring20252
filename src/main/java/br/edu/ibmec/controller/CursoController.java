@@ -154,10 +154,10 @@ public class CursoController {
      * GET /api/curso/completos
      */
     @GetMapping("/completos")
-    public ResponseEntity<List<Curso>> listarCursosCompletos() {
+    public ResponseEntity<List<CursoDTO>> listarCursosCompletos() {
         try {
-            List<Curso> cursos = new ArrayList<>(cursoService.listarCursos());
-            return ResponseEntity.ok(cursos);
+            List<CursoDTO> cursosDTO = cursoService.listarCursosCompletos();
+            return ResponseEntity.ok(cursosDTO);
         } catch (DaoException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
