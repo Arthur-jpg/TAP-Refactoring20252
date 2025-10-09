@@ -21,7 +21,6 @@ import br.edu.ibmec.entity.Turma;
 import br.edu.ibmec.exception.DaoException;
 import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
-import br.edu.ibmec.service.TurmaService;
 import br.edu.ibmec.service.TurmaRepositoryService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,9 +35,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/api/turma")
 @Tag(name = "Turmas", description = "API para gerenciamento de turmas do sistema universitário")
 public class TurmaController {
-
-    @Autowired
-    private TurmaService turmaService;
 
     @Autowired
     private TurmaRepositoryService turmaRepositoryService;

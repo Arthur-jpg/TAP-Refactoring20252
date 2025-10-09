@@ -21,7 +21,6 @@ import br.edu.ibmec.entity.Inscricao;
 import br.edu.ibmec.exception.DaoException;
 import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
-import br.edu.ibmec.service.InscricaoService;
 import br.edu.ibmec.service.InscricaoRepositoryService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,9 +39,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/api/inscricao")
 @Tag(name = "Inscrições", description = "API para gerenciamento de inscrições de alunos em turmas")
 public class InscricaoController {
-
-    @Autowired
-    private InscricaoService inscricaoService;
 
     @Autowired
     private InscricaoRepositoryService inscricaoRepositoryService;

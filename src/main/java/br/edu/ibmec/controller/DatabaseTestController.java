@@ -2,6 +2,7 @@ package br.edu.ibmec.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import java.util.Map;
  * Controller para testar conexão direta com MySQL.
  */
 @RestController
+@Profile("dev")
 @RequestMapping("/api/database")
 @Tag(name = "Database Test", description = "Testes diretos no banco MySQL")
 public class DatabaseTestController {

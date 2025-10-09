@@ -2,6 +2,7 @@ package br.edu.ibmec.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import java.util.Map;
  * Controller para testes básicos da API.
  */
 @RestController
+@Profile("dev")
 @RequestMapping("/api/test")
 @Tag(name = "Teste", description = "Endpoints para testar se a API está funcionando")
 public class TestController {
