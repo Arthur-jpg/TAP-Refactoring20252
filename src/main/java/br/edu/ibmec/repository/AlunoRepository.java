@@ -13,15 +13,15 @@ public interface AlunoRepository extends JpaRepository<Aluno, Integer> {
     
     /**
      * Verifica se existe um aluno com a matrícula informada
-     * @param matricula matrícula do aluno
+     * @param numeroMatricula número da matrícula do aluno
      * @return true se existe, false caso contrário
      */
-    boolean existsByMatricula(int matricula);
+    boolean existsByNumeroMatricula(int numeroMatricula);
     
     /**
      * Busca aluno por matrícula
-     * @param matricula matrícula do aluno
+     * @param numeroMatricula número da matrícula do aluno
      * @return o aluno encontrado ou null
      */
-    Aluno findByMatricula(int matricula);
+    Aluno findByNumeroMatricula(int numeroMatricula);
 }

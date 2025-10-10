@@ -74,7 +74,7 @@ public class DisciplinaRepositoryService {
         // Busca o curso se informado
         Curso curso = null;
         if (disciplinaDTO.getCurso() > 0) {
-            curso = cursoRepository.findByCodigo(disciplinaDTO.getCurso());
+            curso = cursoRepository.findByCodigoCurso(disciplinaDTO.getCurso());
             if (curso == null) {
                 throw new DaoException("Curso com código " + disciplinaDTO.getCurso() + " não encontrado");
             }
@@ -103,7 +103,7 @@ public class DisciplinaRepositoryService {
         // Busca o curso se informado
         Curso curso = null;
         if (disciplinaDTO.getCurso() > 0) {
-            curso = cursoRepository.findByCodigo(disciplinaDTO.getCurso());
+            curso = cursoRepository.findByCodigoCurso(disciplinaDTO.getCurso());
             if (curso == null) {
                 throw new DaoException("Curso com código " + disciplinaDTO.getCurso() + " não encontrado");
             }
@@ -131,7 +131,7 @@ public class DisciplinaRepositoryService {
         dto.setNome(disciplina.getNome());
         
         if (disciplina.getCurso() != null) {
-            dto.setCurso(disciplina.getCurso().getCodigo());
+            dto.setCurso(disciplina.getCurso().obterCodigoCurso());
         }
         
         return dto;

@@ -141,7 +141,7 @@ public class CursoController {
             List<String> nomes = new ArrayList<>();
             for (Iterator<Curso> it = cursoService.listarCursos().iterator(); it.hasNext();) {
                 Curso curso = it.next();
-                nomes.add(curso.getNome());
+                nomes.add(curso.obterNomeCurso());
             }
             return ResponseEntity.ok(nomes);
         } catch (DaoException e) {

@@ -179,7 +179,7 @@ public class AlunoController {
             List<String> nomes = new ArrayList<>();
             for (Iterator<Aluno> it = alunoService.listarAlunos().iterator(); it.hasNext();) {
                 Aluno aluno = it.next();
-                nomes.add(aluno.getNome());
+                nomes.add(aluno.obterNomeCompleto());
             }
             return ResponseEntity.ok(nomes);
         } catch (DaoException e) {
