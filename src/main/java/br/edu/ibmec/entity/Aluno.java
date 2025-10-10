@@ -4,19 +4,10 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Representa um aluno da universidade com suas informações pessoais,
- * curso associado e inscrições em disciplinas.
- * 
- * Esta classe segue os princípios de Clean Code:
- * - Nomes significativos e intenção clara
- * - Responsabilidade única (representar um aluno)
- * - Encapsulamento adequado
- */
 @Entity
 @Table(name = "alunos")
 public class Aluno {
-    
+
     // Identificadores únicos
     @Id
     @Column(name = "matricula")

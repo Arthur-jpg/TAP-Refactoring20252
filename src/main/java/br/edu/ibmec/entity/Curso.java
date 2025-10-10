@@ -4,16 +4,6 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Representa um curso universitário com suas disciplinas e alunos matriculados.
- * Gerencia a relação entre alunos e disciplinas dentro do contexto do curso.
- * 
- * Esta classe segue os princípios de Clean Code:
- * - Nomes significativos e intenção clara
- * - Responsabilidade única (representar um curso)
- * - Encapsulamento adequado
- * - Métodos pequenos e focados
- */
 @Entity
 @Table(name = "cursos")
 public class Curso {
