@@ -33,10 +33,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-/**
- * Controller REST para gerenciamento de alunos.
- * Migrado de JAX-RS para Spring MVC seguindo Clean Code.
- */
 @RestController
 @RequestMapping("/api/aluno")
 @Tag(name = "Alunos", description = "API para gerenciamento de alunos do sistema universitário")
@@ -44,11 +40,6 @@ public class AlunoController {
 
     @Autowired
     private AlunoRepositoryService alunoService;
-
-    /**
-     * Busca aluno por matrícula.
-     * GET /api/aluno/{matricula}
-     */
     @Operation(summary = "Buscar aluno", description = "Busca um aluno específico pela matrícula")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Aluno encontrado com sucesso",
@@ -57,21 +48,18 @@ public class AlunoController {
                 content = @Content)
     })
     @GetMapping("/{matricula}")
-    public ResponseEntity<AlunoDTO> buscarAluno(
+    public ResponseEntity<AlunoDTO> buscarAlunoPorMatricula(
             @Parameter(description = "Matrícula do aluno", required = true, example = "12345")
             @PathVariable int matricula) {
         try {
-            AlunoDTO alunoDTO = alunoService.buscarAluno(matricula);
-            return ResponseEntity.ok(alunoDTO);
-        } catch (DaoException e) {
+            AlunoDTO alunoEncontrado = alunoService.buscarAluno(matricula);
+            return ResponseEntity.ok(alunoEncontrado);
+        } catch (DaoException daoException) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    /**
-     * Cadastra novo aluno.
-     * POST /api/aluno
-     */
+
     @Operation(summary = "Cadastrar aluno", description = "Cadastra um novo aluno no sistema")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Aluno cadastrado com sucesso",
@@ -80,34 +68,21 @@ public class AlunoController {
                 content = @Content(mediaType = "text/plain"))
     })
     @PostMapping
-    public ResponseEntity<String> cadastrarAluno(
+    public ResponseEntity<String> criarNovoAluno(
             @Parameter(description = "Dados do aluno a ser cadastrado", required = true)
             @Valid @RequestBody AlunoDTO alunoDTO) {
         try {
             alunoService.cadastrarAluno(alunoDTO);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body("Aluno cadastrado com sucesso");
-        } catch (ServiceException e) {
-            if (e.getTipo() == ServiceExceptionEnum.CURSO_CODIGO_INVALIDO) {
-                return ResponseEntity.badRequest()
-                        .body("Código inválido");
-            }
-            if (e.getTipo() == ServiceExceptionEnum.CURSO_NOME_INVALIDO) {
-                return ResponseEntity.badRequest()
-                        .body("Nome inválido");
-            }
-            return ResponseEntity.badRequest()
-                    .body(e.getMessage());
-        } catch (DaoException e) {
-            return ResponseEntity.badRequest()
-                    .body("Erro no banco de dados");
+        } catch (ServiceException serviceException) {
+            return tratarServiceException(serviceException);
+        } catch (DaoException daoException) {
+            return tratarDaoException();
         }
     }
 
-    /**
-     * Atualiza aluno existente.
-     * PUT /api/aluno
-     */
+
     @Operation(summary = "Alterar aluno", description = "Altera os dados de um aluno existente")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Aluno alterado com sucesso",
@@ -116,33 +91,20 @@ public class AlunoController {
                 content = @Content(mediaType = "text/plain"))
     })
     @PutMapping
-    public ResponseEntity<String> alterarAluno(
+    public ResponseEntity<String> atualizarDadosDoAluno(
             @Parameter(description = "Dados atualizados do aluno", required = true)
             @RequestBody AlunoDTO alunoDTO) {
         try {
             alunoService.alterarAluno(alunoDTO);
             return ResponseEntity.ok("Aluno alterado com sucesso");
-        } catch (ServiceException e) {
-            if (e.getTipo() == ServiceExceptionEnum.CURSO_CODIGO_INVALIDO) {
-                return ResponseEntity.badRequest()
-                        .body("Código inválido");
-            }
-            if (e.getTipo() == ServiceExceptionEnum.CURSO_NOME_INVALIDO) {
-                return ResponseEntity.badRequest()
-                        .body("Nome inválido");
-            }
-            return ResponseEntity.badRequest()
-                    .body(e.getMessage());
-        } catch (DaoException e) {
-            return ResponseEntity.badRequest()
-                    .body("Erro no banco de dados");
+        } catch (ServiceException serviceException) {
+            return tratarServiceException(serviceException);
+        } catch (DaoException daoException) {
+            return tratarDaoException();
         }
     }
 
-    /**
-     * Remove aluno por matrícula.
-     * DELETE /api/aluno/{matricula}
-     */
+
     @Operation(summary = "Remover aluno", description = "Remove um aluno do sistema pela matrícula")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Aluno removido com sucesso",
@@ -151,7 +113,7 @@ public class AlunoController {
                 content = @Content)
     })
     @DeleteMapping("/{matricula}")
-    public ResponseEntity<String> removerAluno(
+    public ResponseEntity<String> excluirAlunoPorMatricula(
             @Parameter(description = "Matrícula do aluno a ser removido", required = true, example = "12345")
             @PathVariable int matricula) {
         try {
@@ -162,10 +124,7 @@ public class AlunoController {
         }
     }
 
-    /**
-     * Lista todos os alunos.
-     * GET /api/aluno
-     */
+
     @Operation(summary = "Listar nomes dos alunos", description = "Lista apenas os nomes de todos os alunos cadastrados")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Lista de nomes obtida com sucesso",
@@ -174,23 +133,20 @@ public class AlunoController {
                 content = @Content)
     })
     @GetMapping
-    public ResponseEntity<List<String>> listarAlunos() {
+    public ResponseEntity<List<String>> obterNomesDeAlunosMatriculados() {
         try {
-            List<String> nomes = new ArrayList<>();
-            for (Iterator<Aluno> it = alunoService.listarAlunos().iterator(); it.hasNext();) {
-                Aluno aluno = it.next();
-                nomes.add(aluno.getNome());
+            List<String> nomesDeAlunos = new ArrayList<>();
+            for (Iterator<Aluno> iteratorDeAlunos = alunoService.listarAlunos().iterator(); iteratorDeAlunos.hasNext();) {
+                Aluno alunoAtual = iteratorDeAlunos.next();
+                nomesDeAlunos.add(alunoAtual.obterNomeCompleto());
             }
-            return ResponseEntity.ok(nomes);
-        } catch (DaoException e) {
+            return ResponseEntity.ok(nomesDeAlunos);
+        } catch (DaoException daoException) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    /**
-     * Lista todos os alunos completos (versão melhorada).
-     * GET /api/aluno/completos
-     */
+
     @Operation(summary = "Listar alunos completos", description = "Lista todos os alunos com dados completos (DTOs)")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Lista de alunos obtida com sucesso",
@@ -199,12 +155,34 @@ public class AlunoController {
                 content = @Content)
     })
     @GetMapping("/completos")
-    public ResponseEntity<List<AlunoDTO>> listarAlunosCompletos() {
+    public ResponseEntity<List<AlunoDTO>> obterDadosCompletosDeAlunos() {
         try {
-            List<AlunoDTO> alunosDTO = alunoService.listarAlunosCompletos();
-            return ResponseEntity.ok(alunosDTO);
-        } catch (DaoException e) {
+            List<AlunoDTO> dadosCompletosDeAlunos = alunoService.listarAlunosCompletos();
+            return ResponseEntity.ok(dadosCompletosDeAlunos);
+        } catch (DaoException daoException) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    private ResponseEntity<String> tratarServiceException(ServiceException serviceException) {
+        if (isCodigoInvalido(serviceException)) {
+            return ResponseEntity.badRequest().body("Código inválido");
+        }
+        if (isNomeInvalido(serviceException)) {
+            return ResponseEntity.badRequest().body("Nome inválido");
+        }
+        return ResponseEntity.badRequest().body(serviceException.getMessage());
+    }
+
+    private ResponseEntity<String> tratarDaoException() {
+        return ResponseEntity.badRequest().body("Erro no banco de dados");
+    }
+
+    private boolean isCodigoInvalido(ServiceException serviceException) {
+        return serviceException.getTipo() == ServiceExceptionEnum.CURSO_CODIGO_INVALIDO;
+    }
+
+    private boolean isNomeInvalido(ServiceException serviceException) {
+        return serviceException.getTipo() == ServiceExceptionEnum.CURSO_NOME_INVALIDO;
     }
 }

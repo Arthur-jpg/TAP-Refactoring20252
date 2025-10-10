@@ -15,10 +15,10 @@ public interface InscricaoRepository extends JpaRepository<Inscricao, Long> {
     
     /**
      * Busca inscrições por matrícula do aluno
-     * @param matricula matrícula do aluno
+     * @param numeroMatricula número da matrícula do aluno
      * @return lista de inscrições do aluno
      */
-    List<Inscricao> findByAlunoMatricula(int matricula);
+    List<Inscricao> findByAlunoNumeroMatricula(int numeroMatricula);
     
     /**
      * Busca inscrições por código da turma

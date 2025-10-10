@@ -31,10 +31,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-/**
- * Controller REST para gerenciamento de cursos.
- * Migrado de JAX-RS para Spring MVC seguindo Clean Code.
- */
 @RestController
 @RequestMapping("/api/curso")
 @Tag(name = "Cursos", description = "API para gerenciamento de cursos do sistema universitário")
@@ -50,13 +46,13 @@ public class CursoController {
         @ApiResponse(responseCode = "404", description = "Curso não encontrado")
     })
     @GetMapping("/{codigo}")
-    public ResponseEntity<CursoDTO> buscarCurso(
+    public ResponseEntity<CursoDTO> buscarCursoPorCodigo(
             @Parameter(description = "Código do curso", example = "1")
             @PathVariable int codigo) {
         try {
-            CursoDTO cursoDTO = cursoService.buscarCurso(codigo);
-            return ResponseEntity.ok(cursoDTO);
-        } catch (DaoException e) {
+            CursoDTO cursoEncontrado = cursoService.buscarCurso(codigo);
+            return ResponseEntity.ok(cursoEncontrado);
+        } catch (DaoException daoException) {
             return ResponseEntity.notFound().build();
         }
     }
@@ -67,99 +63,89 @@ public class CursoController {
         @ApiResponse(responseCode = "400", description = "Dados inválidos")
     })
     @PostMapping
-    public ResponseEntity<String> cadastrarCurso(
+    public ResponseEntity<String> criarNovoCurso(
             @Parameter(description = "Dados do curso")
             @RequestBody CursoDTO cursoDTO) {
         try {
             cursoService.cadastrarCurso(cursoDTO);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body("Curso cadastrado com sucesso");
-        } catch (ServiceException e) {
-            if (e.getTipo() == ServiceExceptionEnum.CURSO_CODIGO_INVALIDO) {
-                return ResponseEntity.badRequest()
-                        .body("Código inválido");
-            }
-            if (e.getTipo() == ServiceExceptionEnum.CURSO_NOME_INVALIDO) {
-                return ResponseEntity.badRequest()
-                        .body("Nome inválido");
-            }
-            return ResponseEntity.badRequest()
-                    .body(e.getMessage());
-        } catch (DaoException e) {
-            return ResponseEntity.badRequest()
-                    .body("Erro no banco de dados");
+        } catch (ServiceException serviceException) {
+            return tratarExcecaoDeServico(serviceException);
+        } catch (DaoException daoException) {
+            return tratarExcecaoDeBancoDeDados();
         }
     }
 
-    /**
-     * Atualiza curso existente.
-     * PUT /api/curso
-     */
+
     @PutMapping
-    public ResponseEntity<String> alterarCurso(@RequestBody CursoDTO cursoDTO) {
+    public ResponseEntity<String> atualizarDadosDoCurso(@RequestBody CursoDTO cursoDTO) {
         try {
             cursoService.alterarCurso(cursoDTO);
             return ResponseEntity.ok("Curso alterado com sucesso");
-        } catch (ServiceException e) {
-            if (e.getTipo() == ServiceExceptionEnum.CURSO_CODIGO_INVALIDO) {
-                return ResponseEntity.badRequest()
-                        .body("Código inválido");
-            }
-            if (e.getTipo() == ServiceExceptionEnum.CURSO_NOME_INVALIDO) {
-                return ResponseEntity.badRequest()
-                        .body("Nome inválido");
-            }
-            return ResponseEntity.badRequest()
-                    .body(e.getMessage());
-        } catch (DaoException e) {
-            return ResponseEntity.badRequest()
-                    .body("Erro no banco de dados");
+        } catch (ServiceException serviceException) {
+            return tratarExcecaoDeServico(serviceException);
+        } catch (DaoException daoException) {
+            return tratarExcecaoDeBancoDeDados();
         }
     }
 
-    /**
-     * Remove curso por código.
-     * DELETE /api/curso/{codigo}
-     */
+
     @DeleteMapping("/{codigo}")
-    public ResponseEntity<String> removerCurso(@PathVariable int codigo) {
+    public ResponseEntity<String> excluirCursoPorCodigo(@PathVariable int codigo) {
         try {
             cursoService.removerCurso(codigo);
             return ResponseEntity.ok("Curso removido com sucesso");
-        } catch (DaoException e) {
+        } catch (DaoException daoException) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    /**
-     * Lista todos os cursos.
-     * GET /api/curso
-     */
+
     @GetMapping
-    public ResponseEntity<List<String>> listarCursos() {
+    public ResponseEntity<List<String>> obterNomesDeCursosDisponiveis() {
         try {
-            List<String> nomes = new ArrayList<>();
-            for (Iterator<Curso> it = cursoService.listarCursos().iterator(); it.hasNext();) {
-                Curso curso = it.next();
-                nomes.add(curso.getNome());
+            List<String> nomesDeCursos = new ArrayList<>();
+            for (Iterator<Curso> iteratorDeCursos = cursoService.listarCursos().iterator(); iteratorDeCursos.hasNext();) {
+                Curso cursoAtual = iteratorDeCursos.next();
+                nomesDeCursos.add(cursoAtual.obterNomeCurso());
             }
-            return ResponseEntity.ok(nomes);
-        } catch (DaoException e) {
+            return ResponseEntity.ok(nomesDeCursos);
+        } catch (DaoException daoException) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    /**
-     * Lista todos os cursos completos (versão melhorada).
-     * GET /api/curso/completos
-     */
+
     @GetMapping("/completos")
-    public ResponseEntity<List<CursoDTO>> listarCursosCompletos() {
+    public ResponseEntity<List<CursoDTO>> obterDadosCompletosDeCursos() {
         try {
-            List<CursoDTO> cursosDTO = cursoService.listarCursosCompletos();
-            return ResponseEntity.ok(cursosDTO);
-        } catch (DaoException e) {
+            List<CursoDTO> dadosCompletosDeCursos = cursoService.listarCursosCompletos();
+            return ResponseEntity.ok(dadosCompletosDeCursos);
+        } catch (DaoException daoException) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    private ResponseEntity<String> tratarExcecaoDeServico(ServiceException serviceException) {
+        if (isCodigoInvalido(serviceException)) {
+            return ResponseEntity.badRequest().body("Código inválido");
+        }
+        if (isNomeInvalido(serviceException)) {
+            return ResponseEntity.badRequest().body("Nome inválido");
+        }
+        return ResponseEntity.badRequest().body(serviceException.getMessage());
+    }
+
+    private boolean isCodigoInvalido(ServiceException serviceException) {
+        return serviceException.getTipo() == ServiceExceptionEnum.CURSO_CODIGO_INVALIDO;
+    }
+
+    private boolean isNomeInvalido(ServiceException serviceException) {
+        return serviceException.getTipo() == ServiceExceptionEnum.CURSO_NOME_INVALIDO;
+    }
+
+    private ResponseEntity<String> tratarExcecaoDeBancoDeDados() {
+        return ResponseEntity.badRequest().body("Erro no banco de dados");
     }
 }

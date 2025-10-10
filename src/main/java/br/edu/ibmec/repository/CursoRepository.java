@@ -14,15 +14,15 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
     
     /**
      * Verifica se existe um curso com o código informado
-     * @param codigo código do curso
+     * @param codigoCurso código do curso
      * @return true se existe, false caso contrário
      */
-    boolean existsByCodigo(int codigo);
+    boolean existsByCodigoCurso(int codigoCurso);
     
     /**
      * Busca curso por código
-     * @param codigo código do curso
+     * @param codigoCurso código do curso
      * @return o curso encontrado ou null
      */
-    Curso findByCodigo(int codigo);
+    Curso findByCodigoCurso(int codigoCurso);
 }

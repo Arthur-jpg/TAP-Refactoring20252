@@ -35,7 +35,7 @@ public class AlunoRepositoryService {
     private CursoRepository cursoRepository;
 
     public AlunoDTO buscarAluno(int matricula) throws DaoException {
-        Aluno aluno = alunoRepository.findByMatricula(matricula);
+        Aluno aluno = alunoRepository.findByNumeroMatricula(matricula);
         if (aluno == null) {
             throw new DaoException("Aluno com matrícula " + matricula + " não encontrado");
         }
@@ -71,14 +71,14 @@ public class AlunoRepositoryService {
         }
 
         // Verifica se já existe
-        if (alunoRepository.existsByMatricula(alunoDTO.getMatricula())) {
+        if (alunoRepository.existsByNumeroMatricula(alunoDTO.getMatricula())) {
             throw new ServiceException("Aluno com matrícula " + alunoDTO.getMatricula() + " já existe");
         }
 
         // Busca o curso se informado
         Curso curso = null;
         if (alunoDTO.getCurso() > 0) {
-            curso = cursoRepository.findByCodigo(alunoDTO.getCurso());
+            curso = cursoRepository.findByCodigoCurso(alunoDTO.getCurso());
             if (curso == null) {
                 throw new DaoException("Curso com código " + alunoDTO.getCurso() + " não encontrado");
             }
@@ -107,15 +107,15 @@ public class AlunoRepositoryService {
         // Busca o curso se informado
         Curso curso = null;
         if (alunoDTO.getCurso() > 0) {
-            curso = cursoRepository.findByCodigo(alunoDTO.getCurso());
+            curso = cursoRepository.findByCodigoCurso(alunoDTO.getCurso());
             if (curso == null) {
                 throw new DaoException("Curso com código " + alunoDTO.getCurso() + " não encontrado");
             }
         }
 
         Aluno aluno = alunoOpt.get();
-        aluno.setNome(alunoDTO.getNome().trim());
-        aluno.setCurso(curso);
+        aluno.definirNomeCompleto(alunoDTO.getNome().trim());
+        aluno.definirCursoMatriculado(curso);
         // Atualizar outros campos conforme necessário
         
         alunoRepository.save(aluno);
@@ -132,28 +132,28 @@ public class AlunoRepositoryService {
 
     private AlunoDTO convertToDTO(Aluno aluno) {
         AlunoDTO dto = new AlunoDTO();
-        dto.setMatricula(aluno.getMatricula());
-        dto.setNome(aluno.getNome());
-        dto.setIdade(aluno.getIdade());
-        dto.setMatriculaAtiva(aluno.isMatriculaAtiva());
+        dto.setMatricula(aluno.obterNumeroMatricula());
+        dto.setNome(aluno.obterNomeCompleto());
+        dto.setIdade(aluno.obterIdadeAtual());
+        dto.setMatriculaAtiva(aluno.possuiMatriculaAtiva());
         
-        if (aluno.getCurso() != null) {
-            dto.setCurso(aluno.getCurso().getCodigo());
+        if (aluno.obterCursoMatriculado() != null) {
+            dto.setCurso(aluno.obterCursoMatriculado().obterCodigoCurso());
         }
         
         // Converter data de nascimento
-        if (aluno.getDataNascimento() != null) {
-            dto.setDtNascimento(aluno.getDataNascimento().toString());
+        if (aluno.obterDataNascimento() != null) {
+            dto.setDtNascimento(aluno.obterDataNascimento().toString());
         }
         
         // Converter estado civil
-        if (aluno.getEstadoCivil() != null) {
-            dto.setEstadoCivil(convertEstadoCivilToDTO(aluno.getEstadoCivil()));
+        if (aluno.obterEstadoCivil() != null) {
+            dto.setEstadoCivil(convertEstadoCivilToDTO(aluno.obterEstadoCivil()));
         }
         
         // Converter telefones
-        if (aluno.getTelefones() != null) {
-            dto.setTelefones(aluno.getTelefones());
+        if (aluno.obterTelefonesContato() != null) {
+            dto.setTelefones(aluno.obterTelefonesContato());
         }
         
         return dto;
@@ -161,17 +161,17 @@ public class AlunoRepositoryService {
 
     private Aluno convertToEntity(AlunoDTO dto, Curso curso) {
         Aluno aluno = new Aluno();
-        aluno.setMatricula(dto.getMatricula());
-        aluno.setNome(dto.getNome().trim());
-        aluno.setIdade(dto.getIdade());
-        aluno.setMatriculaAtiva(dto.isMatriculaAtiva());
-        aluno.setCurso(curso);
+        aluno.definirNumeroMatricula(dto.getMatricula());
+        aluno.definirNomeCompleto(dto.getNome().trim());
+        aluno.definirIdadeAtual(dto.getIdade());
+        aluno.definirStatusMatricula(dto.isMatriculaAtiva());
+        aluno.definirCursoMatriculado(curso);
         
         // Converter data de nascimento
         if (dto.getDtNascimento() != null && !dto.getDtNascimento().trim().isEmpty()) {
             try {
                 Data dataNascimento = Data.fromString(dto.getDtNascimento());
-                aluno.setDataNascimento(dataNascimento);
+                aluno.definirDataNascimento(dataNascimento);
             } catch (Exception e) {
                 // Se houver erro na conversão, manter null
                 System.err.println("Erro ao converter data de nascimento: " + e.getMessage());
@@ -180,12 +180,12 @@ public class AlunoRepositoryService {
         
         // Converter estado civil
         if (dto.getEstadoCivil() != null) {
-            aluno.setEstadoCivil(convertEstadoCivilFromDTO(dto.getEstadoCivil()));
+            aluno.definirEstadoCivil(convertEstadoCivilFromDTO(dto.getEstadoCivil()));
         }
         
         // Converter telefones
         if (dto.getTelefones() != null) {
-            aluno.setTelefones(dto.getTelefones());
+            aluno.definirTelefonesContato(dto.getTelefones());
         }
         
         return aluno;

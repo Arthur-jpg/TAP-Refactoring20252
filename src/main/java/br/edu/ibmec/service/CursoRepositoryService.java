@@ -28,12 +28,12 @@ public class CursoRepositoryService {
     private CursoRepository cursoRepository;
 
     public CursoDTO buscarCurso(int codigo) throws DaoException {
-        Curso curso = cursoRepository.findByCodigo(codigo);
+        Curso curso = cursoRepository.findByCodigoCurso(codigo);
         if (curso == null) {
             throw new DaoException("Curso com código " + codigo + " não encontrado");
         }
         
-        return new CursoDTO(curso.getCodigo(), curso.getNome());
+        return new CursoDTO(curso.obterCodigoCurso(), curso.obterNomeCurso());
     }
 
     @Transactional(readOnly = true)
@@ -47,7 +47,7 @@ public class CursoRepositoryService {
         List<CursoDTO> cursosDTO = new ArrayList<>();
         
         for (Curso curso : cursos) {
-            cursosDTO.add(new CursoDTO(curso.getCodigo(), curso.getNome()));
+            cursosDTO.add(new CursoDTO(curso.obterCodigoCurso(), curso.obterNomeCurso()));
         }
         
         return cursosDTO;
@@ -65,7 +65,7 @@ public class CursoRepositoryService {
         }
 
         // Verifica se já existe
-        if (cursoRepository.existsByCodigo(cursoDTO.getCodigo())) {
+        if (cursoRepository.existsByCodigoCurso(cursoDTO.getCodigo())) {
             throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_DUPLICADO);
         }
 
@@ -91,7 +91,7 @@ public class CursoRepositoryService {
         }
 
         Curso curso = cursoOpt.get();
-        curso.setNome(cursoDTO.getNome().trim());
+        curso.definirNomeCurso(cursoDTO.getNome().trim());
         cursoRepository.save(curso);
     }
 
