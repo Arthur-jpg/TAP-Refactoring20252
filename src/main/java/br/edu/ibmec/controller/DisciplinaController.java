@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 
 import br.edu.ibmec.dto.DisciplinaDTO;
 import br.edu.ibmec.entity.Disciplina;
@@ -64,7 +65,7 @@ public class DisciplinaController {
      * POST /api/disciplina
      */
     @PostMapping
-    public ResponseEntity<String> cadastrarDisciplina(@RequestBody DisciplinaDTO disciplinaDTO) {
+    public ResponseEntity<String> cadastrarDisciplina(@Valid @RequestBody DisciplinaDTO disciplinaDTO) {
         try {
             disciplinaService.cadastrarDisciplina(disciplinaDTO);
             return ResponseEntity.status(HttpStatus.CREATED)
@@ -91,7 +92,7 @@ public class DisciplinaController {
      * PUT /api/disciplina
      */
     @PutMapping
-    public ResponseEntity<String> alterarDisciplina(@RequestBody DisciplinaDTO disciplinaDTO) {
+    public ResponseEntity<String> alterarDisciplina(@Valid @RequestBody DisciplinaDTO disciplinaDTO) {
         try {
             disciplinaService.alterarDisciplina(disciplinaDTO);
             return ResponseEntity.ok("Disciplina alterada com sucesso");

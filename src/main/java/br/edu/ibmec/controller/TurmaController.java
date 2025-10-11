@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 
 import br.edu.ibmec.dto.TurmaDTO;
 import br.edu.ibmec.entity.Turma;
@@ -62,7 +63,7 @@ public class TurmaController {
      * POST /api/turma
      */
     @PostMapping
-    public ResponseEntity<String> cadastrarTurma(@RequestBody TurmaDTO turmaDTO) {
+    public ResponseEntity<String> cadastrarTurma(@Valid @RequestBody TurmaDTO turmaDTO) {
         try {
             turmaRepositoryService.cadastrarTurma(turmaDTO);
             return ResponseEntity.status(HttpStatus.CREATED)
@@ -89,7 +90,7 @@ public class TurmaController {
      * PUT /api/turma
      */
     @PutMapping
-    public ResponseEntity<String> alterarTurma(@RequestBody TurmaDTO turmaDTO) {
+    public ResponseEntity<String> alterarTurma(@Valid @RequestBody TurmaDTO turmaDTO) {
         try {
             turmaRepositoryService.alterarTurma(turmaDTO);
             return ResponseEntity.ok("Turma alterada com sucesso");

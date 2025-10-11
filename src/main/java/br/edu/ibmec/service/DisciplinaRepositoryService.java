@@ -58,11 +58,12 @@ public class DisciplinaRepositoryService {
 
     @Transactional
     public void cadastrarDisciplina(DisciplinaDTO disciplinaDTO) throws ServiceException, DaoException {
-        if (disciplinaDTO.getCodigo() <= 0) {
-            throw new ServiceException("Código da disciplina deve ser positivo");
+        if (disciplinaDTO.getCodigo() < 1 || disciplinaDTO.getCodigo() > 99) {
+            throw new ServiceException(ServiceException.ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
         }
-        if (disciplinaDTO.getNome() == null || disciplinaDTO.getNome().trim().isEmpty()) {
-            throw new ServiceException("Nome da disciplina é obrigatório");
+        if (disciplinaDTO.getNome() == null || disciplinaDTO.getNome().trim().isEmpty() ||
+            disciplinaDTO.getNome().trim().length() > 20) {
+            throw new ServiceException(ServiceException.ServiceExceptionEnum.CURSO_NOME_INVALIDO);
         }
 
         if (disciplinaRepository.existsByCodigo(disciplinaDTO.getCodigo())) {
@@ -83,11 +84,12 @@ public class DisciplinaRepositoryService {
 
     @Transactional
     public void alterarDisciplina(DisciplinaDTO disciplinaDTO) throws ServiceException, DaoException {
-        if (disciplinaDTO.getCodigo() <= 0) {
-            throw new ServiceException("Código da disciplina deve ser positivo");
+        if (disciplinaDTO.getCodigo() < 1 || disciplinaDTO.getCodigo() > 99) {
+            throw new ServiceException(ServiceException.ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
         }
-        if (disciplinaDTO.getNome() == null || disciplinaDTO.getNome().trim().isEmpty()) {
-            throw new ServiceException("Nome da disciplina é obrigatório");
+        if (disciplinaDTO.getNome() == null || disciplinaDTO.getNome().trim().isEmpty() ||
+            disciplinaDTO.getNome().trim().length() > 20) {
+            throw new ServiceException(ServiceException.ServiceExceptionEnum.CURSO_NOME_INVALIDO);
         }
 
         Optional<Disciplina> disciplinaOpt = disciplinaRepository.findById(disciplinaDTO.getCodigo());

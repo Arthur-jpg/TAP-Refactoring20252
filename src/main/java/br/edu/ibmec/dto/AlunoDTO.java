@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -25,10 +26,11 @@ import lombok.Setter;
 public class AlunoDTO {
     
     @Min(value = 1, message = "Matrícula deve ser um número positivo")
+    @Max(value = 99, message = "Matrícula deve estar entre 1 e 99")
     private int matricula;
     
     @NotBlank(message = "Nome é obrigatório")
-    @Size(max = 100, message = "Nome deve ter no máximo 100 caracteres")
+    @Size(max = 20, message = "Nome deve ter no máximo 20 caracteres")
     private String nome;
     
     private String dtNascimento;

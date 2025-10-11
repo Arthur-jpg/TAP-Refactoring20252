@@ -103,12 +103,12 @@ public class TurmaRepositoryService {
      */
     public void cadastrarTurma(TurmaDTO turmaDTO) throws DaoException, ServiceException {
         try {
-            if (turmaDTO.getCodigo() <= 0) {
-                throw new ServiceException("Código da turma é obrigatório");
+            if (turmaDTO.getCodigo() < 1 || turmaDTO.getCodigo() > 99) {
+                throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
             }
             
-            if (turmaDTO.getAno() <= 0) {
-                throw new ServiceException("Ano da turma é obrigatório");
+            if (turmaDTO.getAno() < 1900 || turmaDTO.getAno() > 2020) {
+                throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
             }
             
             if (turmaDTO.getSemestre() < 1 || turmaDTO.getSemestre() > 2) {
@@ -124,7 +124,7 @@ public class TurmaRepositoryService {
                 throw new ServiceException("Disciplina não encontrada com código " + turmaDTO.getDisciplina());
             }
 
-            Turma turmaExistente = turmaRepository.findByCodigoAndAnoAndSemestre(
+        Turma turmaExistente = turmaRepository.findByCodigoAndAnoAndSemestre(
                     turmaDTO.getCodigo(), turmaDTO.getAno(), turmaDTO.getSemestre());
             
             if (turmaExistente != null) {
