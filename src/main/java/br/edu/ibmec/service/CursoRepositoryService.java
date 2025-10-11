@@ -59,11 +59,11 @@ public class CursoRepositoryService {
     @Transactional
     public void cadastrarCurso(CursoDTO cursoDTO) throws ServiceException, DaoException {
         // Validações
-        if ((cursoDTO.getCodigo() < 1) || (cursoDTO.getCodigo() > 99999)) {
+        if ((cursoDTO.getCodigo() < 1) || (cursoDTO.getCodigo() > 99)) {
             throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
         }
         if (cursoDTO.getNome() == null || cursoDTO.getNome().trim().isEmpty() || 
-            cursoDTO.getNome().length() > 100) {
+            cursoDTO.getNome().trim().length() > 20) {
             throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
         }
 
@@ -79,11 +79,11 @@ public class CursoRepositoryService {
     @Transactional
     public void alterarCurso(CursoDTO cursoDTO) throws ServiceException, DaoException {
         // Validações
-        if ((cursoDTO.getCodigo() < 1) || (cursoDTO.getCodigo() > 99999)) {
+        if ((cursoDTO.getCodigo() < 1) || (cursoDTO.getCodigo() > 99)) {
             throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
         }
         if (cursoDTO.getNome() == null || cursoDTO.getNome().trim().isEmpty() || 
-            cursoDTO.getNome().length() > 100) {
+            cursoDTO.getNome().trim().length() > 20) {
             throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
         }
 

@@ -66,10 +66,10 @@ public class AlunoRepositoryService {
     @Transactional
     public void cadastrarAluno(AlunoDTO alunoDTO) throws ServiceException, DaoException {
         // Validações
-        if (alunoDTO.getMatricula() <= 0) {
+        if (alunoDTO.getMatricula() < 1 || alunoDTO.getMatricula() > 99) {
             throw new ServiceException(ServiceExceptionEnum.ALUNO_MATRICULA_INVALIDA);
         }
-        if (alunoDTO.getNome() == null || alunoDTO.getNome().trim().isEmpty()) {
+        if (alunoDTO.getNome() == null || alunoDTO.getNome().trim().isEmpty() || alunoDTO.getNome().trim().length() > 20) {
             throw new ServiceException(ServiceExceptionEnum.ALUNO_NOME_INVALIDO);
         }
 
@@ -94,10 +94,10 @@ public class AlunoRepositoryService {
     @Transactional
     public void alterarAluno(AlunoDTO alunoDTO) throws ServiceException, DaoException {
         // Validações
-        if (alunoDTO.getMatricula() <= 0) {
+        if (alunoDTO.getMatricula() < 1 || alunoDTO.getMatricula() > 99) {
             throw new ServiceException(ServiceExceptionEnum.ALUNO_MATRICULA_INVALIDA);
         }
-        if (alunoDTO.getNome() == null || alunoDTO.getNome().trim().isEmpty()) {
+        if (alunoDTO.getNome() == null || alunoDTO.getNome().trim().isEmpty() || alunoDTO.getNome().trim().length() > 20) {
             throw new ServiceException(ServiceExceptionEnum.ALUNO_NOME_INVALIDO);
         }
 
@@ -138,9 +138,14 @@ public class AlunoRepositoryService {
             aluno.setEstadoCivilAtual(convertEstadoCivilFromDTO(alunoDTO.getEstadoCivil()));
         }
 
-        // Atualiza telefones se informado
+        // Atualiza telefones se informado (normaliza: trim, remove vazios e duplicados)
         if (alunoDTO.getTelefones() != null) {
-            aluno.setNumerosTelefone(new ArrayList<>(alunoDTO.getTelefones()));
+            List<String> telefonesNormalizados = alunoDTO.getTelefones().stream()
+                .filter(t -> t != null && !t.trim().isEmpty())
+                .map(String::trim)
+                .distinct()
+                .toList();
+            aluno.setNumerosTelefone(new ArrayList<>(telefonesNormalizados));
         }
         
         alunoRepository.save(aluno);
@@ -208,9 +213,14 @@ public class AlunoRepositoryService {
             aluno.setEstadoCivilAtual(convertEstadoCivilFromDTO(dto.getEstadoCivil()));
         }
         
-        // Converter telefones
+        // Converter telefones (normaliza: trim, remove vazios e duplicados)
         if (dto.getTelefones() != null) {
-            aluno.setNumerosTelefone(dto.getTelefones());
+            List<String> telefonesNormalizados = dto.getTelefones().stream()
+                .filter(t -> t != null && !t.trim().isEmpty())
+                .map(String::trim)
+                .distinct()
+                .toList();
+            aluno.setNumerosTelefone(new ArrayList<>(telefonesNormalizados));
         }
         
         return aluno;

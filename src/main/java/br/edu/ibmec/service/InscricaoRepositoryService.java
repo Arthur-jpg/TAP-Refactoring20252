@@ -139,8 +139,11 @@ public class InscricaoRepositoryService {
                 throw new ServiceException("Matrícula do aluno é obrigatória");
             }
             
-            if (inscricaoDTO.getCodigo() <= 0) {
-                throw new ServiceException("Código da turma é obrigatório");
+            if (inscricaoDTO.getCodigo() < 1 || inscricaoDTO.getCodigo() > 999) {
+                throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
+            }
+            if (inscricaoDTO.getAno() < 1900 || inscricaoDTO.getAno() > 2020) {
+                throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
             }
             Optional<Aluno> alunoOpt = alunoRepository.findById(inscricaoDTO.getAluno());
             if (alunoOpt.isEmpty()) {

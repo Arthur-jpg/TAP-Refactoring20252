@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 
 import br.edu.ibmec.dto.InscricaoDTO;
 import br.edu.ibmec.entity.Inscricao;
@@ -67,7 +68,7 @@ public class InscricaoController {
      * POST /api/inscricao
      */
     @PostMapping
-    public ResponseEntity<String> cadastrarInscricao(@RequestBody InscricaoDTO inscricaoDTO) {
+    public ResponseEntity<String> cadastrarInscricao(@Valid @RequestBody InscricaoDTO inscricaoDTO) {
         try {
             inscricaoRepositoryService.cadastrarInscricao(inscricaoDTO);
             return ResponseEntity.status(HttpStatus.CREATED)
@@ -94,7 +95,7 @@ public class InscricaoController {
      * PUT /api/inscricao
      */
     @PutMapping
-    public ResponseEntity<String> alterarInscricao(@RequestBody InscricaoDTO inscricaoDTO) {
+    public ResponseEntity<String> alterarInscricao(@Valid @RequestBody InscricaoDTO inscricaoDTO) {
         try {
             inscricaoRepositoryService.alterarInscricao(inscricaoDTO);
             return ResponseEntity.ok("Inscrição alterada com sucesso");
