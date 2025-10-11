@@ -47,7 +47,6 @@ public class Disciplina {
         }
     }
 
-    // Getters/Setters com cópia defensiva para lista
     public List<Turma> getTurmas() {
         return new ArrayList<>(turmas);
     }

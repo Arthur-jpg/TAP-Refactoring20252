@@ -16,10 +16,7 @@ import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
 import br.edu.ibmec.repository.CursoRepository;
 
-/**
- * Novo serviço para Curso usando Spring Data JPA Repository
- * Substituirá o CursoService antigo para resolver problemas de transação
- */
+/** Serviço de Curso usando Spring Data JPA Repository. */
 @Service("cursoRepositoryService")
 @Transactional
 public class CursoRepositoryService {

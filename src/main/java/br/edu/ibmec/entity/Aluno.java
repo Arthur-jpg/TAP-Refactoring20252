@@ -18,13 +18,11 @@ import java.util.List;
 @ToString(exclude = {"inscricoesEmDisciplinas", "cursoMatriculado"})
 public class Aluno {
 
-    // Identificadores únicos
     @Id
     @Column(name = "matricula")
     @EqualsAndHashCode.Include
     private int numeroMatricula;
     
-    // Informações pessoais
     @Column(name = "nome", nullable = false, length = 100)
     private String nomeCompleto;
     
@@ -38,17 +36,14 @@ public class Aluno {
     @Column(name = "estado_civil")
     private EstadoCivil estadoCivilAtual;
     
-    // Status acadêmico
     @Column(name = "matricula_ativa")
     private boolean possuiMatriculaAtiva;
     
-    // Informações de contato
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "aluno_telefones", joinColumns = @JoinColumn(name = "matricula"))
     @Column(name = "telefone")
     private List<String> numerosTelefone = new ArrayList<>();
     
-    // Relacionamentos acadêmicos
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso_codigo")
     private Curso cursoMatriculado;
@@ -56,7 +51,6 @@ public class Aluno {
     @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Inscricao> inscricoesEmDisciplinas = new ArrayList<>();
 
-    // Métodos de gerenciamento de inscrições
     public void adicionarInscricaoEmDisciplina(Inscricao inscricao) {
         validarInscricaoNaoNula(inscricao);
         adicionarInscricaoSeNaoExiste(inscricao);
@@ -76,7 +70,6 @@ public class Aluno {
         this.inscricoesEmDisciplinas = criarListaSeguraDeInscricoes(novasInscricoes);
     }
     
-    // Métodos auxiliares privados para validação
     private void validarInscricaoNaoNula(Inscricao inscricao) {
         if (inscricao == null) {
             throw new IllegalArgumentException("Inscrição não pode ser nula");
@@ -97,7 +90,6 @@ public class Aluno {
         return inscricoes != null ? new ArrayList<>(inscricoes) : new ArrayList<>();
     }
 
-    // Setters customizados com validação
     public void definirNumeroMatricula(int novoNumeroMatricula) {
         validarNumeroMatriculaPositivo(novoNumeroMatricula);
         this.numeroMatricula = novoNumeroMatricula;
@@ -108,7 +100,6 @@ public class Aluno {
         this.nomeCompleto = novoNomeCompleto.trim();
     }
     
-    // Métodos de validação privados
     private void validarNumeroMatriculaPositivo(int numeroMatricula) {
         if (numeroMatricula <= 0){
             throw new IllegalArgumentException("Matrícula deve ser um número positivo");
@@ -121,20 +112,17 @@ public class Aluno {
         }
     }
 
-    // Setter customizado com validação
     public void definirIdadeAtual(int novaIdade) {
         validarIdadeNaoNegativa(novaIdade);
         this.idadeAtual = novaIdade;
     }
     
-    // Método de validação
     private void validarIdadeNaoNegativa(int idade) {
         if (idade < 0) {
             throw new IllegalArgumentException("Idade não pode ser negativa");
         }
     }
 
-    // Métodos de consulta e regras de negócio
     public boolean possuiInscricaoAtiva() {
         return inscricoesEmDisciplinas.stream()
                 .anyMatch(this::inscricaoEhValida);
@@ -152,7 +140,6 @@ public class Aluno {
         return numerosTelefone != null && !numerosTelefone.isEmpty();
     }
     
-    // Métodos auxiliares privados
     private List<String> criarListaSeguraDeTelefones(List<String> telefones) {
         return telefones != null ? new ArrayList<>(telefones) : new ArrayList<>();
     }

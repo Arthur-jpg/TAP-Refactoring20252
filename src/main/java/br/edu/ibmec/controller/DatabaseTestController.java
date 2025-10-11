@@ -22,9 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Controller para testar conexão direta com MySQL.
- */
+/** Controller para testes diretos com MySQL (perfil dev). */
 @RestController
 @Profile("dev")
 @RequestMapping("/api/database")

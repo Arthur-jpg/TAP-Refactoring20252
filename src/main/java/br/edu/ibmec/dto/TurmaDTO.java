@@ -17,5 +17,4 @@ public class TurmaDTO {
     private int semestre;
     private int disciplina;
 
-    //private List<InscricaoDTO> inscricoes = new ArrayList<InscricaoDTO>();
 }

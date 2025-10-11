@@ -23,5 +23,4 @@ public class InscricaoDTO {
     private int ano;
     private int semestre;
 
-    // private Avaliacao avaliacao;
 }

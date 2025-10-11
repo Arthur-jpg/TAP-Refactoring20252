@@ -25,6 +25,4 @@ public class CursoDTO {
     @Size(max = 100, message = "Nome do curso deve ter no máximo 100 caracteres")
     private String nome;
 
-    // private List<AlunoDTO> alunos = new ArrayList<AlunoDTO>();
-    // private List<DisciplinaDTO> disciplinas = new ArrayList<DisciplinaDTO>();
 }

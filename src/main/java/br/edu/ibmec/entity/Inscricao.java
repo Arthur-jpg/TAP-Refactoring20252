@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "inscricoes")
 public class Inscricao {
+    private static final int LIMITE_FALTAS = 15;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -140,6 +141,6 @@ public class Inscricao {
     }
 
     public boolean temFaltasExcessivas() {
-        return numFaltas > 15; // Assumindo limite de 15 faltas
+        return numFaltas > LIMITE_FALTAS;
     }
 }

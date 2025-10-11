@@ -7,7 +7,10 @@ public class ServiceException extends Exception {
     private String message;
     private ServiceExceptionEnum tipo;
 
-    // private ArrayList;
+    /**
+     * Exceção de regra de negócio da aplicação com suporte a enumeração tipada
+     * e mensagem amigável.
+     */
 
     public ServiceException() {
 

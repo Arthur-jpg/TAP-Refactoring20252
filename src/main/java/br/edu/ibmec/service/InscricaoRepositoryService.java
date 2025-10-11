@@ -135,7 +135,6 @@ public class InscricaoRepositoryService {
      */
     public void cadastrarInscricao(InscricaoDTO inscricaoDTO) throws DaoException, ServiceException {
         try {
-            // Validações básicas
             if (inscricaoDTO.getAluno() <= 0) {
                 throw new ServiceException("Matrícula do aluno é obrigatória");
             }
@@ -143,14 +142,10 @@ public class InscricaoRepositoryService {
             if (inscricaoDTO.getCodigo() <= 0) {
                 throw new ServiceException("Código da turma é obrigatório");
             }
-
-            // Busca o aluno
             Optional<Aluno> alunoOpt = alunoRepository.findById(inscricaoDTO.getAluno());
             if (alunoOpt.isEmpty()) {
                 throw new ServiceException("Aluno não encontrado com matrícula " + inscricaoDTO.getAluno());
             }
-
-            // Busca a turma
             List<Turma> todasTurmas = turmaRepository.findAll();
             Optional<Turma> turmaOpt = todasTurmas.stream()
                     .filter(turma -> turma.getCodigo() == inscricaoDTO.getCodigo() &&
@@ -163,7 +158,6 @@ public class InscricaoRepositoryService {
                         "/" + inscricaoDTO.getAno() + "/" + inscricaoDTO.getSemestre());
             }
 
-            // Verifica se já existe inscrição
             List<Inscricao> inscricoesExistentes = inscricaoRepository.findAll();
             boolean jaExiste = inscricoesExistentes.stream()
                     .anyMatch(inscricao -> inscricao.getAluno() != null && 
@@ -177,7 +171,6 @@ public class InscricaoRepositoryService {
                 throw new ServiceException("Aluno já inscrito nesta turma");
             }
 
-            // Cria nova inscrição
             Inscricao novaInscricao = convertToEntity(inscricaoDTO, alunoOpt.get(), turmaOpt.get());
             inscricaoRepository.save(novaInscricao);
             
@@ -196,7 +189,6 @@ public class InscricaoRepositoryService {
      */
     public void alterarInscricao(InscricaoDTO inscricaoDTO) throws DaoException, ServiceException {
         try {
-            // Busca inscrição existente
             List<Inscricao> todasInscricoes = inscricaoRepository.findAll();
             Optional<Inscricao> inscricaoOpt = todasInscricoes.stream()
                     .filter(inscricao -> inscricao.getAluno() != null && 
@@ -213,7 +205,6 @@ public class InscricaoRepositoryService {
 
             Inscricao inscricao = inscricaoOpt.get();
             
-            // Atualiza dados
             inscricao.setAvaliacao1(inscricaoDTO.getAvaliacao1());
             inscricao.setAvaliacao2(inscricaoDTO.getAvaliacao2());
             inscricao.setNumFaltas(inscricaoDTO.getNumFaltas());

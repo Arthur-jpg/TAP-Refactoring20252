@@ -31,7 +31,6 @@ public class AlunoDTO {
     @Size(max = 100, message = "Nome deve ter no máximo 100 caracteres")
     private String nome;
     
-    // @NotBlank(message = "Data de nascimento é obrigatória") // Temporariamente removido para testes
     private String dtNascimento;
     
     @Min(value = 0, message = "Idade deve ser positiva")
@@ -39,7 +38,6 @@ public class AlunoDTO {
     
     private boolean matriculaAtiva;
     
-    // @NotNull(message = "Estado civil é obrigatório") // Temporariamente removido para testes
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     private EstadoCivilDTO estadoCivilDTO;
