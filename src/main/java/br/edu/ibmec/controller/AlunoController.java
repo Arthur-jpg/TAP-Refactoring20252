@@ -92,8 +92,8 @@ public class AlunoController {
     })
     @PutMapping
     public ResponseEntity<String> atualizarDadosDoAluno(
-            @Parameter(description = "Dados atualizados do aluno", required = true)
-            @RequestBody AlunoDTO alunoDTO) {
+        @Parameter(description = "Dados atualizados do aluno", required = true)
+        @Valid @RequestBody AlunoDTO alunoDTO) {
         try {
             alunoService.alterarAluno(alunoDTO);
             return ResponseEntity.ok("Aluno alterado com sucesso");
@@ -135,12 +135,10 @@ public class AlunoController {
     @GetMapping
     public ResponseEntity<List<String>> obterNomesDeAlunosMatriculados() {
         try {
-            List<String> nomesDeAlunos = new ArrayList<>();
-            for (Iterator<Aluno> iteratorDeAlunos = alunoService.listarAlunos().iterator(); iteratorDeAlunos.hasNext();) {
-                Aluno alunoAtual = iteratorDeAlunos.next();
-                nomesDeAlunos.add(alunoAtual.getNomeCompleto());
-            }
-            return ResponseEntity.ok(nomesDeAlunos);
+            List<String> nomes = alunoService.listarAlunos().stream()
+                .map(Aluno::getNomeCompleto)
+                .toList();
+            return ResponseEntity.ok(nomes);
         } catch (DaoException daoException) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -179,10 +177,10 @@ public class AlunoController {
     }
 
     private boolean isCodigoInvalido(ServiceException serviceException) {
-        return serviceException.getTipo() == ServiceExceptionEnum.CURSO_CODIGO_INVALIDO;
+        return serviceException.getTipo() == ServiceExceptionEnum.ALUNO_MATRICULA_INVALIDA;
     }
 
     private boolean isNomeInvalido(ServiceException serviceException) {
-        return serviceException.getTipo() == ServiceExceptionEnum.CURSO_NOME_INVALIDO;
+        return serviceException.getTipo() == ServiceExceptionEnum.ALUNO_NOME_INVALIDO;
     }
 }

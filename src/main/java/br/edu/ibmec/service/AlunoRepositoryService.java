@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
 import br.edu.ibmec.dto.AlunoDTO;
 import br.edu.ibmec.dto.EstadoCivilDTO;
@@ -26,6 +27,7 @@ import br.edu.ibmec.repository.CursoRepository;
  */
 @Service("alunoRepositoryService")
 @Transactional
+@Slf4j
 public class AlunoRepositoryService {
     
     @Autowired
@@ -34,6 +36,7 @@ public class AlunoRepositoryService {
     @Autowired
     private CursoRepository cursoRepository;
 
+    @Transactional(readOnly = true)
     public AlunoDTO buscarAluno(int matricula) throws DaoException {
         Aluno aluno = alunoRepository.findByNumeroMatricula(matricula);
         if (aluno == null) {
@@ -151,9 +154,9 @@ public class AlunoRepositoryService {
             dto.setEstadoCivil(convertEstadoCivilToDTO(aluno.getEstadoCivilAtual()));
         }
         
-        // Converter telefones
+        // Converter telefones (cópia defensiva para evitar LazyInitialization no Jackson)
         if (aluno.getNumerosTelefone() != null) {
-            dto.setTelefones(aluno.getNumerosTelefone());
+            dto.setTelefones(new ArrayList<>(aluno.getNumerosTelefone()));
         }
         
         return dto;
@@ -173,8 +176,8 @@ public class AlunoRepositoryService {
                 br.edu.ibmec.entity.Data dataNascimento = br.edu.ibmec.entity.Data.fromString(dto.getDtNascimento());
                 aluno.setDataNascimento(dataNascimento);
             } catch (Exception e) {
-                // Se houver erro na conversão, manter null
-                System.err.println("Erro ao converter data de nascimento: " + e.getMessage());
+                // Se houver erro na conversão, manter null e registrar aviso
+                log.warn("Erro ao converter data de nascimento '{}': {}", dto.getDtNascimento(), e.getMessage());
             }
         }
         

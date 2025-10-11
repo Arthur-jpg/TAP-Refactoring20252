@@ -43,7 +43,7 @@ public class Aluno {
     private boolean possuiMatriculaAtiva;
     
     // Informações de contato
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "aluno_telefones", joinColumns = @JoinColumn(name = "matricula"))
     @Column(name = "telefone")
     private List<String> numerosTelefone = new ArrayList<>();
