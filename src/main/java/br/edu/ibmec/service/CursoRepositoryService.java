@@ -16,10 +16,7 @@ import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
 import br.edu.ibmec.repository.CursoRepository;
 
-/**
- * Novo serviço para Curso usando Spring Data JPA Repository
- * Substituirá o CursoService antigo para resolver problemas de transação
- */
+/** Serviço de Curso usando Spring Data JPA Repository. */
 @Service("cursoRepositoryService")
 @Transactional
 public class CursoRepositoryService {
@@ -33,7 +30,10 @@ public class CursoRepositoryService {
             throw new DaoException("Curso com código " + codigo + " não encontrado");
         }
         
-        return new CursoDTO(curso.obterCodigoCurso(), curso.obterNomeCurso());
+    return CursoDTO.builder()
+        .codigo(curso.getCodigoCurso())
+        .nome(curso.getNomeCurso())
+        .build();
     }
 
     @Transactional(readOnly = true)
@@ -47,7 +47,10 @@ public class CursoRepositoryService {
         List<CursoDTO> cursosDTO = new ArrayList<>();
         
         for (Curso curso : cursos) {
-            cursosDTO.add(new CursoDTO(curso.obterCodigoCurso(), curso.obterNomeCurso()));
+        cursosDTO.add(CursoDTO.builder()
+            .codigo(curso.getCodigoCurso())
+            .nome(curso.getNomeCurso())
+            .build());
         }
         
         return cursosDTO;
@@ -91,7 +94,7 @@ public class CursoRepositoryService {
         }
 
         Curso curso = cursoOpt.get();
-        curso.definirNomeCurso(cursoDTO.getNome().trim());
+        curso.setNomeCurso(cursoDTO.getNome().trim());
         cursoRepository.save(curso);
     }
 

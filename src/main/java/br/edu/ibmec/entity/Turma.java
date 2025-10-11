@@ -1,6 +1,9 @@
 package br.edu.ibmec.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +14,8 @@ import java.util.List;
 @Entity
 @Table(name = "turmas")
 @IdClass(TurmaId.class)
+@Getter
+@NoArgsConstructor
 public class Turma {
     @Id
     @Column(name = "codigo")
@@ -26,13 +31,12 @@ public class Turma {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "disciplina_codigo")
+    @Setter
     private Disciplina disciplina;
     
     @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Inscricao> inscricoes = new ArrayList<>();
 
-    public Turma() {
-    }
 
     public Turma(int codigo, int ano, int semestre, Disciplina disciplina) {
         this.codigo = codigo;
@@ -64,19 +68,11 @@ public class Turma {
         this.inscricoes = inscricoes != null ? new ArrayList<>(inscricoes) : new ArrayList<>();
     }
 
-    public int getCodigo() {
-        return codigo;
-    }
-
     public void setCodigo(int codigo) {
         if (codigo <= 0) {
             throw new IllegalArgumentException("Código deve ser um número positivo");
         }
         this.codigo = codigo;
-    }
-
-    public int getAno() {
-        return ano;
     }
 
     public void setAno(int ano) {
@@ -86,23 +82,11 @@ public class Turma {
         this.ano = ano;
     }
 
-    public int getSemestre() {
-        return semestre;
-    }
-
     public void setSemestre(int semestre) {
         if (semestre < 1 || semestre > 2) {
             throw new IllegalArgumentException("Semestre deve ser 1 ou 2");
         }
         this.semestre = semestre;
-    }
-
-    public Disciplina getDisciplina() {
-        return disciplina;
-    }
-
-    public void setDisciplina(Disciplina disciplina) {
-        this.disciplina = disciplina;
     }
 
     public int getQuantidadeInscricoes() {

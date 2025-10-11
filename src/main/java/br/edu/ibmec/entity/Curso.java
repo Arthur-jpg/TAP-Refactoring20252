@@ -1,40 +1,44 @@
 package br.edu.ibmec.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "cursos")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(exclude = {"alunosMatriculados", "disciplinasOfertadas"})
 public class Curso {
     
-    // Identificador único do curso
     @Id
     @Column(name = "codigo")
+    @EqualsAndHashCode.Include
     private int codigoCurso;
     
-    // Informações básicas do curso
     @Column(name = "nome", nullable = false, length = 100)
     private String nomeCurso;
     
-    // Relacionamentos - alunos matriculados no curso
     @OneToMany(mappedBy = "cursoMatriculado", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Aluno> alunosMatriculados = new ArrayList<>();
     
-    // Relacionamentos - disciplinas oferecidas pelo curso
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Disciplina> disciplinasOfertadas = new ArrayList<>();
 
-    // Construtores
-    public Curso() {
-    }
-
-    public Curso(int codigoCurso, String nomeCurso) {
+    public Curso (int codigoCurso, String nome ) {
         this.codigoCurso = codigoCurso;
-        this.nomeCurso = nomeCurso;
+        this.nomeCurso = nome;
     }
 
-    // Métodos de gerenciamento de alunos
     public void adicionarAlunoMatriculado(Aluno aluno) {
         validarAlunoNaoNulo(aluno);
         adicionarAlunoSeNaoExiste(aluno);
@@ -46,7 +50,6 @@ public class Curso {
         }
     }
 
-    // Métodos de gerenciamento de disciplinas
     public void adicionarDisciplinaOfertada(Disciplina disciplina) {
         validarDisciplinaNaoNula(disciplina);
         adicionarDisciplinaSeNaoExiste(disciplina);
@@ -58,7 +61,6 @@ public class Curso {
         }
     }
     
-    // Métodos auxiliares privados para validação de alunos
     private void validarAlunoNaoNulo(Aluno aluno) {
         if (aluno == null) {
             throw new IllegalArgumentException("Aluno não pode ser nulo");
@@ -75,7 +77,6 @@ public class Curso {
         return aluno != null;
     }
     
-    // Métodos auxiliares privados para validação de disciplinas
     private void validarDisciplinaNaoNula(Disciplina disciplina) {
         if (disciplina == null) {
             throw new IllegalArgumentException("Disciplina não pode ser nula");
@@ -92,7 +93,6 @@ public class Curso {
         return disciplina != null;
     }
 
-    // Getters e setters para listas de relacionamentos
     public List<Aluno> obterTodosAlunosMatriculados() {
         return criarListaSeguraDeAlunos(alunosMatriculados);
     }
@@ -109,26 +109,15 @@ public class Curso {
         this.disciplinasOfertadas = criarListaSeguraDeDisciplinas(novasDisciplinas);
     }
 
-    // Getters e setters para propriedades básicas
-    public int obterCodigoCurso() {
-        return codigoCurso;
-    }
-
     public void definirCodigoCurso(int novoCodigoCurso) {
         validarCodigoPositivo(novoCodigoCurso);
         this.codigoCurso = novoCodigoCurso;
     }
-
-    public String obterNomeCurso() {
-        return nomeCurso;
-    }
-
     public void definirNomeCurso(String novoNomeCurso) {
         validarNomeNaoVazio(novoNomeCurso);
         this.nomeCurso = novoNomeCurso.trim();
     }
     
-    // Métodos auxiliares para criação de listas seguras
     private List<Aluno> criarListaSeguraDeAlunos(List<Aluno> alunos) {
         return alunos != null ? new ArrayList<>(alunos) : new ArrayList<>();
     }
@@ -137,7 +126,6 @@ public class Curso {
         return disciplinas != null ? new ArrayList<>(disciplinas) : new ArrayList<>();
     }
     
-    // Métodos de validação privados
     private void validarCodigoPositivo(int codigo) {
         if (codigo <= 0) {
             throw new IllegalArgumentException("Código deve ser um número positivo");
@@ -150,7 +138,6 @@ public class Curso {
         }
     }
 
-    // Métodos de consulta e regras de negócio
     public int obterQuantidadeAlunosMatriculados() {
         return alunosMatriculados.size();
     }
@@ -179,27 +166,4 @@ public class Curso {
         return temAlunosMatriculados() || temDisciplinasOfertadas();
     }
 
-    // Sobrescrita de métodos Object para comparação e debug
-    @Override
-    public boolean equals(Object outroObjeto) {
-        if (this == outroObjeto) return true;
-        if (outroObjeto == null || getClass() != outroObjeto.getClass()) return false;
-        
-        Curso outroCurso = (Curso) outroObjeto;
-        return codigoCurso == outroCurso.codigoCurso;
-    }
-
-    @Override
-    public int hashCode() {
-        return Integer.hashCode(codigoCurso);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Curso{codigo=%d, nome='%s', alunos=%d, disciplinas=%d}", 
-                codigoCurso, 
-                nomeCurso, 
-                obterQuantidadeAlunosMatriculados(),
-                obterQuantidadeDisciplinasOfertadas());
-    }
 }

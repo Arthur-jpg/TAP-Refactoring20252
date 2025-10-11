@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 
 import br.edu.ibmec.dto.CursoDTO;
 import br.edu.ibmec.entity.Curso;
@@ -65,7 +66,7 @@ public class CursoController {
     @PostMapping
     public ResponseEntity<String> criarNovoCurso(
             @Parameter(description = "Dados do curso")
-            @RequestBody CursoDTO cursoDTO) {
+        @Valid @RequestBody CursoDTO cursoDTO) {
         try {
             cursoService.cadastrarCurso(cursoDTO);
             return ResponseEntity.status(HttpStatus.CREATED)
@@ -79,7 +80,7 @@ public class CursoController {
 
 
     @PutMapping
-    public ResponseEntity<String> atualizarDadosDoCurso(@RequestBody CursoDTO cursoDTO) {
+    public ResponseEntity<String> atualizarDadosDoCurso(@Valid @RequestBody CursoDTO cursoDTO) {
         try {
             cursoService.alterarCurso(cursoDTO);
             return ResponseEntity.ok("Curso alterado com sucesso");
@@ -105,12 +106,10 @@ public class CursoController {
     @GetMapping
     public ResponseEntity<List<String>> obterNomesDeCursosDisponiveis() {
         try {
-            List<String> nomesDeCursos = new ArrayList<>();
-            for (Iterator<Curso> iteratorDeCursos = cursoService.listarCursos().iterator(); iteratorDeCursos.hasNext();) {
-                Curso cursoAtual = iteratorDeCursos.next();
-                nomesDeCursos.add(cursoAtual.obterNomeCurso());
-            }
-            return ResponseEntity.ok(nomesDeCursos);
+            List<String> nomes = cursoService.listarCursos().stream()
+                .map(Curso::getNomeCurso)
+                .toList();
+            return ResponseEntity.ok(nomes);
         } catch (DaoException daoException) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -134,7 +133,11 @@ public class CursoController {
         if (isNomeInvalido(serviceException)) {
             return ResponseEntity.badRequest().body("Nome inválido");
         }
-        return ResponseEntity.badRequest().body(serviceException.getMessage());
+        String msg = serviceException.getMessage();
+        if (msg == null || msg.isBlank()) {
+            msg = serviceException.getTipo() != null ? serviceException.getTipo().getDescricao() : "Erro de serviço";
+        }
+        return ResponseEntity.badRequest().body(msg);
     }
 
     private boolean isCodigoInvalido(ServiceException serviceException) {

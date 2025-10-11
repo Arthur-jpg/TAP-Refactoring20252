@@ -1,17 +1,26 @@
 package br.edu.ibmec.entity;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-/**
- * Representa a inscrição de um aluno em uma turma específica.
- * Contém as avaliações, número de faltas e situação final do aluno.
- */
+/** Representa a inscrição de um aluno em uma turma específica. */
 @Entity
 @Table(name = "inscricoes")
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(exclude = {"aluno", "turma"})
 public class Inscricao {
+    private static final int LIMITE_FALTAS = 15;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @EqualsAndHashCode.Include
     private Long id;
     
     @Column(name = "avaliacao1", nullable = false)
@@ -42,9 +51,6 @@ public class Inscricao {
     })
     private Turma turma;
 
-    public Inscricao() {
-    }
-
     public Inscricao(float avaliacao1, float avaliacao2, int numFaltas,
                      Situacao situacao, Aluno aluno, Turma turma) {
         this.avaliacao1 = avaliacao1;
@@ -54,14 +60,6 @@ public class Inscricao {
         this.situacao = situacao;
         this.aluno = aluno;
         this.turma = turma;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public float getAvaliacao1() {
@@ -88,10 +86,6 @@ public class Inscricao {
         calcularMedia();
     }
 
-    public float getMedia() {
-        return media;
-    }
-
     private void calcularMedia() {
         this.media = (avaliacao1 + avaliacao2) / 2;
     }
@@ -107,29 +101,6 @@ public class Inscricao {
         this.numFaltas = numFaltas;
     }
 
-    public Situacao getSituacao() {
-        return situacao;
-    }
-
-    public void setSituacao(Situacao situacao) {
-        this.situacao = situacao;
-    }
-
-    public Aluno getAluno() {
-        return aluno;
-    }
-
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
-    }
-
-    public Turma getTurma() {
-        return turma;
-    }
-
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
 
     public boolean isAprovado() {
         return situacao == Situacao.aprovado;
@@ -140,6 +111,6 @@ public class Inscricao {
     }
 
     public boolean temFaltasExcessivas() {
-        return numFaltas > 15; // Assumindo limite de 15 faltas
+        return numFaltas > LIMITE_FALTAS;
     }
 }

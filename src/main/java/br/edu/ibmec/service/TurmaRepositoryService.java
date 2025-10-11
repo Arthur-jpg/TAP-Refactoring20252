@@ -103,7 +103,6 @@ public class TurmaRepositoryService {
      */
     public void cadastrarTurma(TurmaDTO turmaDTO) throws DaoException, ServiceException {
         try {
-            // Validações básicas
             if (turmaDTO.getCodigo() <= 0) {
                 throw new ServiceException("Código da turma é obrigatório");
             }
@@ -120,13 +119,11 @@ public class TurmaRepositoryService {
                 throw new ServiceException("Código da disciplina é obrigatório");
             }
 
-            // Busca a disciplina
             Optional<Disciplina> disciplinaOpt = disciplinaRepository.findById(turmaDTO.getDisciplina());
             if (disciplinaOpt.isEmpty()) {
                 throw new ServiceException("Disciplina não encontrada com código " + turmaDTO.getDisciplina());
             }
 
-            // Verifica se já existe turma
             Turma turmaExistente = turmaRepository.findByCodigoAndAnoAndSemestre(
                     turmaDTO.getCodigo(), turmaDTO.getAno(), turmaDTO.getSemestre());
             
@@ -135,7 +132,6 @@ public class TurmaRepositoryService {
                         "/" + turmaDTO.getAno() + "/" + turmaDTO.getSemestre());
             }
 
-            // Cria nova turma
             Turma novaTurma = convertToEntity(turmaDTO, disciplinaOpt.get());
             turmaRepository.save(novaTurma);
             
@@ -154,7 +150,6 @@ public class TurmaRepositoryService {
      */
     public void alterarTurma(TurmaDTO turmaDTO) throws DaoException, ServiceException {
         try {
-            // Busca turma existente
             Turma turmaExistente = turmaRepository.findByCodigoAndAnoAndSemestre(
                     turmaDTO.getCodigo(), turmaDTO.getAno(), turmaDTO.getSemestre());
             
@@ -162,7 +157,6 @@ public class TurmaRepositoryService {
                 throw new ServiceException("Turma não encontrada");
             }
 
-            // Busca a disciplina se foi alterada
             if (turmaDTO.getDisciplina() > 0) {
                 Optional<Disciplina> disciplinaOpt = disciplinaRepository.findById(turmaDTO.getDisciplina());
                 if (disciplinaOpt.isPresent()) {
@@ -207,12 +201,12 @@ public class TurmaRepositoryService {
      * @return TurmaDTO
      */
     private TurmaDTO convertToDTO(Turma turma) {
-        return new TurmaDTO(
-                turma.getCodigo(),
-                turma.getAno(),
-                turma.getSemestre(),
-                turma.getDisciplina() != null ? turma.getDisciplina().getCodigo() : 0
-        );
+        return TurmaDTO.builder()
+                .codigo(turma.getCodigo())
+                .ano(turma.getAno())
+                .semestre(turma.getSemestre())
+                .disciplina(turma.getDisciplina() != null ? turma.getDisciplina().getCodigo() : 0)
+                .build();
     }
 
     /**
@@ -224,7 +218,6 @@ public class TurmaRepositoryService {
     private Turma convertToEntity(TurmaDTO dto, Disciplina disciplina) {
         Turma turma = new Turma();
         
-        // A entidade Turma usa @IdClass, então configuramos os campos diretamente
         turma.setCodigo(dto.getCodigo());
         turma.setAno(dto.getAno());
         turma.setSemestre(dto.getSemestre());

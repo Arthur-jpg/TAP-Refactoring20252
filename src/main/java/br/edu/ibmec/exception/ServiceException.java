@@ -7,7 +7,10 @@ public class ServiceException extends Exception {
     private String message;
     private ServiceExceptionEnum tipo;
 
-    // private ArrayList;
+    /**
+     * Exceção de regra de negócio da aplicação com suporte a enumeração tipada
+     * e mensagem amigável.
+     */
 
     public ServiceException() {
 
@@ -20,6 +23,7 @@ public class ServiceException extends Exception {
 
     public ServiceException(ServiceExceptionEnum tipo) {
         this.tipo = tipo;
+        this.message = (tipo != null) ? tipo.getDescricao() : null;
     }
 
     public ServiceException(ArrayList<String> listaErrosCurso) {
@@ -27,7 +31,13 @@ public class ServiceException extends Exception {
     }
 
     public String getMessage() {
-        return message;
+        if (message != null && !message.isEmpty()) {
+            return message;
+        }
+        if (tipo != null && tipo.getDescricao() != null && !tipo.getDescricao().isEmpty()) {
+            return tipo.getDescricao();
+        }
+        return super.getMessage();
     }
 
     public void setMessage(String msg) {

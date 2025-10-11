@@ -58,7 +58,6 @@ public class DisciplinaRepositoryService {
 
     @Transactional
     public void cadastrarDisciplina(DisciplinaDTO disciplinaDTO) throws ServiceException, DaoException {
-        // Validações
         if (disciplinaDTO.getCodigo() <= 0) {
             throw new ServiceException("Código da disciplina deve ser positivo");
         }
@@ -66,12 +65,10 @@ public class DisciplinaRepositoryService {
             throw new ServiceException("Nome da disciplina é obrigatório");
         }
 
-        // Verifica se já existe
         if (disciplinaRepository.existsByCodigo(disciplinaDTO.getCodigo())) {
             throw new ServiceException("Disciplina com código " + disciplinaDTO.getCodigo() + " já existe");
         }
 
-        // Busca o curso se informado
         Curso curso = null;
         if (disciplinaDTO.getCurso() > 0) {
             curso = cursoRepository.findByCodigoCurso(disciplinaDTO.getCurso());
@@ -86,7 +83,6 @@ public class DisciplinaRepositoryService {
 
     @Transactional
     public void alterarDisciplina(DisciplinaDTO disciplinaDTO) throws ServiceException, DaoException {
-        // Validações
         if (disciplinaDTO.getCodigo() <= 0) {
             throw new ServiceException("Código da disciplina deve ser positivo");
         }
@@ -94,13 +90,11 @@ public class DisciplinaRepositoryService {
             throw new ServiceException("Nome da disciplina é obrigatório");
         }
 
-        // Verifica se existe
         Optional<Disciplina> disciplinaOpt = disciplinaRepository.findById(disciplinaDTO.getCodigo());
         if (disciplinaOpt.isEmpty()) {
             throw new DaoException("Disciplina com código " + disciplinaDTO.getCodigo() + " não encontrada");
         }
 
-        // Busca o curso se informado
         Curso curso = null;
         if (disciplinaDTO.getCurso() > 0) {
             curso = cursoRepository.findByCodigoCurso(disciplinaDTO.getCurso());
@@ -131,7 +125,7 @@ public class DisciplinaRepositoryService {
         dto.setNome(disciplina.getNome());
         
         if (disciplina.getCurso() != null) {
-            dto.setCurso(disciplina.getCurso().obterCodigoCurso());
+            dto.setCurso(disciplina.getCurso().getCodigoCurso());
         }
         
         return dto;
