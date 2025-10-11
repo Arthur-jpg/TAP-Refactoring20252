@@ -1,6 +1,8 @@
 package br.edu.ibmec.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = {"curso", "turmas"})
+@AllArgsConstructor
+@Builder
 public class Disciplina {
     @Id
     @Column(name = "codigo")
@@ -30,6 +34,7 @@ public class Disciplina {
     private Curso curso;
 
     @OneToMany(mappedBy = "disciplina", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Builder.Default
     private List<Turma> turmas = new ArrayList<>();
 
     public void adicionarTurma(Turma turma) {

@@ -109,19 +109,10 @@ public class Curso {
         this.disciplinasOfertadas = criarListaSeguraDeDisciplinas(novasDisciplinas);
     }
 
-    public int obterCodigoCurso() {
-        return codigoCurso;
-    }
-
     public void definirCodigoCurso(int novoCodigoCurso) {
         validarCodigoPositivo(novoCodigoCurso);
         this.codigoCurso = novoCodigoCurso;
     }
-
-    public String obterNomeCurso() {
-        return nomeCurso;
-    }
-
     public void definirNomeCurso(String novoNomeCurso) {
         validarNomeNaoVazio(novoNomeCurso);
         this.nomeCurso = novoNomeCurso.trim();

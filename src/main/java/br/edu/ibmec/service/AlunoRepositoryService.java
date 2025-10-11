@@ -119,7 +119,29 @@ public class AlunoRepositoryService {
         Aluno aluno = alunoOpt.get();
         aluno.definirNomeCompleto(alunoDTO.getNome().trim());
         aluno.setCursoMatriculado(curso);
-        // Atualizar outros campos conforme necessário
+        // Atualizar demais campos
+        aluno.definirIdadeAtual(alunoDTO.getIdade());
+        aluno.setPossuiMatriculaAtiva(alunoDTO.isMatriculaAtiva());
+
+        // Atualiza data de nascimento se informada
+        if (alunoDTO.getDtNascimento() != null && !alunoDTO.getDtNascimento().trim().isEmpty()) {
+            try {
+                Data dataNascimento = Data.fromString(alunoDTO.getDtNascimento());
+                aluno.setDataNascimento(dataNascimento);
+            } catch (Exception e) {
+                log.warn("Erro ao converter data de nascimento '{}': {}", alunoDTO.getDtNascimento(), e.getMessage());
+            }
+        }
+
+        // Atualiza estado civil se informado
+        if (alunoDTO.getEstadoCivil() != null) {
+            aluno.setEstadoCivilAtual(convertEstadoCivilFromDTO(alunoDTO.getEstadoCivil()));
+        }
+
+        // Atualiza telefones se informado
+        if (alunoDTO.getTelefones() != null) {
+            aluno.setNumerosTelefone(new ArrayList<>(alunoDTO.getTelefones()));
+        }
         
         alunoRepository.save(aluno);
     }
