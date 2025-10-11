@@ -138,7 +138,7 @@ public class AlunoController {
             List<String> nomesDeAlunos = new ArrayList<>();
             for (Iterator<Aluno> iteratorDeAlunos = alunoService.listarAlunos().iterator(); iteratorDeAlunos.hasNext();) {
                 Aluno alunoAtual = iteratorDeAlunos.next();
-                nomesDeAlunos.add(alunoAtual.obterNomeCompleto());
+                nomesDeAlunos.add(alunoAtual.getNomeCompleto());
             }
             return ResponseEntity.ok(nomesDeAlunos);
         } catch (DaoException daoException) {

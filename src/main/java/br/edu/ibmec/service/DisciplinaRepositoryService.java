@@ -131,7 +131,7 @@ public class DisciplinaRepositoryService {
         dto.setNome(disciplina.getNome());
         
         if (disciplina.getCurso() != null) {
-            dto.setCurso(disciplina.getCurso().obterCodigoCurso());
+            dto.setCurso(disciplina.getCurso().getCodigoCurso());
         }
         
         return dto;

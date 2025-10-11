@@ -109,7 +109,7 @@ public class InscricaoRepositoryService {
             List<Inscricao> todasInscricoes = inscricaoRepository.findAll();
             Optional<Inscricao> inscricaoOpt = todasInscricoes.stream()
                     .filter(inscricao -> inscricao.getAluno() != null && 
-                            inscricao.getAluno().obterNumeroMatricula() == matricula &&
+                            inscricao.getAluno().getNumeroMatricula() == matricula &&
                             inscricao.getTurma() != null &&
                             inscricao.getTurma().getCodigo() == codigo &&
                             inscricao.getTurma().getAno() == ano &&
@@ -167,7 +167,7 @@ public class InscricaoRepositoryService {
             List<Inscricao> inscricoesExistentes = inscricaoRepository.findAll();
             boolean jaExiste = inscricoesExistentes.stream()
                     .anyMatch(inscricao -> inscricao.getAluno() != null && 
-                            inscricao.getAluno().obterNumeroMatricula() == inscricaoDTO.getAluno() &&
+                            inscricao.getAluno().getNumeroMatricula() == inscricaoDTO.getAluno() &&
                             inscricao.getTurma() != null &&
                             inscricao.getTurma().getCodigo() == inscricaoDTO.getCodigo() &&
                             inscricao.getTurma().getAno() == inscricaoDTO.getAno() &&
@@ -200,7 +200,7 @@ public class InscricaoRepositoryService {
             List<Inscricao> todasInscricoes = inscricaoRepository.findAll();
             Optional<Inscricao> inscricaoOpt = todasInscricoes.stream()
                     .filter(inscricao -> inscricao.getAluno() != null && 
-                            inscricao.getAluno().obterNumeroMatricula() == inscricaoDTO.getAluno() &&
+                            inscricao.getAluno().getNumeroMatricula() == inscricaoDTO.getAluno() &&
                             inscricao.getTurma() != null &&
                             inscricao.getTurma().getCodigo() == inscricaoDTO.getCodigo() &&
                             inscricao.getTurma().getAno() == inscricaoDTO.getAno() &&
@@ -248,7 +248,7 @@ public class InscricaoRepositoryService {
             List<Inscricao> todasInscricoes = inscricaoRepository.findAll();
             Optional<Inscricao> inscricaoOpt = todasInscricoes.stream()
                     .filter(inscricao -> inscricao.getAluno() != null && 
-                            inscricao.getAluno().obterNumeroMatricula() == matricula &&
+                            inscricao.getAluno().getNumeroMatricula() == matricula &&
                             inscricao.getTurma() != null &&
                             inscricao.getTurma().getCodigo() == codigo &&
                             inscricao.getTurma().getAno() == ano &&
@@ -277,7 +277,7 @@ public class InscricaoRepositoryService {
                 inscricao.getAvaliacao2(),
                 inscricao.getNumFaltas(),
                 inscricao.getSituacao() != null ? inscricao.getSituacao().name() : "ATIVA",
-                inscricao.getAluno() != null ? inscricao.getAluno().obterNumeroMatricula() : 0,
+                inscricao.getAluno() != null ? inscricao.getAluno().getNumeroMatricula() : 0,
                 inscricao.getTurma() != null ? inscricao.getTurma().getCodigo() : 0,
                 inscricao.getTurma() != null ? inscricao.getTurma().getAno() : 0,
                 inscricao.getTurma() != null ? inscricao.getTurma().getSemestre() : 0

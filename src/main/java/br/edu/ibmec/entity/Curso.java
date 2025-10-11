@@ -1,16 +1,29 @@
 package br.edu.ibmec.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "cursos")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(exclude = {"alunosMatriculados", "disciplinasOfertadas"})
 public class Curso {
     
     // Identificador único do curso
     @Id
     @Column(name = "codigo")
+    @EqualsAndHashCode.Include
     private int codigoCurso;
     
     // Informações básicas do curso
@@ -25,13 +38,9 @@ public class Curso {
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Disciplina> disciplinasOfertadas = new ArrayList<>();
 
-    // Construtores
-    public Curso() {
-    }
-
-    public Curso(int codigoCurso, String nomeCurso) {
+    public Curso (int codigoCurso, String nome ) {
         this.codigoCurso = codigoCurso;
-        this.nomeCurso = nomeCurso;
+        this.nomeCurso = nome;
     }
 
     // Métodos de gerenciamento de alunos
@@ -179,27 +188,4 @@ public class Curso {
         return temAlunosMatriculados() || temDisciplinasOfertadas();
     }
 
-    // Sobrescrita de métodos Object para comparação e debug
-    @Override
-    public boolean equals(Object outroObjeto) {
-        if (this == outroObjeto) return true;
-        if (outroObjeto == null || getClass() != outroObjeto.getClass()) return false;
-        
-        Curso outroCurso = (Curso) outroObjeto;
-        return codigoCurso == outroCurso.codigoCurso;
-    }
-
-    @Override
-    public int hashCode() {
-        return Integer.hashCode(codigoCurso);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Curso{codigo=%d, nome='%s', alunos=%d, disciplinas=%d}", 
-                codigoCurso, 
-                nomeCurso, 
-                obterQuantidadeAlunosMatriculados(),
-                obterQuantidadeDisciplinasOfertadas());
-    }
 }

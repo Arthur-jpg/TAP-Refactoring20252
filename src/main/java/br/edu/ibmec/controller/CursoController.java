@@ -108,7 +108,7 @@ public class CursoController {
             List<String> nomesDeCursos = new ArrayList<>();
             for (Iterator<Curso> iteratorDeCursos = cursoService.listarCursos().iterator(); iteratorDeCursos.hasNext();) {
                 Curso cursoAtual = iteratorDeCursos.next();
-                nomesDeCursos.add(cursoAtual.obterNomeCurso());
+                nomesDeCursos.add(cursoAtual.getNomeCurso());
             }
             return ResponseEntity.ok(nomesDeCursos);
         } catch (DaoException daoException) {

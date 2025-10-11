@@ -33,7 +33,7 @@ public class CursoRepositoryService {
             throw new DaoException("Curso com código " + codigo + " não encontrado");
         }
         
-        return new CursoDTO(curso.obterCodigoCurso(), curso.obterNomeCurso());
+        return new CursoDTO(curso.getCodigoCurso(), curso.getNomeCurso());
     }
 
     @Transactional(readOnly = true)
@@ -47,7 +47,7 @@ public class CursoRepositoryService {
         List<CursoDTO> cursosDTO = new ArrayList<>();
         
         for (Curso curso : cursos) {
-            cursosDTO.add(new CursoDTO(curso.obterCodigoCurso(), curso.obterNomeCurso()));
+            cursosDTO.add(new CursoDTO(curso.getCodigoCurso(), curso.getNomeCurso()));
         }
         
         return cursosDTO;
@@ -91,7 +91,7 @@ public class CursoRepositoryService {
         }
 
         Curso curso = cursoOpt.get();
-        curso.definirNomeCurso(cursoDTO.getNome().trim());
+        curso.setNomeCurso(cursoDTO.getNome().trim());
         cursoRepository.save(curso);
     }
 
