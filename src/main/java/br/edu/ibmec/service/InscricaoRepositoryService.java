@@ -272,16 +272,17 @@ public class InscricaoRepositoryService {
      * @return InscricaoDTO
      */
     private InscricaoDTO convertToDTO(Inscricao inscricao) {
-        return new InscricaoDTO(
-                inscricao.getAvaliacao1(),
-                inscricao.getAvaliacao2(),
-                inscricao.getNumFaltas(),
-                inscricao.getSituacao() != null ? inscricao.getSituacao().name() : "ATIVA",
-                inscricao.getAluno() != null ? inscricao.getAluno().getNumeroMatricula() : 0,
-                inscricao.getTurma() != null ? inscricao.getTurma().getCodigo() : 0,
-                inscricao.getTurma() != null ? inscricao.getTurma().getAno() : 0,
-                inscricao.getTurma() != null ? inscricao.getTurma().getSemestre() : 0
-        );
+    return InscricaoDTO.builder()
+        .avaliacao1(inscricao.getAvaliacao1())
+        .avaliacao2(inscricao.getAvaliacao2())
+        .media(0f) // media não era definida antes; mantendo 0 como padrão
+        .numFaltas(inscricao.getNumFaltas())
+        .situacao(inscricao.getSituacao() != null ? inscricao.getSituacao().name() : "ATIVA")
+        .aluno(inscricao.getAluno() != null ? inscricao.getAluno().getNumeroMatricula() : 0)
+        .codigo(inscricao.getTurma() != null ? inscricao.getTurma().getCodigo() : 0)
+        .ano(inscricao.getTurma() != null ? inscricao.getTurma().getAno() : 0)
+        .semestre(inscricao.getTurma() != null ? inscricao.getTurma().getSemestre() : 0)
+        .build();
     }
 
     /**

@@ -3,11 +3,19 @@ package br.edu.ibmec.dto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * DTO para transferência de dados de Curso
  * Contém validações Bean Validation
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CursoDTO {
     
     @Min(value = 1, message = "Código do curso deve ser um número positivo")
@@ -19,37 +27,4 @@ public class CursoDTO {
 
     // private List<AlunoDTO> alunos = new ArrayList<AlunoDTO>();
     // private List<DisciplinaDTO> disciplinas = new ArrayList<DisciplinaDTO>();
-
-    public CursoDTO() {
-
-    }
-
-    public CursoDTO(int codigo, String nome) {
-        this.codigo = codigo;
-        this.nome = nome;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    @Override
-    public String toString() {
-        return "CursoDTO [codigo=" + codigo + ", nome=" + nome + "]";
-    }
-
-
-
 }

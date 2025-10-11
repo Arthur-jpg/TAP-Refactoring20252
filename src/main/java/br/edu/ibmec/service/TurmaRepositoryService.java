@@ -207,12 +207,12 @@ public class TurmaRepositoryService {
      * @return TurmaDTO
      */
     private TurmaDTO convertToDTO(Turma turma) {
-        return new TurmaDTO(
-                turma.getCodigo(),
-                turma.getAno(),
-                turma.getSemestre(),
-                turma.getDisciplina() != null ? turma.getDisciplina().getCodigo() : 0
-        );
+        return TurmaDTO.builder()
+                .codigo(turma.getCodigo())
+                .ano(turma.getAno())
+                .semestre(turma.getSemestre())
+                .disciplina(turma.getDisciplina() != null ? turma.getDisciplina().getCodigo() : 0)
+                .build();
     }
 
     /**
