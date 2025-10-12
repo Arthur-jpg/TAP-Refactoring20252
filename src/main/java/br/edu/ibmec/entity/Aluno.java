@@ -1,118 +1,141 @@
 package br.edu.ibmec.entity;
+
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.AccessLevel;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
+@Entity
+@Table(name = "alunos")
+@Getter
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(exclude = {"inscricoesEmDisciplinas", "cursoMatriculado"})
 public class Aluno {
-    private int matricula;
-    private String nome;
+
+    private static final int MATRICULA_MINIMA = 1;
+
+    @Id
+    @Column(name = "matricula")
+    @EqualsAndHashCode.Include
+    @Setter(AccessLevel.NONE)
+    private int numeroMatricula;
+    
+    @Column(name = "nome", nullable = false, length = 100)
+    @Setter(AccessLevel.NONE)
+    private String nomeCompleto;
+    
+    @Embedded
+    @Setter
     private Data dataNascimento;
-    private int idade;
-    private boolean matriculaAtiva;
-    private EstadoCivil estadoCivil;
-    private Vector<String> telefones;
+    
+    @Column(name = "idade")
+    @Setter(AccessLevel.NONE)
+    private int idadeAtual;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado_civil")
+    @Setter
+    private EstadoCivil estadoCivilAtual;
+    
+    @Column(name = "matricula_ativa")
+    @Setter
+    private boolean possuiMatriculaAtiva;
+    
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "aluno_telefones", joinColumns = @JoinColumn(name = "matricula"))
+    @Column(name = "telefone")
+    @Setter
+    private List<String> numerosTelefone = new ArrayList<>();
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "curso_codigo")
+    @Setter
+    private Curso cursoMatriculado;
+    
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Setter(AccessLevel.NONE)
+    private List<Inscricao> inscricoesEmDisciplinas = new ArrayList<>();
 
-
-    private Curso curso;
-
-    private List<Inscricao> inscricoes = new ArrayList<Inscricao>();
-
-    public Aluno() {
-
+    // Métodos de negócio para inscrições
+    public void adicionarInscricaoEmDisciplina(Inscricao inscricao) {
+        validarObjetoNaoNulo(inscricao, "Inscrição");
+        if (!inscricoesEmDisciplinas.contains(inscricao)) {
+            inscricoesEmDisciplinas.add(inscricao);
+        }
     }
 
-    public Aluno(int matricula, String nome, Data dataNascimento,
-                 boolean matriculaAtiva, EstadoCivil estadoCivil, Curso curso,
-                 Vector<String> telefones) {
-        this.matricula = matricula;
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.matriculaAtiva = matriculaAtiva;
-        this.estadoCivil = estadoCivil;
-        this.curso = curso;
-
-        this.idade = 0;
-        this.telefones = telefones;
+    public void removerInscricaoEmDisciplina(Inscricao inscricao) {
+        if (isObjetoValido(inscricao)) {
+            inscricoesEmDisciplinas.remove(inscricao);
+        }
     }
 
-    public void addInscricao(Inscricao inscricao) {
-        inscricoes.add(inscricao);
+    public List<Inscricao> obterTodasInscricoes() {
+        return new ArrayList<>(inscricoesEmDisciplinas);
     }
 
-    public void removeInscricao(Inscricao inscricao) {
-        inscricoes.remove(inscricao);
+    public void definirInscricoes(List<Inscricao> novasInscricoes) {
+        this.inscricoesEmDisciplinas = criarListaSegura(novasInscricoes);
     }
 
-    public List<Inscricao> getInscricoes() {
-        return inscricoes;
+    // Setters customizados com validação
+    public void setNumeroMatricula(int novoNumeroMatricula) {
+        if (novoNumeroMatricula < MATRICULA_MINIMA) {
+            throw new IllegalArgumentException("Matrícula deve ser um número positivo");
+        }
+        this.numeroMatricula = novoNumeroMatricula;
     }
 
-    public void setInscricoes(List<Inscricao> inscricoes) {
-        this.inscricoes = inscricoes;
+    public void setNomeCompleto(String novoNomeCompleto) {
+        if (novoNomeCompleto == null || novoNomeCompleto.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome não pode ser nulo ou vazio");
+        }
+        this.nomeCompleto = novoNomeCompleto.trim();
     }
 
-    public int getMatricula() {
-        return matricula;
+    public void setIdadeAtual(int novaIdade) {
+        if (novaIdade < 0) {
+            throw new IllegalArgumentException("Idade não pode ser negativa");
+        }
+        this.idadeAtual = novaIdade;
     }
 
-    public void setMatricula(int matricula) {
-        this.matricula = matricula;
+    // Métodos utilitários privados - Clean Code: métodos pequenos e reutilizáveis
+    private void validarObjetoNaoNulo(Object objeto, String nomeObjeto) {
+        if (objeto == null) {
+            throw new IllegalArgumentException(nomeObjeto + " não pode ser nulo");
+        }
     }
 
-    public String getNome() {
-        return nome;
+    private boolean isObjetoValido(Object objeto) {
+        return objeto != null;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    private <T> List<T> criarListaSegura(List<T> lista) {
+        return lista != null ? new ArrayList<>(lista) : new ArrayList<>();
     }
 
-    public Data getDataNascimento() {
-        return dataNascimento;
+    // Métodos de consulta
+    public boolean possuiInscricaoAtiva() {
+        return inscricoesEmDisciplinas.stream()
+                .anyMatch(this::isObjetoValido);
     }
 
-    public void setDataNascimento(Data dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public int obterQuantidadeInscricoes() {
+        return inscricoesEmDisciplinas.size();
     }
 
-    public int getIdade() {
-        return idade;
+    public boolean isMatriculadoEmCurso() {
+        return cursoMatriculado != null;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public boolean possuiTelefoneContato() {
+        return numerosTelefone != null && !numerosTelefone.isEmpty();
     }
-
-    public boolean isMatriculaAtiva() {
-        return matriculaAtiva;
-    }
-
-    public void setMatriculaAtiva(boolean matriculaAtiva) {
-        this.matriculaAtiva = matriculaAtiva;
-    }
-
-    public EstadoCivil getEstadoCivil() {
-        return estadoCivil;
-    }
-
-    public void setEstadoCivil(EstadoCivil estadoCivil) {
-        this.estadoCivil = estadoCivil;
-    }
-
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
-
-    public Vector<String> getTelefones() {
-        return telefones;
-    }
-
-    public void setTelefones(Vector<String> telefones) {
-        this.telefones = telefones;
-    }
-
 }
