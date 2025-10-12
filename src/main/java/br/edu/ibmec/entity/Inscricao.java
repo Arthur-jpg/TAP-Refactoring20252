@@ -56,9 +56,9 @@ public class Inscricao {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-        @JoinColumn(name = "turma_codigo"),
-        @JoinColumn(name = "turma_ano"),
-        @JoinColumn(name = "turma_semestre")
+        @JoinColumn(name = "turma_ano", referencedColumnName = "ano"),
+        @JoinColumn(name = "turma_codigo", referencedColumnName = "codigo"),
+        @JoinColumn(name = "turma_semestre", referencedColumnName = "semestre")
     })
     @Setter
     private Turma turma;
