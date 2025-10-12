@@ -21,19 +21,21 @@ import br.edu.ibmec.repository.CursoRepository;
 @Transactional
 public class CursoRepositoryService {
     
+    private static final int CODIGO_MINIMO = 1;
+    private static final int CODIGO_MAXIMO = 99;
+    private static final int NOME_TAMANHO_MAXIMO = 20;
+
     @Autowired
     private CursoRepository cursoRepository;
 
+    @Transactional(readOnly = true)
     public CursoDTO buscarCurso(int codigo) throws DaoException {
         Curso curso = cursoRepository.findByCodigoCurso(codigo);
         if (curso == null) {
             throw new DaoException("Curso com código " + codigo + " não encontrado");
         }
         
-    return CursoDTO.builder()
-        .codigo(curso.getCodigoCurso())
-        .nome(curso.getNomeCurso())
-        .build();
+        return convertToDTO(curso);
     }
 
     @Transactional(readOnly = true)
@@ -47,10 +49,7 @@ public class CursoRepositoryService {
         List<CursoDTO> cursosDTO = new ArrayList<>();
         
         for (Curso curso : cursos) {
-        cursosDTO.add(CursoDTO.builder()
-            .codigo(curso.getCodigoCurso())
-            .nome(curso.getNomeCurso())
-            .build());
+            cursosDTO.add(convertToDTO(curso));
         }
         
         return cursosDTO;
@@ -58,16 +57,8 @@ public class CursoRepositoryService {
 
     @Transactional
     public void cadastrarCurso(CursoDTO cursoDTO) throws ServiceException, DaoException {
-        // Validações
-        if ((cursoDTO.getCodigo() < 1) || (cursoDTO.getCodigo() > 99)) {
-            throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
-        }
-        if (cursoDTO.getNome() == null || cursoDTO.getNome().trim().isEmpty() || 
-            cursoDTO.getNome().trim().length() > 20) {
-            throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
-        }
+        validarCursoDTO(cursoDTO);
 
-        // Verifica se já existe
         if (cursoRepository.existsByCodigoCurso(cursoDTO.getCodigo())) {
             throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_DUPLICADO);
         }
@@ -78,16 +69,8 @@ public class CursoRepositoryService {
 
     @Transactional
     public void alterarCurso(CursoDTO cursoDTO) throws ServiceException, DaoException {
-        // Validações
-        if ((cursoDTO.getCodigo() < 1) || (cursoDTO.getCodigo() > 99)) {
-            throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
-        }
-        if (cursoDTO.getNome() == null || cursoDTO.getNome().trim().isEmpty() || 
-            cursoDTO.getNome().trim().length() > 20) {
-            throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
-        }
+        validarCursoDTO(cursoDTO);
 
-        // Verifica se existe
         Optional<Curso> cursoOpt = cursoRepository.findById(cursoDTO.getCodigo());
         if (cursoOpt.isEmpty()) {
             throw new DaoException("Curso com código " + cursoDTO.getCodigo() + " não encontrado");
@@ -105,5 +88,23 @@ public class CursoRepositoryService {
         }
         
         cursoRepository.deleteById(codigo);
+    }
+
+    // Métodos privados - Clean Code: extrair validações e lógica repetida
+    private void validarCursoDTO(CursoDTO cursoDTO) throws ServiceException {
+        if (cursoDTO.getCodigo() < CODIGO_MINIMO || cursoDTO.getCodigo() > CODIGO_MAXIMO) {
+            throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
+        }
+        if (cursoDTO.getNome() == null || cursoDTO.getNome().trim().isEmpty()
+            || cursoDTO.getNome().trim().length() > NOME_TAMANHO_MAXIMO) {
+            throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
+        }
+    }
+
+    private CursoDTO convertToDTO(Curso curso) {
+        return CursoDTO.builder()
+            .codigo(curso.getCodigoCurso())
+            .nome(curso.getNomeCurso())
+            .build();
     }
 }
