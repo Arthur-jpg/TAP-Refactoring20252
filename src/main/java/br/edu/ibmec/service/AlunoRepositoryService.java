@@ -30,6 +30,10 @@ import br.edu.ibmec.repository.CursoRepository;
 @Slf4j
 public class AlunoRepositoryService {
     
+    private static final int MATRICULA_MINIMA = 1;
+    private static final int MATRICULA_MAXIMA = 99;
+    private static final int NOME_TAMANHO_MAXIMO = 20;
+
     @Autowired
     private AlunoRepository alunoRepository;
     
@@ -65,90 +69,29 @@ public class AlunoRepositoryService {
 
     @Transactional
     public void cadastrarAluno(AlunoDTO alunoDTO) throws ServiceException, DaoException {
-        // Validações
-        if (alunoDTO.getMatricula() < 1 || alunoDTO.getMatricula() > 99) {
-            throw new ServiceException(ServiceExceptionEnum.ALUNO_MATRICULA_INVALIDA);
-        }
-        if (alunoDTO.getNome() == null || alunoDTO.getNome().trim().isEmpty() || alunoDTO.getNome().trim().length() > 20) {
-            throw new ServiceException(ServiceExceptionEnum.ALUNO_NOME_INVALIDO);
-        }
+        validarAlunoDTO(alunoDTO);
 
-        // Verifica se já existe
         if (alunoRepository.existsByNumeroMatricula(alunoDTO.getMatricula())) {
             throw new ServiceException("Aluno com matrícula " + alunoDTO.getMatricula() + " já existe");
         }
 
-        // Busca o curso se informado
-        Curso curso = null;
-        if (alunoDTO.getCurso() > 0) {
-            curso = cursoRepository.findByCodigoCurso(alunoDTO.getCurso());
-            if (curso == null) {
-                throw new DaoException("Curso com código " + alunoDTO.getCurso() + " não encontrado");
-            }
-        }
-
+        Curso curso = buscarCursoSeInformado(alunoDTO.getCurso());
         Aluno aluno = convertToEntity(alunoDTO, curso);
         alunoRepository.save(aluno);
     }
 
     @Transactional
     public void alterarAluno(AlunoDTO alunoDTO) throws ServiceException, DaoException {
-        // Validações
-        if (alunoDTO.getMatricula() < 1 || alunoDTO.getMatricula() > 99) {
-            throw new ServiceException(ServiceExceptionEnum.ALUNO_MATRICULA_INVALIDA);
-        }
-        if (alunoDTO.getNome() == null || alunoDTO.getNome().trim().isEmpty() || alunoDTO.getNome().trim().length() > 20) {
-            throw new ServiceException(ServiceExceptionEnum.ALUNO_NOME_INVALIDO);
-        }
+        validarAlunoDTO(alunoDTO);
 
-        // Verifica se existe
         Optional<Aluno> alunoOpt = alunoRepository.findById(alunoDTO.getMatricula());
         if (alunoOpt.isEmpty()) {
             throw new DaoException("Aluno com matrícula " + alunoDTO.getMatricula() + " não encontrado");
         }
 
-        // Busca o curso se informado
-        Curso curso = null;
-        if (alunoDTO.getCurso() > 0) {
-            curso = cursoRepository.findByCodigoCurso(alunoDTO.getCurso());
-            if (curso == null) {
-                throw new DaoException("Curso com código " + alunoDTO.getCurso() + " não encontrado");
-            }
-        }
-
-        Aluno aluno = alunoOpt.get();
-        aluno.definirNomeCompleto(alunoDTO.getNome().trim());
-        aluno.setCursoMatriculado(curso);
-        // Atualizar demais campos
-        aluno.definirIdadeAtual(alunoDTO.getIdade());
-        aluno.setPossuiMatriculaAtiva(alunoDTO.isMatriculaAtiva());
-
-        // Atualiza data de nascimento se informada
-        if (alunoDTO.getDtNascimento() != null && !alunoDTO.getDtNascimento().trim().isEmpty()) {
-            try {
-                Data dataNascimento = Data.fromString(alunoDTO.getDtNascimento());
-                aluno.setDataNascimento(dataNascimento);
-            } catch (Exception e) {
-                log.warn("Erro ao converter data de nascimento '{}': {}", alunoDTO.getDtNascimento(), e.getMessage());
-            }
-        }
-
-        // Atualiza estado civil se informado
-        if (alunoDTO.getEstadoCivil() != null) {
-            aluno.setEstadoCivilAtual(convertEstadoCivilFromDTO(alunoDTO.getEstadoCivil()));
-        }
-
-        // Atualiza telefones se informado (normaliza: trim, remove vazios e duplicados)
-        if (alunoDTO.getTelefones() != null) {
-            List<String> telefonesNormalizados = alunoDTO.getTelefones().stream()
-                .filter(t -> t != null && !t.trim().isEmpty())
-                .map(String::trim)
-                .distinct()
-                .toList();
-            aluno.setNumerosTelefone(new ArrayList<>(telefonesNormalizados));
-        }
-        
-        alunoRepository.save(aluno);
+        Curso curso = buscarCursoSeInformado(alunoDTO.getCurso());
+        atualizarDadosAluno(alunoOpt.get(), alunoDTO, curso);
+        alunoRepository.save(alunoOpt.get());
     }
 
     @Transactional
@@ -156,8 +99,70 @@ public class AlunoRepositoryService {
         if (!alunoRepository.existsById(matricula)) {
             throw new DaoException("Aluno com matrícula " + matricula + " não encontrado");
         }
-        
+
         alunoRepository.deleteById(matricula);
+    }
+
+    // Métodos privados - Clean Code: extrair validações e lógica repetida
+    private void validarAlunoDTO(AlunoDTO alunoDTO) throws ServiceException {
+        if (alunoDTO.getMatricula() < MATRICULA_MINIMA || alunoDTO.getMatricula() > MATRICULA_MAXIMA) {
+            throw new ServiceException(ServiceExceptionEnum.ALUNO_MATRICULA_INVALIDA);
+        }
+        if (alunoDTO.getNome() == null || alunoDTO.getNome().trim().isEmpty()
+            || alunoDTO.getNome().trim().length() > NOME_TAMANHO_MAXIMO) {
+            throw new ServiceException(ServiceExceptionEnum.ALUNO_NOME_INVALIDO);
+        }
+    }
+
+    private Curso buscarCursoSeInformado(int codigoCurso) throws DaoException {
+        if (codigoCurso <= 0) {
+            return null;
+        }
+
+        Curso curso = cursoRepository.findByCodigoCurso(codigoCurso);
+        if (curso == null) {
+            throw new DaoException("Curso com código " + codigoCurso + " não encontrado");
+        }
+        return curso;
+    }
+
+    private void atualizarDadosAluno(Aluno aluno, AlunoDTO alunoDTO, Curso curso) {
+        aluno.setNomeCompleto(alunoDTO.getNome().trim());
+        aluno.setCursoMatriculado(curso);
+        aluno.setIdadeAtual(alunoDTO.getIdade());
+        aluno.setPossuiMatriculaAtiva(alunoDTO.isMatriculaAtiva());
+
+        atualizarDataNascimento(aluno, alunoDTO.getDtNascimento());
+        atualizarEstadoCivil(aluno, alunoDTO.getEstadoCivil());
+        atualizarTelefones(aluno, alunoDTO.getTelefones());
+    }
+
+    private void atualizarDataNascimento(Aluno aluno, String dtNascimento) {
+        if (dtNascimento != null && !dtNascimento.trim().isEmpty()) {
+            try {
+                Data dataNascimento = Data.fromString(dtNascimento);
+                aluno.setDataNascimento(dataNascimento);
+            } catch (Exception e) {
+                log.warn("Erro ao converter data de nascimento '{}': {}", dtNascimento, e.getMessage());
+            }
+        }
+    }
+
+    private void atualizarEstadoCivil(Aluno aluno, EstadoCivilDTO estadoCivilDTO) {
+        if (estadoCivilDTO != null) {
+            aluno.setEstadoCivilAtual(convertEstadoCivilFromDTO(estadoCivilDTO));
+        }
+    }
+
+    private void atualizarTelefones(Aluno aluno, List<String> telefones) {
+        if (telefones != null) {
+            List<String> telefonesNormalizados = telefones.stream()
+                .filter(t -> t != null && !t.trim().isEmpty())
+                .map(String::trim)
+                .distinct()
+                .toList();
+            aluno.setNumerosTelefone(new ArrayList<>(telefonesNormalizados));
+        }
     }
 
     private AlunoDTO convertToDTO(Aluno aluno) {
@@ -171,17 +176,14 @@ public class AlunoRepositoryService {
             dto.setCurso(aluno.getCursoMatriculado().getCodigoCurso());
         }
         
-        // Converter data de nascimento
         if (aluno.getDataNascimento() != null) {
             dto.setDtNascimento(aluno.getDataNascimento().toString());
         }
         
-        // Converter estado civil
         if (aluno.getEstadoCivilAtual() != null) {
             dto.setEstadoCivil(convertEstadoCivilToDTO(aluno.getEstadoCivilAtual()));
         }
         
-        // Converter telefones (cópia defensiva para evitar LazyInitialization no Jackson)
         if (aluno.getNumerosTelefone() != null) {
             dto.setTelefones(new ArrayList<>(aluno.getNumerosTelefone()));
         }
@@ -191,68 +193,34 @@ public class AlunoRepositoryService {
 
     private Aluno convertToEntity(AlunoDTO dto, Curso curso) {
         Aluno aluno = new Aluno();
-        aluno.definirNumeroMatricula(dto.getMatricula());
-        aluno.definirNomeCompleto(dto.getNome().trim());
-        aluno.definirIdadeAtual(dto.getIdade());
+        aluno.setNumeroMatricula(dto.getMatricula());
+        aluno.setNomeCompleto(dto.getNome().trim());
+        aluno.setIdadeAtual(dto.getIdade());
         aluno.setPossuiMatriculaAtiva(dto.isMatriculaAtiva());
         aluno.setCursoMatriculado(curso);
         
-        // Converter data de nascimento
-        if (dto.getDtNascimento() != null && !dto.getDtNascimento().trim().isEmpty()) {
-            try {
-                br.edu.ibmec.entity.Data dataNascimento = br.edu.ibmec.entity.Data.fromString(dto.getDtNascimento());
-                aluno.setDataNascimento(dataNascimento);
-            } catch (Exception e) {
-                // Se houver erro na conversão, manter null e registrar aviso
-                log.warn("Erro ao converter data de nascimento '{}': {}", dto.getDtNascimento(), e.getMessage());
-            }
-        }
-        
-        // Converter estado civil
-        if (dto.getEstadoCivil() != null) {
-            aluno.setEstadoCivilAtual(convertEstadoCivilFromDTO(dto.getEstadoCivil()));
-        }
-        
-        // Converter telefones (normaliza: trim, remove vazios e duplicados)
-        if (dto.getTelefones() != null) {
-            List<String> telefonesNormalizados = dto.getTelefones().stream()
-                .filter(t -> t != null && !t.trim().isEmpty())
-                .map(String::trim)
-                .distinct()
-                .toList();
-            aluno.setNumerosTelefone(new ArrayList<>(telefonesNormalizados));
-        }
-        
+        atualizarDataNascimento(aluno, dto.getDtNascimento());
+        atualizarEstadoCivil(aluno, dto.getEstadoCivil());
+        atualizarTelefones(aluno, dto.getTelefones());
+
         return aluno;
     }
 
     private EstadoCivilDTO convertEstadoCivilToDTO(EstadoCivil estadoCivil) {
-        switch (estadoCivil) {
-            case solteiro:
-                return EstadoCivilDTO.solteiro;
-            case casado:
-                return EstadoCivilDTO.casado;
-            case divorciado:
-                return EstadoCivilDTO.divorciado;
-            case viuvo:
-                return EstadoCivilDTO.viuvo;
-            default:
-                return null;
-        }
+        return switch (estadoCivil) {
+            case solteiro -> EstadoCivilDTO.solteiro;
+            case casado -> EstadoCivilDTO.casado;
+            case divorciado -> EstadoCivilDTO.divorciado;
+            case viuvo -> EstadoCivilDTO.viuvo;
+        };
     }
 
     private EstadoCivil convertEstadoCivilFromDTO(EstadoCivilDTO estadoCivilDTO) {
-        switch (estadoCivilDTO) {
-            case solteiro:
-                return EstadoCivil.solteiro;
-            case casado:
-                return EstadoCivil.casado;
-            case divorciado:
-                return EstadoCivil.divorciado;
-            case viuvo:
-                return EstadoCivil.viuvo;
-            default:
-                return null;
-        }
+        return switch (estadoCivilDTO) {
+            case solteiro -> EstadoCivil.solteiro;
+            case casado -> EstadoCivil.casado;
+            case divorciado -> EstadoCivil.divorciado;
+            case viuvo -> EstadoCivil.viuvo;
+        };
     }
 }
