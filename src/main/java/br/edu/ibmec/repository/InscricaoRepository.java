@@ -6,24 +6,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import br.edu.ibmec.entity.Inscricao;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-/**
- * Repository Spring Data JPA para a entidade Inscricao
- */
 @Repository
 public interface InscricaoRepository extends JpaRepository<Inscricao, Long> {
-    
-    /**
-     * Busca inscrições por matrícula do aluno
-     * @param numeroMatricula número da matrícula do aluno
-     * @return lista de inscrições do aluno
-     */
-    List<Inscricao> findByAlunoNumeroMatricula(int numeroMatricula);
-    
-    /**
-     * Busca inscrições por código da turma
-     * @param codigoTurma código da turma
-     * @return lista de inscrições da turma
-     */
-    List<Inscricao> findByTurmaCodigo(int codigoTurma);
+
+    List<Inscricao> findByAlunoMatricula(int matricula);
+
+    List<Inscricao> findByTurmaCodigoAndTurmaAnoAndTurmaSemestre(int codigo, int ano, int semestre);
+
+    boolean existsByAlunoMatriculaAndTurmaCodigoAndTurmaAnoAndTurmaSemestre(int matricula, int codigo, int ano, int semestre);
+
+    Optional<Inscricao> findByAlunoMatriculaAndTurmaCodigoAndTurmaAnoAndTurmaSemestre(int matricula, int codigo, int ano, int semestre);
 }

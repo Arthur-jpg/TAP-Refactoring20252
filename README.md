@@ -4,6 +4,19 @@ Este repositório contém uma aplicação Spring Boot (exemplo acadêmico) que u
 
 O passo a passo abaixo foi testado pelo autor: ao clonar o repositório e executar a aplicação com Maven, o banco de dados MySQL foi criado automaticamente e a API ficou funcional.
 
+## Modelo de domínio alinhado ao diagrama AP2
+
+O domínio foi enxugado para refletir apenas as entidades presentes no quadro branco enviado:
+
+- `Aluno` — identificado por matrícula, relaciona-se com `Turma` via `Inscrição`.
+- `Turma` — identificada por código/ano/semestre e vinculada obrigatoriamente a uma `Disciplina`.
+- `Disciplina` — parte de um `Curso` e ministrada por exatamente um `Professor`.
+- `Curso` — agrega disciplinas (composição) e mantém código/nome.
+- `Professor` — novo agregado com id e nome, podendo lecionar várias disciplinas.
+- `Inscrição` — associação entre `Aluno` e `Turma` (sem notas/campos extras, apenas a relação).
+
+Campos que não estavam na modelagem (telefones, estado civil, avaliações, etc.) foram removidos para manter o modelo limpo.
+
 ## Sumário
 
 - Pré-requisitos
@@ -46,18 +59,18 @@ Substitua `<URL_DO_REPOSITORIO>` pela URL do repositório remoto (HTTPS ou SSH).
 
 A aplicação está configurada por padrão para conectar em um MySQL local com as seguintes credenciais (arquivo `src/main/resources/application.properties`):
 
-- URL: jdbc:mysql://localhost:3306/universidade_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Sao_Paulo
+- URL: jdbc:mysql://localhost:3306/universidade_v2?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Sao_Paulo
 - Usuário: `root`
 - Senha: `admin`
 
 Observações:
-- O parâmetro `createDatabaseIfNotExist=true` (na URL) permite que o MySQL crie o banco `universidade_db` automaticamente se o usuário tiver permissão.
+- O parâmetro `createDatabaseIfNotExist=true` (na URL) permite que o MySQL crie o banco `universidade_v2` automaticamente se o usuário tiver permissão.
 - A propriedade `spring.jpa.hibernate.ddl-auto=update` faz o Hibernate ajustar o esquema automaticamente conforme as entidades.
 
 Se quiser usar outras credenciais ou um servidor remoto, edite `src/main/resources/application.properties` (ou use variáveis de ambiente) antes de iniciar a aplicação. Exemplo com variáveis de ambiente:
 
 ```bash
-export SPRING_DATASOURCE_URL="jdbc:mysql://meu-host:3306/universidade_db?createDatabaseIfNotExist=true"
+export SPRING_DATASOURCE_URL="jdbc:mysql://meu-host:3306/universidade_v2?createDatabaseIfNotExist=true"
 export SPRING_DATASOURCE_USERNAME="meu_usuario"
 export SPRING_DATASOURCE_PASSWORD="minha_senha"
 ```
@@ -78,9 +91,9 @@ mysql -u root -p
 2. Execute os comandos (substitua `admin` pela senha desejada):
 
 ```sql
-CREATE DATABASE IF NOT EXISTS universidade_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS universidade_v2 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED BY 'admin';
-GRANT ALL PRIVILEGES ON universidade_db.* TO 'root'@'localhost';
+GRANT ALL PRIVILEGES ON universidade_v2.* TO 'root'@'localhost';
 FLUSH PRIVILEGES;
 ```
 

@@ -1,144 +1,118 @@
 package br.edu.ibmec.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import br.edu.ibmec.dto.DisciplinaDTO;
+import br.edu.ibmec.entity.Curso;
+import br.edu.ibmec.entity.Disciplina;
+import br.edu.ibmec.entity.Professor;
+import br.edu.ibmec.exception.DaoException;
+import br.edu.ibmec.exception.ServiceException;
+import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
+import br.edu.ibmec.repository.CursoRepository;
+import br.edu.ibmec.repository.DisciplinaRepository;
+import br.edu.ibmec.repository.ProfessorRepository;
 import java.util.List;
 import java.util.Optional;
-
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.edu.ibmec.dto.DisciplinaDTO;
-import br.edu.ibmec.entity.Curso;
-import br.edu.ibmec.entity.Disciplina;
-import br.edu.ibmec.exception.DaoException;
-import br.edu.ibmec.exception.ServiceException;
-import br.edu.ibmec.repository.CursoRepository;
-import br.edu.ibmec.repository.DisciplinaRepository;
-
-/**
- * Serviço para Disciplina usando Spring Data JPA Repository
- */
 @Service("disciplinaRepositoryService")
 @Transactional
 public class DisciplinaRepositoryService {
-    
+
     @Autowired
     private DisciplinaRepository disciplinaRepository;
-    
+
     @Autowired
     private CursoRepository cursoRepository;
 
+    @Autowired
+    private ProfessorRepository professorRepository;
+
+    @Transactional(readOnly = true)
     public DisciplinaDTO buscarDisciplina(int codigo) throws DaoException {
         Disciplina disciplina = disciplinaRepository.findByCodigo(codigo);
         if (disciplina == null) {
             throw new DaoException("Disciplina com código " + codigo + " não encontrada");
         }
-        
         return convertToDTO(disciplina);
     }
 
     @Transactional(readOnly = true)
-    public Collection<Disciplina> listarDisciplinas() throws DaoException {
-        return disciplinaRepository.findAll();
+    public List<DisciplinaDTO> listarDisciplinas() {
+        return disciplinaRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
-    public List<DisciplinaDTO> listarDisciplinasCompletas() throws DaoException {
-        List<Disciplina> disciplinas = disciplinaRepository.findAll();
-        List<DisciplinaDTO> disciplinasDTO = new ArrayList<>();
-        
-        for (Disciplina disciplina : disciplinas) {
-            disciplinasDTO.add(convertToDTO(disciplina));
+    public void cadastrarDisciplina(DisciplinaDTO dto) throws ServiceException, DaoException {
+        validar(dto);
+        if (disciplinaRepository.existsByCodigo(dto.getCodigo())) {
+            throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_DUPLICADO);
         }
-        
-        return disciplinasDTO;
-    }
+        Curso curso = obterCurso(dto.getCurso());
+        Professor professor = obterProfessor(dto.getProfessorId());
 
-    @Transactional
-    public void cadastrarDisciplina(DisciplinaDTO disciplinaDTO) throws ServiceException, DaoException {
-        if (disciplinaDTO.getCodigo() < 1 || disciplinaDTO.getCodigo() > 99) {
-            throw new ServiceException(ServiceException.ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
-        }
-        if (disciplinaDTO.getNome() == null || disciplinaDTO.getNome().trim().isEmpty() ||
-            disciplinaDTO.getNome().trim().length() > 20) {
-            throw new ServiceException(ServiceException.ServiceExceptionEnum.CURSO_NOME_INVALIDO);
-        }
-
-        if (disciplinaRepository.existsByCodigo(disciplinaDTO.getCodigo())) {
-            throw new ServiceException("Disciplina com código " + disciplinaDTO.getCodigo() + " já existe");
-        }
-
-        Curso curso = null;
-        if (disciplinaDTO.getCurso() > 0) {
-            curso = cursoRepository.findByCodigoCurso(disciplinaDTO.getCurso());
-            if (curso == null) {
-                throw new DaoException("Curso com código " + disciplinaDTO.getCurso() + " não encontrado");
-            }
-        }
-
-        Disciplina disciplina = convertToEntity(disciplinaDTO, curso);
-        disciplinaRepository.save(disciplina);
-    }
-
-    @Transactional
-    public void alterarDisciplina(DisciplinaDTO disciplinaDTO) throws ServiceException, DaoException {
-        if (disciplinaDTO.getCodigo() < 1 || disciplinaDTO.getCodigo() > 99) {
-            throw new ServiceException(ServiceException.ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
-        }
-        if (disciplinaDTO.getNome() == null || disciplinaDTO.getNome().trim().isEmpty() ||
-            disciplinaDTO.getNome().trim().length() > 20) {
-            throw new ServiceException(ServiceException.ServiceExceptionEnum.CURSO_NOME_INVALIDO);
-        }
-
-        Optional<Disciplina> disciplinaOpt = disciplinaRepository.findById(disciplinaDTO.getCodigo());
-        if (disciplinaOpt.isEmpty()) {
-            throw new DaoException("Disciplina com código " + disciplinaDTO.getCodigo() + " não encontrada");
-        }
-
-        Curso curso = null;
-        if (disciplinaDTO.getCurso() > 0) {
-            curso = cursoRepository.findByCodigoCurso(disciplinaDTO.getCurso());
-            if (curso == null) {
-                throw new DaoException("Curso com código " + disciplinaDTO.getCurso() + " não encontrado");
-            }
-        }
-
-        Disciplina disciplina = disciplinaOpt.get();
-        disciplina.setNome(disciplinaDTO.getNome().trim());
+        Disciplina disciplina = new Disciplina();
+        disciplina.setCodigo(dto.getCodigo());
+        disciplina.setNome(dto.getNome());
         disciplina.setCurso(curso);
-        
+        disciplina.setProfessor(professor);
         disciplinaRepository.save(disciplina);
     }
 
-    @Transactional
+    public void alterarDisciplina(DisciplinaDTO dto) throws ServiceException, DaoException {
+        validar(dto);
+        Optional<Disciplina> existente = disciplinaRepository.findById(dto.getCodigo());
+        if (existente.isEmpty()) {
+            throw new DaoException("Disciplina com código " + dto.getCodigo() + " não encontrada");
+        }
+        Disciplina disciplina = existente.get();
+        disciplina.setNome(dto.getNome());
+        disciplina.setCurso(obterCurso(dto.getCurso()));
+        disciplina.setProfessor(obterProfessor(dto.getProfessorId()));
+        disciplinaRepository.save(disciplina);
+    }
+
     public void removerDisciplina(int codigo) throws DaoException {
         if (!disciplinaRepository.existsById(codigo)) {
             throw new DaoException("Disciplina com código " + codigo + " não encontrada");
         }
-        
         disciplinaRepository.deleteById(codigo);
     }
 
-    private DisciplinaDTO convertToDTO(Disciplina disciplina) {
-        DisciplinaDTO dto = new DisciplinaDTO();
-        dto.setCodigo(disciplina.getCodigo());
-        dto.setNome(disciplina.getNome());
-        
-        if (disciplina.getCurso() != null) {
-            dto.setCurso(disciplina.getCurso().getCodigoCurso());
+    private void validar(DisciplinaDTO dto) throws ServiceException {
+        if (dto.getCodigo() < 1) {
+            throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
         }
-        
-        return dto;
+        if (dto.getNome() == null || dto.getNome().trim().isEmpty()) {
+            throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
+        }
+        if (dto.getProfessorId() == null) {
+            throw new ServiceException("Professor é obrigatório");
+        }
     }
 
-    private Disciplina convertToEntity(DisciplinaDTO dto, Curso curso) {
-        Disciplina disciplina = new Disciplina();
-        disciplina.setCodigo(dto.getCodigo());
-        disciplina.setNome(dto.getNome().trim());
-        disciplina.setCurso(curso);
-        
-        return disciplina;
+    private Curso obterCurso(int codigoCurso) throws DaoException {
+        Curso curso = cursoRepository.findByCodigo(codigoCurso);
+        if (curso == null) {
+            throw new DaoException("Curso com código " + codigoCurso + " não encontrado");
+        }
+        return curso;
+    }
+
+    private Professor obterProfessor(Long professorId) throws DaoException {
+        return professorRepository.findById(professorId)
+                .orElseThrow(() -> new DaoException("Professor com id " + professorId + " não encontrado"));
+    }
+
+    private DisciplinaDTO convertToDTO(Disciplina disciplina) {
+        return DisciplinaDTO.builder()
+                .codigo(disciplina.getCodigo())
+                .nome(disciplina.getNome())
+                .curso(disciplina.getCurso() != null ? disciplina.getCurso().getCodigo() : 0)
+                .professorId(disciplina.getProfessor() != null ? disciplina.getProfessor().getId() : null)
+                .build();
     }
 }

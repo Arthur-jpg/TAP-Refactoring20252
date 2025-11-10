@@ -1,6 +1,5 @@
 package br.edu.ibmec.dto;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -12,12 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CursoDTO {
+public class ProfessorDTO {
 
-    @Min(value = 1, message = "Código deve ser positivo")
-    private int codigo;
+    private Long id;
 
-    @NotBlank(message = "Nome é obrigatório")
-    @Size(max = 80, message = "Nome deve ter no máximo 80 caracteres")
+    @NotBlank
+    @Size(max = 80)
     private String nome;
 }

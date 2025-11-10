@@ -1,228 +1,103 @@
 package br.edu.ibmec.service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import br.edu.ibmec.dto.TurmaDTO;
 import br.edu.ibmec.entity.Disciplina;
 import br.edu.ibmec.entity.Turma;
-import br.edu.ibmec.entity.TurmaId;
 import br.edu.ibmec.exception.DaoException;
 import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
 import br.edu.ibmec.repository.DisciplinaRepository;
 import br.edu.ibmec.repository.TurmaRepository;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Service usando Spring Data JPA para gerenciamento de turmas.
- * Implementa conversão Entity↔DTO e transações @Transactional.
- * 
- * @author GitHub Copilot
- * @version 2.0 - Spring Data JPA
- * @since 2024-10-09
- */
 @Service
 @Transactional
 public class TurmaRepositoryService {
 
     @Autowired
     private TurmaRepository turmaRepository;
-    
+
     @Autowired
     private DisciplinaRepository disciplinaRepository;
 
-    /**
-     * Lista todas as turmas convertidas para DTO.
-     * @return lista de TurmaDTO
-     * @throws DaoException se houver erro na consulta
-     */
     @Transactional(readOnly = true)
-    public List<TurmaDTO> listarTurmasCompletas() throws DaoException {
-        try {
-            List<Turma> turmas = turmaRepository.findAll();
-            return turmas.stream()
-                    .map(this::convertToDTO)
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new DaoException("Erro ao listar turmas: " + e.getMessage());
-        }
+    public List<TurmaDTO> listarTurmas() {
+        return turmaRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
-    /**
-     * Lista turmas por código da disciplina convertidas para DTO.
-     * @param codigoDisciplina código da disciplina
-     * @return lista de TurmaDTO da disciplina
-     * @throws DaoException se houver erro na consulta
-     */
-    @Transactional(readOnly = true)
-    public List<TurmaDTO> listarTurmasPorDisciplina(int codigoDisciplina) throws DaoException {
-        try {
-            List<Turma> todasTurmas = turmaRepository.findAll();
-            return todasTurmas.stream()
-                    .filter(turma -> turma.getDisciplina() != null && 
-                            turma.getDisciplina().getCodigo() == codigoDisciplina)
-                    .map(this::convertToDTO)
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new DaoException("Erro ao listar turmas da disciplina " + codigoDisciplina + ": " + e.getMessage());
-        }
-    }
-
-    /**
-     * Busca turma específica por código, ano e semestre.
-     * @param codigo código da turma
-     * @param ano ano da turma
-     * @param semestre semestre da turma
-     * @return TurmaDTO encontrada
-     * @throws DaoException se turma não for encontrada
-     */
     @Transactional(readOnly = true)
     public TurmaDTO buscarTurma(int codigo, int ano, int semestre) throws DaoException {
-        try {
-            Turma turma = turmaRepository.findByCodigoAndAnoAndSemestre(codigo, ano, semestre);
-            if (turma == null) {
-                throw new DaoException("Turma não encontrada com código " + codigo + 
-                        "/" + ano + "/" + semestre);
-            }
-            return convertToDTO(turma);
-        } catch (Exception e) {
-            throw new DaoException("Erro ao buscar turma: " + e.getMessage());
+        Turma turma = turmaRepository.findByCodigoAndAnoAndSemestre(codigo, ano, semestre);
+        if (turma == null) {
+            throw new DaoException("Turma não encontrada");
         }
+        return convertToDTO(turma);
     }
 
-    /**
-     * Cadastra nova turma.
-     * @param turmaDTO dados da turma
-     * @throws DaoException se houver erro na operação
-     * @throws ServiceException se dados inválidos
-     */
-    public void cadastrarTurma(TurmaDTO turmaDTO) throws DaoException, ServiceException {
-        try {
-            if (turmaDTO.getCodigo() < 1 || turmaDTO.getCodigo() > 99) {
-                throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
-            }
-            
-            if (turmaDTO.getAno() < 1900 || turmaDTO.getAno() > 2020) {
-                throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
-            }
-            
-            if (turmaDTO.getSemestre() < 1 || turmaDTO.getSemestre() > 2) {
-                throw new ServiceException("Semestre deve ser 1 ou 2");
-            }
-
-            if (turmaDTO.getDisciplina() <= 0) {
-                throw new ServiceException("Código da disciplina é obrigatório");
-            }
-
-            Optional<Disciplina> disciplinaOpt = disciplinaRepository.findById(turmaDTO.getDisciplina());
-            if (disciplinaOpt.isEmpty()) {
-                throw new ServiceException("Disciplina não encontrada com código " + turmaDTO.getDisciplina());
-            }
-
-        Turma turmaExistente = turmaRepository.findByCodigoAndAnoAndSemestre(
-                    turmaDTO.getCodigo(), turmaDTO.getAno(), turmaDTO.getSemestre());
-            
-            if (turmaExistente != null) {
-                throw new ServiceException("Turma já existe com código " + turmaDTO.getCodigo() + 
-                        "/" + turmaDTO.getAno() + "/" + turmaDTO.getSemestre());
-            }
-
-            Turma novaTurma = convertToEntity(turmaDTO, disciplinaOpt.get());
-            turmaRepository.save(novaTurma);
-            
-        } catch (ServiceException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new DaoException("Erro ao cadastrar turma: " + e.getMessage());
+    public void cadastrarTurma(TurmaDTO dto) throws ServiceException, DaoException {
+        validar(dto);
+        if (turmaRepository.findByCodigoAndAnoAndSemestre(dto.getCodigo(), dto.getAno(), dto.getSemestre()) != null) {
+            throw new ServiceException("Turma já cadastrada para este período");
         }
+        Disciplina disciplina = obterDisciplina(dto.getDisciplina());
+        Turma turma = new Turma();
+        turma.setCodigo(dto.getCodigo());
+        turma.setAno(dto.getAno());
+        turma.setSemestre(dto.getSemestre());
+        turma.setDisciplina(disciplina);
+        turmaRepository.save(turma);
     }
 
-    /**
-     * Altera turma existente.
-     * @param turmaDTO dados da turma
-     * @throws DaoException se houver erro na operação
-     * @throws ServiceException se dados inválidos
-     */
-    public void alterarTurma(TurmaDTO turmaDTO) throws DaoException, ServiceException {
-        try {
-            Turma turmaExistente = turmaRepository.findByCodigoAndAnoAndSemestre(
-                    turmaDTO.getCodigo(), turmaDTO.getAno(), turmaDTO.getSemestre());
-            
-            if (turmaExistente == null) {
-                throw new ServiceException("Turma não encontrada");
-            }
-
-            if (turmaDTO.getDisciplina() > 0) {
-                Optional<Disciplina> disciplinaOpt = disciplinaRepository.findById(turmaDTO.getDisciplina());
-                if (disciplinaOpt.isPresent()) {
-                    turmaExistente.setDisciplina(disciplinaOpt.get());
-                }
-            }
-
-            turmaRepository.save(turmaExistente);
-            
-        } catch (ServiceException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new DaoException("Erro ao alterar turma: " + e.getMessage());
+    public void alterarTurma(TurmaDTO dto) throws ServiceException, DaoException {
+        validar(dto);
+        Turma turma = turmaRepository.findByCodigoAndAnoAndSemestre(dto.getCodigo(), dto.getAno(), dto.getSemestre());
+        if (turma == null) {
+            throw new DaoException("Turma não encontrada");
         }
+        turma.setDisciplina(obterDisciplina(dto.getDisciplina()));
+        turmaRepository.save(turma);
     }
 
-    /**
-     * Remove turma por código, ano e semestre.
-     * @param codigo código da turma
-     * @param ano ano da turma
-     * @param semestre semestre da turma
-     * @throws DaoException se houver erro na operação
-     */
     public void removerTurma(int codigo, int ano, int semestre) throws DaoException {
-        try {
-            Turma turma = turmaRepository.findByCodigoAndAnoAndSemestre(codigo, ano, semestre);
-            
-            if (turma == null) {
-                throw new DaoException("Turma não encontrada");
-            }
+        Turma turma = turmaRepository.findByCodigoAndAnoAndSemestre(codigo, ano, semestre);
+        if (turma == null) {
+            throw new DaoException("Turma não encontrada");
+        }
+        turmaRepository.delete(turma);
+    }
 
-            turmaRepository.delete(turma);
-            
-        } catch (Exception e) {
-            throw new DaoException("Erro ao remover turma: " + e.getMessage());
+    private void validar(TurmaDTO dto) throws ServiceException {
+        if (dto.getCodigo() < 1) {
+            throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_INVALIDO);
+        }
+        if (dto.getAno() < 1900 || dto.getAno() > 2100) {
+            throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
+        }
+        if (dto.getSemestre() < 1 || dto.getSemestre() > 2) {
+            throw new ServiceException("Semestre deve ser 1 ou 2");
+        }
+        if (dto.getDisciplina() == null || dto.getDisciplina() < 1) {
+            throw new ServiceException("Disciplina é obrigatória");
         }
     }
 
-    /**
-     * Converte entidade Turma para DTO.
-     * @param turma entidade
-     * @return TurmaDTO
-     */
+    private Disciplina obterDisciplina(int codigo) throws DaoException {
+        return disciplinaRepository.findById(codigo)
+                .orElseThrow(() -> new DaoException("Disciplina com código " + codigo + " não encontrada"));
+    }
+
     private TurmaDTO convertToDTO(Turma turma) {
         return TurmaDTO.builder()
                 .codigo(turma.getCodigo())
                 .ano(turma.getAno())
                 .semestre(turma.getSemestre())
-                .disciplina(turma.getDisciplina() != null ? turma.getDisciplina().getCodigo() : 0)
+                .disciplina(turma.getDisciplina() != null ? turma.getDisciplina().getCodigo() : null)
                 .build();
-    }
-
-    /**
-     * Converte DTO para entidade Turma.
-     * @param dto DTO
-     * @param disciplina entidade Disciplina
-     * @return entidade Turma
-     */
-    private Turma convertToEntity(TurmaDTO dto, Disciplina disciplina) {
-        Turma turma = new Turma();
-        
-        turma.setCodigo(dto.getCodigo());
-        turma.setAno(dto.getAno());
-        turma.setSemestre(dto.getSemestre());
-        turma.setDisciplina(disciplina);
-        
-        return turma;
     }
 }

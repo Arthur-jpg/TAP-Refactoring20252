@@ -1,9 +1,9 @@
 package br.edu.ibmec.controller;
 
-import br.edu.ibmec.dto.AlunoDTO;
+import br.edu.ibmec.dto.ProfessorDTO;
 import br.edu.ibmec.exception.DaoException;
 import br.edu.ibmec.exception.ServiceException;
-import br.edu.ibmec.service.AlunoRepositoryService;
+import br.edu.ibmec.service.ProfessorRepositoryService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -20,42 +20,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/aluno")
-@Tag(name = "Alunos")
-public class AlunoController {
+@RequestMapping("/api/professor")
+@Tag(name = "Professores")
+public class ProfessorController {
 
     @Autowired
-    private AlunoRepositoryService alunoService;
+    private ProfessorRepositoryService professorService;
 
     @GetMapping
-    public ResponseEntity<List<AlunoDTO>> listarAlunos() {
-        return ResponseEntity.ok(alunoService.listarAlunos());
+    public ResponseEntity<List<ProfessorDTO>> listarProfessores() {
+        return ResponseEntity.ok(professorService.listarProfessores());
     }
 
-    @GetMapping("/{matricula}")
-    public ResponseEntity<AlunoDTO> buscarAluno(@PathVariable int matricula) {
+    @GetMapping("/{id}")
+    public ResponseEntity<ProfessorDTO> buscarProfessor(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(alunoService.buscarAluno(matricula));
+            return ResponseEntity.ok(professorService.buscarProfessor(id));
         } catch (DaoException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping
-    public ResponseEntity<String> cadastrarAluno(@Valid @RequestBody AlunoDTO alunoDTO) {
+    public ResponseEntity<?> cadastrarProfessor(@Valid @RequestBody ProfessorDTO professorDTO) {
         try {
-            alunoService.cadastrarAluno(alunoDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Aluno cadastrado com sucesso");
+            ProfessorDTO salvo = professorService.cadastrarProfessor(professorDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
         } catch (ServiceException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PutMapping
-    public ResponseEntity<String> atualizarAluno(@Valid @RequestBody AlunoDTO alunoDTO) {
+    public ResponseEntity<String> atualizarProfessor(@Valid @RequestBody ProfessorDTO professorDTO) {
         try {
-            alunoService.alterarAluno(alunoDTO);
-            return ResponseEntity.ok("Aluno atualizado com sucesso");
+            professorService.alterarProfessor(professorDTO);
+            return ResponseEntity.ok("Professor atualizado com sucesso");
         } catch (ServiceException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (DaoException e) {
@@ -63,11 +63,11 @@ public class AlunoController {
         }
     }
 
-    @DeleteMapping("/{matricula}")
-    public ResponseEntity<String> removerAluno(@PathVariable int matricula) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> removerProfessor(@PathVariable Long id) {
         try {
-            alunoService.removerAluno(matricula);
-            return ResponseEntity.ok("Aluno removido com sucesso");
+            professorService.removerProfessor(id);
+            return ResponseEntity.ok("Professor removido com sucesso");
         } catch (DaoException e) {
             return ResponseEntity.notFound().build();
         }
