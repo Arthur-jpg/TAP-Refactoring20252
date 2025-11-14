@@ -43,6 +43,21 @@ public class Inscricao {
     })
     private Turma turma;
 
+    @Column(name = "nota_av1")
+    private Double notaAv1;
+
+    @Column(name = "nota_av2")
+    private Double notaAv2;
+
+    @Column(name = "nota_recuperacao")
+    private Double notaRecuperacao;
+
+    @Column(name = "media_final")
+    private Double mediaFinal;
+
+    @Column(name = "status_aprovacao", length = 20)
+    private String statusAprovacao;
+
     public void setId(Long id) {
         if (id == null || id < 1) {
             throw new IllegalArgumentException("Id da inscrição deve ser positivo");

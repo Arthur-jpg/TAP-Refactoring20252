@@ -1,5 +1,6 @@
 package br.edu.ibmec.dto;
 
+import br.edu.ibmec.service.calculo.TipoCalculoNota;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -31,4 +32,16 @@ public class InscricaoDTO {
     @Min(1)
     @Max(2)
     private int semestre;
+
+    private Double notaAv1;
+
+    private Double notaAv2;
+
+    private Double notaRecuperacao;
+
+    private Double mediaFinal;
+
+    private String statusAprovacao;
+
+    private TipoCalculoNota tipoCalculoNota;
 }
