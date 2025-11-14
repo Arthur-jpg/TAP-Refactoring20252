@@ -9,6 +9,7 @@ import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.repository.AlunoRepository;
 import br.edu.ibmec.repository.InscricaoRepository;
 import br.edu.ibmec.repository.TurmaRepository;
+import br.edu.ibmec.service.factory.InscricaoFactory;
 import br.edu.ibmec.service.validation.InscricaoValidacaoStrategy;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,6 +32,9 @@ public class InscricaoRepositoryService {
     
     @Autowired
     private List<InscricaoValidacaoStrategy> inscricaoValidacoes;
+    
+    @Autowired
+    private InscricaoFactory inscricaoFactory;
 
     @Transactional(readOnly = true)
     public List<InscricaoDTO> listarInscricoes() {
@@ -77,10 +81,7 @@ public class InscricaoRepositoryService {
         if (turma == null) {
             throw new DaoException("Turma não encontrada");
         }
-        Inscricao inscricao = new Inscricao();
-        inscricao.setId(dto.getId());
-        inscricao.setAluno(aluno);
-        inscricao.setTurma(turma);
+        Inscricao inscricao = inscricaoFactory.criarInscricao(dto, aluno, turma);
         inscricaoRepository.save(inscricao);
     }
 

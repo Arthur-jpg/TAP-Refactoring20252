@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Order(1)
-public class CamposObrigatoriosInscricaoStrategy implements InscricaoValidacaoStrategy {
+public class  CamposObrigatoriosInscricaoStrategy implements InscricaoValidacaoStrategy {
 
     @Override
     public void validar(InscricaoDTO dto) throws ServiceException {
