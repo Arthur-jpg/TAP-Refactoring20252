@@ -35,12 +35,8 @@ public class InscricaoController {
     public ResponseEntity<InscricaoDTO> buscarInscricao(@PathVariable int matricula,
                                                         @PathVariable int codigo,
                                                         @PathVariable int ano,
-                                                        @PathVariable int semestre) {
-        try {
-            return ResponseEntity.ok(inscricaoService.buscarInscricao(matricula, codigo, ano, semestre));
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+                                                        @PathVariable int semestre) throws DaoException {
+        return ResponseEntity.ok(inscricaoService.buscarInscricao(matricula, codigo, ano, semestre));
     }
 
     @GetMapping("/aluno/{matricula}")
@@ -56,25 +52,17 @@ public class InscricaoController {
     }
 
     @PostMapping
-    public ResponseEntity<String> cadastrarInscricao(@Valid @RequestBody InscricaoDTO inscricaoDTO) {
-        try {
-            inscricaoService.cadastrarInscricao(inscricaoDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Inscrição cadastrada com sucesso");
-        } catch (ServiceException | DaoException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<String> cadastrarInscricao(@Valid @RequestBody InscricaoDTO inscricaoDTO) throws ServiceException, DaoException {
+        inscricaoService.cadastrarInscricao(inscricaoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Inscrição cadastrada com sucesso");
     }
 
     @DeleteMapping("/{matricula}/{codigo}/{ano}/{semestre}")
     public ResponseEntity<String> removerInscricao(@PathVariable int matricula,
                                                    @PathVariable int codigo,
                                                    @PathVariable int ano,
-                                                   @PathVariable int semestre) {
-        try {
-            inscricaoService.removerInscricao(matricula, codigo, ano, semestre);
-            return ResponseEntity.ok("Inscrição removida com sucesso");
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+                                                   @PathVariable int semestre) throws DaoException {
+        inscricaoService.removerInscricao(matricula, codigo, ano, semestre);
+        return ResponseEntity.ok("Inscrição removida com sucesso");
     }
 }

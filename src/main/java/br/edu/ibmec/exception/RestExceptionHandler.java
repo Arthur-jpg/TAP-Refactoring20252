@@ -1,10 +1,9 @@
 package br.edu.ibmec.exception;
 
-import java.time.Instant;
-import java.util.HashMap;
+import jakarta.servlet.http.HttpServletRequest;
+import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -13,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -25,32 +25,47 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", Instant.now().toString());
-        body.put("status", HttpStatus.BAD_REQUEST.value());
-
         Map<String, String> errors = ex.getBindingResult().getFieldErrors().stream()
                 .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage, (a, b) -> a));
-        body.put("errors", errors);
-        return ResponseEntity.badRequest().body(body);
+        String path = extractPath(request);
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST.value(),
+                "Falha de validação: verifique os campos enviados",
+                path,
+                "VALIDATION_FAILED",
+                errors);
+        return ResponseEntity.badRequest().body(apiError);
     }
 
     @ExceptionHandler(ServiceException.class)
-    public ResponseEntity<Object> handleServiceException(ServiceException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", Instant.now().toString());
-        body.put("status", HttpStatus.BAD_REQUEST.value());
-        body.put("error", ex.getMessage());
-        body.put("type", ex.getTipo() != null ? ex.getTipo().name() : null);
-        return ResponseEntity.badRequest().body(body);
+    public ResponseEntity<ApiError> handleServiceException(ServiceException ex, HttpServletRequest request) {
+        String code = ex.getTipo() != null ? ex.getTipo().name() : null;
+        return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), code, request, Collections.emptyMap());
     }
 
     @ExceptionHandler(DaoException.class)
-    public ResponseEntity<Object> handleDaoException(DaoException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", Instant.now().toString());
-        body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    public ResponseEntity<ApiError> handleDaoException(DaoException ex, HttpServletRequest request) {
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), "RESOURCE_NOT_FOUND", request, Collections.emptyMap());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiError> handleUnexpected(Exception ex, HttpServletRequest request) {
+        return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR,
+                "Erro interno inesperado. Contate o suporte se o problema persistir.",
+                "UNEXPECTED_ERROR",
+                request,
+                Collections.singletonMap("exception", ex.getClass().getSimpleName()));
+    }
+
+    private ResponseEntity<ApiError> buildResponse(HttpStatus status, String message, String code,
+                                                   HttpServletRequest request, Map<String, String> details) {
+        ApiError apiError = new ApiError(status.value(), message, request != null ? request.getRequestURI() : null, code, details);
+        return ResponseEntity.status(status).body(apiError);
+    }
+
+    private String extractPath(WebRequest request) {
+        if (request instanceof ServletWebRequest servletWebRequest) {
+            return servletWebRequest.getRequest().getRequestURI();
+        }
+        return null;
     }
 }

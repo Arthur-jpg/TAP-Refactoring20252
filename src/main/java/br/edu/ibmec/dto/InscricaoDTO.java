@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class InscricaoDTO {
 
+    @NotNull
+    @Min(1)
     private Long id;
 
     @Min(1)

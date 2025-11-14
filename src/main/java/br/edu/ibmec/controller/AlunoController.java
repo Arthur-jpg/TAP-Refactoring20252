@@ -33,43 +33,25 @@ public class AlunoController {
     }
 
     @GetMapping("/{matricula}")
-    public ResponseEntity<AlunoDTO> buscarAluno(@PathVariable int matricula) {
-        try {
-            return ResponseEntity.ok(alunoService.buscarAluno(matricula));
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<AlunoDTO> buscarAluno(@PathVariable int matricula) throws DaoException {
+        return ResponseEntity.ok(alunoService.buscarAluno(matricula));
     }
 
     @PostMapping
-    public ResponseEntity<String> cadastrarAluno(@Valid @RequestBody AlunoDTO alunoDTO) {
-        try {
-            alunoService.cadastrarAluno(alunoDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Aluno cadastrado com sucesso");
-        } catch (ServiceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<String> cadastrarAluno(@Valid @RequestBody AlunoDTO alunoDTO) throws ServiceException {
+        alunoService.cadastrarAluno(alunoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Aluno cadastrado com sucesso");
     }
 
     @PutMapping
-    public ResponseEntity<String> atualizarAluno(@Valid @RequestBody AlunoDTO alunoDTO) {
-        try {
-            alunoService.alterarAluno(alunoDTO);
-            return ResponseEntity.ok("Aluno atualizado com sucesso");
-        } catch (ServiceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<String> atualizarAluno(@Valid @RequestBody AlunoDTO alunoDTO) throws ServiceException, DaoException {
+        alunoService.alterarAluno(alunoDTO);
+        return ResponseEntity.ok("Aluno atualizado com sucesso");
     }
 
     @DeleteMapping("/{matricula}")
-    public ResponseEntity<String> removerAluno(@PathVariable int matricula) {
-        try {
-            alunoService.removerAluno(matricula);
-            return ResponseEntity.ok("Aluno removido com sucesso");
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<String> removerAluno(@PathVariable int matricula) throws DaoException {
+        alunoService.removerAluno(matricula);
+        return ResponseEntity.ok("Aluno removido com sucesso");
     }
 }

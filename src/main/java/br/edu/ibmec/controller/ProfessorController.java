@@ -33,43 +33,25 @@ public class ProfessorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProfessorDTO> buscarProfessor(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(professorService.buscarProfessor(id));
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<ProfessorDTO> buscarProfessor(@PathVariable Long id) throws DaoException {
+        return ResponseEntity.ok(professorService.buscarProfessor(id));
     }
 
     @PostMapping
-    public ResponseEntity<?> cadastrarProfessor(@Valid @RequestBody ProfessorDTO professorDTO) {
-        try {
-            ProfessorDTO salvo = professorService.cadastrarProfessor(professorDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
-        } catch (ServiceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<?> cadastrarProfessor(@Valid @RequestBody ProfessorDTO professorDTO) throws ServiceException {
+        ProfessorDTO salvo = professorService.cadastrarProfessor(professorDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
     }
 
     @PutMapping
-    public ResponseEntity<String> atualizarProfessor(@Valid @RequestBody ProfessorDTO professorDTO) {
-        try {
-            professorService.alterarProfessor(professorDTO);
-            return ResponseEntity.ok("Professor atualizado com sucesso");
-        } catch (ServiceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<String> atualizarProfessor(@Valid @RequestBody ProfessorDTO professorDTO) throws ServiceException, DaoException {
+        professorService.alterarProfessor(professorDTO);
+        return ResponseEntity.ok("Professor atualizado com sucesso");
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> removerProfessor(@PathVariable Long id) {
-        try {
-            professorService.removerProfessor(id);
-            return ResponseEntity.ok("Professor removido com sucesso");
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<String> removerProfessor(@PathVariable Long id) throws DaoException {
+        professorService.removerProfessor(id);
+        return ResponseEntity.ok("Professor removido com sucesso");
     }
 }

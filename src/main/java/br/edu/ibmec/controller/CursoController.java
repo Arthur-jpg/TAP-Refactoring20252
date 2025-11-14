@@ -33,43 +33,25 @@ public class CursoController {
     }
 
     @GetMapping("/{codigo}")
-    public ResponseEntity<CursoDTO> buscarCurso(@PathVariable int codigo) {
-        try {
-            return ResponseEntity.ok(cursoService.buscarCurso(codigo));
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<CursoDTO> buscarCurso(@PathVariable int codigo) throws DaoException {
+        return ResponseEntity.ok(cursoService.buscarCurso(codigo));
     }
 
     @PostMapping
-    public ResponseEntity<String> cadastrarCurso(@Valid @RequestBody CursoDTO cursoDTO) {
-        try {
-            cursoService.cadastrarCurso(cursoDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Curso cadastrado com sucesso");
-        } catch (ServiceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<String> cadastrarCurso(@Valid @RequestBody CursoDTO cursoDTO) throws ServiceException {
+        cursoService.cadastrarCurso(cursoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Curso cadastrado com sucesso");
     }
 
     @PutMapping
-    public ResponseEntity<String> atualizarCurso(@Valid @RequestBody CursoDTO cursoDTO) {
-        try {
-            cursoService.alterarCurso(cursoDTO);
-            return ResponseEntity.ok("Curso atualizado com sucesso");
-        } catch (ServiceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<String> atualizarCurso(@Valid @RequestBody CursoDTO cursoDTO) throws ServiceException, DaoException {
+        cursoService.alterarCurso(cursoDTO);
+        return ResponseEntity.ok("Curso atualizado com sucesso");
     }
 
     @DeleteMapping("/{codigo}")
-    public ResponseEntity<String> removerCurso(@PathVariable int codigo) {
-        try {
-            cursoService.removerCurso(codigo);
-            return ResponseEntity.ok("Curso removido com sucesso");
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<String> removerCurso(@PathVariable int codigo) throws DaoException {
+        cursoService.removerCurso(codigo);
+        return ResponseEntity.ok("Curso removido com sucesso");
     }
 }

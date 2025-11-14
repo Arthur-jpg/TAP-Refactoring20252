@@ -3,8 +3,6 @@ package br.edu.ibmec.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
@@ -29,7 +27,6 @@ import lombok.ToString;
 public class Inscricao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @EqualsAndHashCode.Include
     private Long id;
@@ -45,4 +42,11 @@ public class Inscricao {
         @JoinColumn(name = "turma_semestre", referencedColumnName = "semestre", nullable = false)
     })
     private Turma turma;
+
+    public void setId(Long id) {
+        if (id == null || id < 1) {
+            throw new IllegalArgumentException("Id da inscrição deve ser positivo");
+        }
+        this.id = id;
+    }
 }

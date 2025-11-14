@@ -35,45 +35,27 @@ public class TurmaController {
     @GetMapping("/{codigo}/{ano}/{semestre}")
     public ResponseEntity<TurmaDTO> buscarTurma(@PathVariable int codigo,
                                                 @PathVariable int ano,
-                                                @PathVariable int semestre) {
-        try {
-            return ResponseEntity.ok(turmaService.buscarTurma(codigo, ano, semestre));
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+                                                @PathVariable int semestre) throws DaoException {
+        return ResponseEntity.ok(turmaService.buscarTurma(codigo, ano, semestre));
     }
 
     @PostMapping
-    public ResponseEntity<String> cadastrarTurma(@Valid @RequestBody TurmaDTO turmaDTO) {
-        try {
-            turmaService.cadastrarTurma(turmaDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Turma cadastrada com sucesso");
-        } catch (ServiceException | DaoException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<String> cadastrarTurma(@Valid @RequestBody TurmaDTO turmaDTO) throws ServiceException, DaoException {
+        turmaService.cadastrarTurma(turmaDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Turma cadastrada com sucesso");
     }
 
     @PutMapping
-    public ResponseEntity<String> atualizarTurma(@Valid @RequestBody TurmaDTO turmaDTO) {
-        try {
-            turmaService.alterarTurma(turmaDTO);
-            return ResponseEntity.ok("Turma atualizada com sucesso");
-        } catch (ServiceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<String> atualizarTurma(@Valid @RequestBody TurmaDTO turmaDTO) throws ServiceException, DaoException {
+        turmaService.alterarTurma(turmaDTO);
+        return ResponseEntity.ok("Turma atualizada com sucesso");
     }
 
     @DeleteMapping("/{codigo}/{ano}/{semestre}")
     public ResponseEntity<String> removerTurma(@PathVariable int codigo,
                                                @PathVariable int ano,
-                                               @PathVariable int semestre) {
-        try {
-            turmaService.removerTurma(codigo, ano, semestre);
-            return ResponseEntity.ok("Turma removida com sucesso");
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+                                               @PathVariable int semestre) throws DaoException {
+        turmaService.removerTurma(codigo, ano, semestre);
+        return ResponseEntity.ok("Turma removida com sucesso");
     }
 }

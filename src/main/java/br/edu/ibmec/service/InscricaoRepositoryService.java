@@ -9,6 +9,7 @@ import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.repository.AlunoRepository;
 import br.edu.ibmec.repository.InscricaoRepository;
 import br.edu.ibmec.repository.TurmaRepository;
+import br.edu.ibmec.service.validation.InscricaoValidacaoStrategy;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class InscricaoRepositoryService {
 
     @Autowired
     private TurmaRepository turmaRepository;
+    
+    @Autowired
+    private List<InscricaoValidacaoStrategy> inscricaoValidacoes;
 
     @Transactional(readOnly = true)
     public List<InscricaoDTO> listarInscricoes() {
@@ -57,7 +61,13 @@ public class InscricaoRepositoryService {
     }
 
     public void cadastrarInscricao(InscricaoDTO dto) throws ServiceException, DaoException {
-        validar(dto);
+        aplicarValidacoes(dto);
+        if (dto.getId() == null || dto.getId() < 1) {
+            throw new ServiceException("Id da inscrição é obrigatório");
+        }
+        if (inscricaoRepository.existsById(dto.getId())) {
+            throw new ServiceException("Já existe inscrição com id " + dto.getId());
+        }
         if (inscricaoRepository.existsByAlunoMatriculaAndTurmaCodigoAndTurmaAnoAndTurmaSemestre(dto.getAlunoMatricula(), dto.getTurmaCodigo(), dto.getAno(), dto.getSemestre())) {
             throw new ServiceException("Aluno já inscrito nesta turma");
         }
@@ -68,6 +78,7 @@ public class InscricaoRepositoryService {
             throw new DaoException("Turma não encontrada");
         }
         Inscricao inscricao = new Inscricao();
+        inscricao.setId(dto.getId());
         inscricao.setAluno(aluno);
         inscricao.setTurma(turma);
         inscricaoRepository.save(inscricao);
@@ -79,18 +90,12 @@ public class InscricaoRepositoryService {
         inscricaoRepository.delete(inscricao);
     }
 
-    private void validar(InscricaoDTO dto) throws ServiceException {
-        if (dto.getAlunoMatricula() < 1) {
-            throw new ServiceException("Matrícula do aluno é obrigatória");
+    private void aplicarValidacoes(InscricaoDTO dto) throws ServiceException {
+        if (inscricaoValidacoes == null) {
+            return;
         }
-        if (dto.getTurmaCodigo() < 1) {
-            throw new ServiceException("Código da turma é obrigatório");
-        }
-        if (dto.getAno() < 1900 || dto.getAno() > 2100) {
-            throw new ServiceException("Ano inválido");
-        }
-        if (dto.getSemestre() < 1 || dto.getSemestre() > 2) {
-            throw new ServiceException("Semestre deve ser 1 ou 2");
+        for (InscricaoValidacaoStrategy validacao : inscricaoValidacoes) {
+            validacao.validar(dto);
         }
     }
 

@@ -33,43 +33,25 @@ public class DisciplinaController {
     }
 
     @GetMapping("/{codigo}")
-    public ResponseEntity<DisciplinaDTO> buscarDisciplina(@PathVariable int codigo) {
-        try {
-            return ResponseEntity.ok(disciplinaService.buscarDisciplina(codigo));
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<DisciplinaDTO> buscarDisciplina(@PathVariable int codigo) throws DaoException {
+        return ResponseEntity.ok(disciplinaService.buscarDisciplina(codigo));
     }
 
     @PostMapping
-    public ResponseEntity<String> cadastrarDisciplina(@Valid @RequestBody DisciplinaDTO disciplinaDTO) {
-        try {
-            disciplinaService.cadastrarDisciplina(disciplinaDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Disciplina cadastrada com sucesso");
-        } catch (ServiceException | DaoException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<String> cadastrarDisciplina(@Valid @RequestBody DisciplinaDTO disciplinaDTO) throws ServiceException, DaoException {
+        disciplinaService.cadastrarDisciplina(disciplinaDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Disciplina cadastrada com sucesso");
     }
 
     @PutMapping
-    public ResponseEntity<String> atualizarDisciplina(@Valid @RequestBody DisciplinaDTO disciplinaDTO) {
-        try {
-            disciplinaService.alterarDisciplina(disciplinaDTO);
-            return ResponseEntity.ok("Disciplina atualizada com sucesso");
-        } catch (ServiceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<String> atualizarDisciplina(@Valid @RequestBody DisciplinaDTO disciplinaDTO) throws ServiceException, DaoException {
+        disciplinaService.alterarDisciplina(disciplinaDTO);
+        return ResponseEntity.ok("Disciplina atualizada com sucesso");
     }
 
     @DeleteMapping("/{codigo}")
-    public ResponseEntity<String> removerDisciplina(@PathVariable int codigo) {
-        try {
-            disciplinaService.removerDisciplina(codigo);
-            return ResponseEntity.ok("Disciplina removida com sucesso");
-        } catch (DaoException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<String> removerDisciplina(@PathVariable int codigo) throws DaoException {
+        disciplinaService.removerDisciplina(codigo);
+        return ResponseEntity.ok("Disciplina removida com sucesso");
     }
 }
