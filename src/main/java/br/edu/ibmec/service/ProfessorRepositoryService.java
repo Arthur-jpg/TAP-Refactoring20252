@@ -37,10 +37,17 @@ public class ProfessorRepositoryService {
 
     public ProfessorDTO cadastrarProfessor(ProfessorDTO dto) throws ServiceException {
         validar(dto);
+        if (dto.getId() == null) {
+            throw new ServiceException("Id do professor é obrigatório");
+        }
+        if (professorRepository.existsById(dto.getId())) {
+            throw new ServiceException("Já existe professor com id " + dto.getId());
+        }
         if (professorRepository.existsByNomeIgnoreCase(dto.getNome())) {
             throw new ServiceException("Professor já cadastrado com este nome");
         }
         Professor professor = new Professor();
+        professor.setId(dto.getId());
         professor.setNome(dto.getNome());
         Professor salvo = professorRepository.save(professor);
         return convertToDTO(salvo);
@@ -65,6 +72,9 @@ public class ProfessorRepositoryService {
     }
 
     private void validar(ProfessorDTO dto) throws ServiceException {
+        if (dto.getId() != null && dto.getId() < 1) {
+            throw new ServiceException("Id do professor deve ser positivo");
+        }
         if (dto.getNome() == null || dto.getNome().trim().isEmpty()) {
             throw new ServiceException("Nome do professor é obrigatório");
         }

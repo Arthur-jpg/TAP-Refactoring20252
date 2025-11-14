@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "inscricoes")
+@Table(name = "inscricoes",
+        uniqueConstraints = @UniqueConstraint(name = "uk_inscricao_aluno_turma",
+                columnNames = {"aluno_matricula", "turma_codigo", "turma_ano", "turma_semestre"}))
 @Getter
 @Setter
 @NoArgsConstructor

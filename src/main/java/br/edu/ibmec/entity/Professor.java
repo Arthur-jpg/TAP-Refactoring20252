@@ -3,8 +3,6 @@ package br.edu.ibmec.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -22,11 +20,10 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = "disciplinas")
+@ToString(exclude = "turmas")
 public class Professor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
 
@@ -34,12 +31,19 @@ public class Professor {
     private String nome;
 
     @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY)
-    private List<Disciplina> disciplinas = new ArrayList<>();
+    private List<Turma> turmas = new ArrayList<>();
 
     public void setNome(String nome) {
         if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome é obrigatório");
         }
         this.nome = nome.trim();
+    }
+
+    public void setId(Long id) {
+        if (id == null || id < 1) {
+            throw new IllegalArgumentException("Id do professor deve ser positivo");
+        }
+        this.id = id;
     }
 }

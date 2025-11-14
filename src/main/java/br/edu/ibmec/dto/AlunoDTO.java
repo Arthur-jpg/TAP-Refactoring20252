@@ -20,4 +20,9 @@ public class AlunoDTO {
     @NotBlank(message = "Nome é obrigatório")
     @Size(max = 80, message = "Nome deve ter no máximo 80 caracteres")
     private String nome;
+
+    @Min(value = 1, message = "Curso é obrigatório")
+    private int cursoCodigo;
+
+    private String cursoNome;
 }

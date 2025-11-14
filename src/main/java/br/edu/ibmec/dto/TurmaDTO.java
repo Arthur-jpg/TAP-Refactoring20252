@@ -27,4 +27,7 @@ public class TurmaDTO {
 
     @NotNull
     private Integer disciplina;
+
+    @NotNull
+    private Long professorId;
 }

@@ -5,6 +5,7 @@ As regras abaixo refletem o modelo enxuto composto por Aluno, Curso, Disciplina,
 ## Aluno
 - Matrícula inteira positiva (`@Min(1)` no DTO e validação no serviço).
 - Nome obrigatório, máx. 80 caracteres.
+- Deve informar `cursoCodigo` e o serviço valida se o curso existe.
 
 ## Curso
 - Código inteiro positivo.
@@ -16,19 +17,20 @@ As regras abaixo refletem o modelo enxuto composto por Aluno, Curso, Disciplina,
 ## Disciplina
 - Código inteiro positivo.
 - Nome obrigatório, máx. 80 caracteres.
-- Deve existir curso (`curso_codigo`) e professor (`professor_id`) válidos.
+- Deve existir curso (`curso_codigo`) válido.
 
 ## Turma
 - Código inteiro positivo.
 - Ano entre 1900 e 2100.
 - Semestre 1 ou 2.
 - Necessita de disciplina existente.
+- Professor responsável obrigatório.
 - Identificada por (código, ano, semestre) => chave composta.
 
 ## Inscrição
 - Exige matrícula de aluno e chave da turma (código, ano, semestre).
 - Ano entre 1900 e 2100, semestre 1 ou 2.
-- Uma inscrição por combinação aluno/turma (checada via `existsByAluno...`).
+- Uma inscrição por combinação aluno/turma (agora também garantida por constraint única no banco).
 
 ## Observações
 - Todas as relações "1" do diagrama são obrigatórias (`optional = false`, `nullable = false`).

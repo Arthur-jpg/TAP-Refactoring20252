@@ -2,10 +2,12 @@ package br.edu.ibmec.service;
 
 import br.edu.ibmec.dto.AlunoDTO;
 import br.edu.ibmec.entity.Aluno;
+import br.edu.ibmec.entity.Curso;
 import br.edu.ibmec.exception.DaoException;
 import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
 import br.edu.ibmec.repository.AlunoRepository;
+import br.edu.ibmec.repository.CursoRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,6 +23,9 @@ public class AlunoRepositoryService {
 
     @Autowired
     private AlunoRepository alunoRepository;
+    
+    @Autowired
+    private CursoRepository cursoRepository;
 
     @Transactional(readOnly = true)
     public AlunoDTO buscarAluno(int matricula) throws DaoException {
@@ -43,7 +48,8 @@ public class AlunoRepositoryService {
         if (alunoRepository.existsByMatricula(alunoDTO.getMatricula())) {
             throw new ServiceException(ServiceExceptionEnum.ALUNO_MATRICULA_INVALIDA);
         }
-        alunoRepository.save(convertToEntity(alunoDTO));
+        Curso curso = obterCurso(alunoDTO.getCursoCodigo());
+        alunoRepository.save(convertToEntity(alunoDTO, curso));
     }
 
     public void alterarAluno(AlunoDTO alunoDTO) throws ServiceException, DaoException {
@@ -54,6 +60,7 @@ public class AlunoRepositoryService {
         }
         Aluno aluno = existente.get();
         aluno.setNome(alunoDTO.getNome());
+        aluno.setCurso(obterCurso(alunoDTO.getCursoCodigo()));
         alunoRepository.save(aluno);
     }
 
@@ -71,19 +78,33 @@ public class AlunoRepositoryService {
         if (dto.getNome() == null || dto.getNome().trim().isEmpty()) {
             throw new ServiceException(ServiceExceptionEnum.ALUNO_NOME_INVALIDO);
         }
+        if (dto.getCursoCodigo() < MATRICULA_MINIMA) {
+            throw new ServiceException("Curso é obrigatório");
+        }
     }
 
     private AlunoDTO convertToDTO(Aluno aluno) {
         return AlunoDTO.builder()
                 .matricula(aluno.getMatricula())
                 .nome(aluno.getNome())
+                .cursoCodigo(aluno.getCurso() != null ? aluno.getCurso().getCodigo() : 0)
+                .cursoNome(aluno.getCurso() != null ? aluno.getCurso().getNome() : null)
                 .build();
     }
 
-    private Aluno convertToEntity(AlunoDTO dto) {
+    private Aluno convertToEntity(AlunoDTO dto, Curso curso) {
         Aluno aluno = new Aluno();
         aluno.setMatricula(dto.getMatricula());
         aluno.setNome(dto.getNome());
+        aluno.setCurso(curso);
         return aluno;
+    }
+    
+    private Curso obterCurso(int codigo) throws ServiceException {
+        Curso curso = cursoRepository.findByCodigo(codigo);
+        if (curso == null) {
+            throw new ServiceException("Curso com código " + codigo + " não encontrado");
+        }
+        return curso;
     }
 }

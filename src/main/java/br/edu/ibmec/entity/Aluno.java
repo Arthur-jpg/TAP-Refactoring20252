@@ -5,6 +5,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = "inscricoes")
+@ToString(exclude = {"inscricoes", "curso"})
 public class Aluno {
 
     private static final int MATRICULA_MINIMA = 1;
@@ -36,6 +38,10 @@ public class Aluno {
 
     @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Inscricao> inscricoes = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "curso_codigo", nullable = false)
+    private Curso curso;
 
     public void setMatricula(int matricula) {
         if (matricula < MATRICULA_MINIMA) {
@@ -65,5 +71,12 @@ public class Aluno {
         }
         inscricoes.remove(inscricao);
         inscricao.setAluno(null);
+    }
+
+    public void setCurso(Curso curso) {
+        if (curso == null) {
+            throw new IllegalArgumentException("Curso é obrigatório");
+        }
+        this.curso = curso;
     }
 }

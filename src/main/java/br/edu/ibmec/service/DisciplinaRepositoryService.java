@@ -3,13 +3,11 @@ package br.edu.ibmec.service;
 import br.edu.ibmec.dto.DisciplinaDTO;
 import br.edu.ibmec.entity.Curso;
 import br.edu.ibmec.entity.Disciplina;
-import br.edu.ibmec.entity.Professor;
 import br.edu.ibmec.exception.DaoException;
 import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
 import br.edu.ibmec.repository.CursoRepository;
 import br.edu.ibmec.repository.DisciplinaRepository;
-import br.edu.ibmec.repository.ProfessorRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,9 +24,6 @@ public class DisciplinaRepositoryService {
 
     @Autowired
     private CursoRepository cursoRepository;
-
-    @Autowired
-    private ProfessorRepository professorRepository;
 
     @Transactional(readOnly = true)
     public DisciplinaDTO buscarDisciplina(int codigo) throws DaoException {
@@ -52,13 +47,10 @@ public class DisciplinaRepositoryService {
             throw new ServiceException(ServiceExceptionEnum.CURSO_CODIGO_DUPLICADO);
         }
         Curso curso = obterCurso(dto.getCurso());
-        Professor professor = obterProfessor(dto.getProfessorId());
-
         Disciplina disciplina = new Disciplina();
         disciplina.setCodigo(dto.getCodigo());
         disciplina.setNome(dto.getNome());
         disciplina.setCurso(curso);
-        disciplina.setProfessor(professor);
         disciplinaRepository.save(disciplina);
     }
 
@@ -71,7 +63,6 @@ public class DisciplinaRepositoryService {
         Disciplina disciplina = existente.get();
         disciplina.setNome(dto.getNome());
         disciplina.setCurso(obterCurso(dto.getCurso()));
-        disciplina.setProfessor(obterProfessor(dto.getProfessorId()));
         disciplinaRepository.save(disciplina);
     }
 
@@ -89,9 +80,6 @@ public class DisciplinaRepositoryService {
         if (dto.getNome() == null || dto.getNome().trim().isEmpty()) {
             throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
         }
-        if (dto.getProfessorId() == null) {
-            throw new ServiceException("Professor é obrigatório");
-        }
     }
 
     private Curso obterCurso(int codigoCurso) throws DaoException {
@@ -102,17 +90,11 @@ public class DisciplinaRepositoryService {
         return curso;
     }
 
-    private Professor obterProfessor(Long professorId) throws DaoException {
-        return professorRepository.findById(professorId)
-                .orElseThrow(() -> new DaoException("Professor com id " + professorId + " não encontrado"));
-    }
-
     private DisciplinaDTO convertToDTO(Disciplina disciplina) {
         return DisciplinaDTO.builder()
                 .codigo(disciplina.getCodigo())
                 .nome(disciplina.getNome())
                 .curso(disciplina.getCurso() != null ? disciplina.getCurso().getCodigo() : 0)
-                .professorId(disciplina.getProfessor() != null ? disciplina.getProfessor().getId() : null)
                 .build();
     }
 }

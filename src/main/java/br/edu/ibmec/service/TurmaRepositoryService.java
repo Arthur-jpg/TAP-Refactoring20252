@@ -2,11 +2,13 @@ package br.edu.ibmec.service;
 
 import br.edu.ibmec.dto.TurmaDTO;
 import br.edu.ibmec.entity.Disciplina;
+import br.edu.ibmec.entity.Professor;
 import br.edu.ibmec.entity.Turma;
 import br.edu.ibmec.exception.DaoException;
 import br.edu.ibmec.exception.ServiceException;
 import br.edu.ibmec.exception.ServiceException.ServiceExceptionEnum;
 import br.edu.ibmec.repository.DisciplinaRepository;
+import br.edu.ibmec.repository.ProfessorRepository;
 import br.edu.ibmec.repository.TurmaRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +25,9 @@ public class TurmaRepositoryService {
 
     @Autowired
     private DisciplinaRepository disciplinaRepository;
+    
+    @Autowired
+    private ProfessorRepository professorRepository;
 
     @Transactional(readOnly = true)
     public List<TurmaDTO> listarTurmas() {
@@ -46,11 +51,13 @@ public class TurmaRepositoryService {
             throw new ServiceException("Turma já cadastrada para este período");
         }
         Disciplina disciplina = obterDisciplina(dto.getDisciplina());
+        Professor professor = obterProfessor(dto.getProfessorId());
         Turma turma = new Turma();
         turma.setCodigo(dto.getCodigo());
         turma.setAno(dto.getAno());
         turma.setSemestre(dto.getSemestre());
         turma.setDisciplina(disciplina);
+        turma.setProfessor(professor);
         turmaRepository.save(turma);
     }
 
@@ -61,6 +68,7 @@ public class TurmaRepositoryService {
             throw new DaoException("Turma não encontrada");
         }
         turma.setDisciplina(obterDisciplina(dto.getDisciplina()));
+        turma.setProfessor(obterProfessor(dto.getProfessorId()));
         turmaRepository.save(turma);
     }
 
@@ -85,11 +93,19 @@ public class TurmaRepositoryService {
         if (dto.getDisciplina() == null || dto.getDisciplina() < 1) {
             throw new ServiceException("Disciplina é obrigatória");
         }
+        if (dto.getProfessorId() == null || dto.getProfessorId() < 1) {
+            throw new ServiceException("Professor é obrigatório");
+        }
     }
 
     private Disciplina obterDisciplina(int codigo) throws DaoException {
         return disciplinaRepository.findById(codigo)
                 .orElseThrow(() -> new DaoException("Disciplina com código " + codigo + " não encontrada"));
+    }
+    
+    private Professor obterProfessor(Long id) throws DaoException {
+        return professorRepository.findById(id)
+                .orElseThrow(() -> new DaoException("Professor com id " + id + " não encontrado"));
     }
 
     private TurmaDTO convertToDTO(Turma turma) {
@@ -98,6 +114,7 @@ public class TurmaRepositoryService {
                 .ano(turma.getAno())
                 .semestre(turma.getSemestre())
                 .disciplina(turma.getDisciplina() != null ? turma.getDisciplina().getCodigo() : null)
+                .professorId(turma.getProfessor() != null ? turma.getProfessor().getId() : null)
                 .build();
     }
 }

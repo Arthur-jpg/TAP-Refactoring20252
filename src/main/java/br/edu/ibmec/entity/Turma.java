@@ -25,7 +25,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {"disciplina", "inscricoes"})
+@ToString(exclude = {"disciplina", "professor", "inscricoes"})
 public class Turma {
 
     private static final int CODIGO_MINIMO = 1;
@@ -52,6 +52,10 @@ public class Turma {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "disciplina_codigo", nullable = false)
     private Disciplina disciplina;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "professor_id", nullable = false)
+    private Professor professor;
 
     @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Inscricao> inscricoes = new ArrayList<>();

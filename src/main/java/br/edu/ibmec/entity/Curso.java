@@ -1,6 +1,5 @@
 package br.edu.ibmec.entity;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,11 +8,13 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import jakarta.persistence.CascadeType;
 
 @Entity
 @Table(name = "cursos")
@@ -21,7 +22,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = "disciplinas")
+@ToString(exclude = {"disciplinas", "alunos"})
 public class Curso {
 
     private static final int CODIGO_MINIMO = 1;
@@ -36,6 +37,9 @@ public class Curso {
 
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Disciplina> disciplinas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
+    private List<Aluno> alunos = new ArrayList<>();
 
     public void setCodigo(int codigo) {
         if (codigo < CODIGO_MINIMO) {
