@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -36,6 +37,9 @@ public class Disciplina {
     @Column(name = "nome", nullable = false, length = 80)
     private String nome;
 
+    @Column(name = "valor_base")
+    private BigDecimal valorBase;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "curso_codigo", nullable = false)
     private Curso curso;
@@ -55,5 +59,12 @@ public class Disciplina {
             throw new IllegalArgumentException("Nome é obrigatório");
         }
         this.nome = nome.trim();
+    }
+
+    public void setValorBase(BigDecimal valorBase) {
+        if (valorBase == null || valorBase.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Valor base da disciplina deve ser zero ou positivo");
+        }
+        this.valorBase = valorBase;
     }
 }

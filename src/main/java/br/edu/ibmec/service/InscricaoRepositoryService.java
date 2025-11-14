@@ -60,7 +60,7 @@ public class InscricaoRepositoryService {
         return inscricaoRepository.findAll().stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-    }
+    } /////
 
     @Transactional(readOnly = true)
     public List<InscricaoDTO> listarInscricoesPorAluno(int matricula) {
@@ -93,6 +93,7 @@ public class InscricaoRepositoryService {
         }
         if (inscricaoRepository.existsByAlunoMatriculaAndTurmaCodigoAndTurmaAnoAndTurmaSemestre(dto.getAlunoMatricula(), dto.getTurmaCodigo(), dto.getAno(), dto.getSemestre())) {
             throw new ServiceException("Aluno já inscrito nesta turma");
+            ///
         }
         Aluno aluno = alunoRepository.findById(dto.getAlunoMatricula())
                 .orElseThrow(() -> new DaoException("Aluno não encontrado"));

@@ -51,6 +51,7 @@ public class DisciplinaRepositoryService {
         disciplina.setCodigo(dto.getCodigo());
         disciplina.setNome(dto.getNome());
         disciplina.setCurso(curso);
+        disciplina.setValorBase(dto.getValorBase());
         disciplinaRepository.save(disciplina);
     }
 
@@ -63,6 +64,7 @@ public class DisciplinaRepositoryService {
         Disciplina disciplina = existente.get();
         disciplina.setNome(dto.getNome());
         disciplina.setCurso(obterCurso(dto.getCurso()));
+        disciplina.setValorBase(dto.getValorBase());
         disciplinaRepository.save(disciplina);
     }
 
@@ -80,6 +82,9 @@ public class DisciplinaRepositoryService {
         if (dto.getNome() == null || dto.getNome().trim().isEmpty()) {
             throw new ServiceException(ServiceExceptionEnum.CURSO_NOME_INVALIDO);
         }
+        if (dto.getValorBase() == null || dto.getValorBase().signum() < 0) {
+            throw new ServiceException("Valor base da disciplina é obrigatório e deve ser zero ou positivo");
+        }
     }
 
     private Curso obterCurso(int codigoCurso) throws DaoException {
@@ -95,6 +100,7 @@ public class DisciplinaRepositoryService {
                 .codigo(disciplina.getCodigo())
                 .nome(disciplina.getNome())
                 .curso(disciplina.getCurso() != null ? disciplina.getCurso().getCodigo() : 0)
+                .valorBase(disciplina.getValorBase())
                 .build();
     }
 }
